@@ -1,4 +1,4 @@
-package comercio.movil;
+package utils;
 
 import android.widget.ImageView;
 import android.widget.TextView;

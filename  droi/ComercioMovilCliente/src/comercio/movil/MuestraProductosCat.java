@@ -2,6 +2,9 @@ package comercio.movil;
 
 import java.util.ArrayList;
 
+import utils.OpBd;
+import utils.ProductosCat;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;

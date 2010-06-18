@@ -1,17 +1,23 @@
-package comercio.movil;
+package utils;
 
-public class DatosProductoListCat {
+public class ProductosCat {
 	private String idProd;
-	private String nombreProd;
-	private double precioProd;
-	private String imagenProd;
-	private String nombreFabricante;
-	
+    private String nombreProd;
+    private String precioProd; 
+    private String imagenProd;
+    private String nombreFabricante;
+    
 	public String getIdProd() {
 		return idProd;
 	}
 	public void setIdProd(String idProd) {
 		this.idProd = idProd;
+	}
+	public String getNombreFabricante() {
+		return nombreFabricante;
+	}
+	public void setNombreFabricante(String nombreFabricante) {
+		this.nombreFabricante = nombreFabricante;
 	}
 	public String getNombreProd() {
 		return nombreProd;
@@ -19,10 +25,10 @@ public class DatosProductoListCat {
 	public void setNombreProd(String nombreProd) {
 		this.nombreProd = nombreProd;
 	}
-	public double getPrecioProd() {
+	public String getPrecioProd() {
 		return precioProd;
 	}
-	public void setPrecioProd(double precioProd) {
+	public void setPrecioProd(String precioProd) {
 		this.precioProd = precioProd;
 	}
 	public String getImagenProd() {
@@ -31,12 +37,4 @@ public class DatosProductoListCat {
 	public void setImagenProd(String imagenProd) {
 		this.imagenProd = imagenProd;
 	}
-	public String getNombreFabricante() {
-		return nombreFabricante;
-	}
-	public void setNombreFabricante(String nombreFabricante) {
-		this.nombreFabricante = nombreFabricante;
-	}
-
-
 }

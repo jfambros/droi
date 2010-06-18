@@ -1,4 +1,4 @@
-package comercio.movil;
+package utils;
 
 public class Producto {
 	  private String idProd; 
