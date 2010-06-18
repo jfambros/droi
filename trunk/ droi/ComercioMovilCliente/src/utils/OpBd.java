@@ -1,4 +1,4 @@
-package comercio.movil;
+package utils;
 
 import android.content.ContentValues;
 import android.content.Context;

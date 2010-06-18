@@ -1,5 +1,6 @@
 package comercio.movil;
 
+import utils.OpBd;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

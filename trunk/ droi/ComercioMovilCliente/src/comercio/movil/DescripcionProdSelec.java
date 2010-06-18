@@ -4,15 +4,14 @@ import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.ObtenerValoresJSon;
+import utils.Producto;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -32,8 +31,6 @@ public class DescripcionProdSelec extends Activity{
     private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
     private SoapSerializationEnvelope envelope;
     private HttpTransportSE httpt;
-    private JSONObject JSONObj;
-    private String resultData;
     
     
     private SoapObject result;
@@ -68,7 +65,6 @@ public class DescripcionProdSelec extends Activity{
     	
     	ObtenerValoresJSon valoresJSon = new ObtenerValoresJSon();
     	
-    	String value = "";
     	try{
              httpt.call(SOAP_ACTION, envelope);
              result = (SoapObject)envelope.bodyIn;

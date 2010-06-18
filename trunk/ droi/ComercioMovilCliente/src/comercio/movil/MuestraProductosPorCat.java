@@ -13,6 +13,9 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.ProductosCat;
+import utils.ProductosListCat;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;

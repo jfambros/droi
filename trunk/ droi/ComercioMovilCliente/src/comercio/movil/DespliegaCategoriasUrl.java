@@ -9,6 +9,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import utils.Categorias;
+import utils.OpBd;
+
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
