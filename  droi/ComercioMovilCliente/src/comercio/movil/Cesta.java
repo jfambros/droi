@@ -1,5 +1,8 @@
 package comercio.movil;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -8,6 +11,8 @@ import utils.DatosCesta;
 import utils.ListaCesta;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,11 +29,15 @@ import android.widget.TableRow.LayoutParams;
 
 public class Cesta extends Activity {
     private TableLayout tlCesta;
-    private TextView imagenProd = null;
+    private TextView imaProd = null;
+    private ImageView imagenProd = null;
     private TextView nombreProd = null;
     private EditText cantidadProd = null;
     private TextView precioProd = null;
     private ImageView ivInicio = null;
+    private static final String HOST = "10.0.2.2";
+    private String ruta = "http://"+HOST+"/tienda/catalog/images/";
+    private Bundle bundle = null;
 	
 	
 	
@@ -50,15 +59,22 @@ public class Cesta extends Activity {
         
         
         if (!ListaCesta.arregloCesta.isEmpty()){
-        	Bundle bundle = getIntent().getExtras();
+        	bundle = getIntent().getExtras();
         	if (bundle != null){
 	            String id = bundle.getString("idProducto");
 		        Log.i("bundle", id+" "+bundle.getString("cantidad"));
 		        DatosCesta datos =   ListaCesta.arregloCesta.get(id);
 		        Log.i("id",datos.getIdProducto());
+		        /*
+		        DatosCesta sumaUno =   ListaCesta.arregloCesta.get(id);
+		        int cantidad = sumaUno.getCantidadProd();
+		        sumaUno.setCantidadProd(cantidad+1);
+		        ListaCesta.arregloCesta.put(id, sumaUno);
+		        */
         	}
 	        try{
 	        	int cont=0;
+
 	        	Set set = ListaCesta.arregloCesta.entrySet();
 
 	            Iterator i = set.iterator();
@@ -76,14 +92,34 @@ public class Cesta extends Activity {
 		        	LayoutParams.WRAP_CONTENT));
 		        	
 		        	
-		            imagenProd = new TextView(this);
-		            imagenProd.setText(((DatosCesta) me.getValue()).getImagenProducto());
-		            imagenProd.setTextColor(Color.BLACK);
+		        	String rutaUrl = ruta + ((DatosCesta) me.getValue()).getImagenProducto();
+		        	URL aURL = new URL(rutaUrl);
+		        	HttpURLConnection conn= (HttpURLConnection)aURL.openConnection();
+		            conn.setDoInput(true);
+		            conn.connect();
+		            int length = conn.getContentLength();
+		            int[] bitmapData =new int[length];
+		            byte[] bitmapData2 =new byte[length];
+		            InputStream is = conn.getInputStream();
+		            Bitmap bmImg = BitmapFactory.decodeStream(is);
+		            Bitmap bMapScala = Bitmap.createScaledBitmap(bmImg, 80, 80, true);
+		            
+		            imagenProd = new ImageView(this);
 		            imagenProd.setLayoutParams(new LayoutParams(
 		            LayoutParams.FILL_PARENT,
 		            LayoutParams.FILL_PARENT));
-		            imagenProd.setGravity(Gravity.CENTER_VERTICAL);
-		            imagenProd.setWidth(80);
+		            imagenProd.setImageBitmap(bMapScala);
+		            
+		        	
+		        	
+		            imaProd = new TextView(this);
+		            imaProd.setText(((DatosCesta) me.getValue()).getImagenProducto());
+		            imaProd.setTextColor(Color.BLACK);
+		            imaProd.setLayoutParams(new LayoutParams(
+		            LayoutParams.FILL_PARENT,
+		            LayoutParams.FILL_PARENT));
+		            imaProd.setGravity(Gravity.CENTER_VERTICAL);
+		            imaProd.setWidth(80);
 
 		
 		            nombreProd = new TextView(this);
@@ -96,7 +132,8 @@ public class Cesta extends Activity {
 		            nombreProd.setWidth(50);
 
 		            cantidadProd = new EditText(this);
-		            cantidadProd.setText(((DatosCesta) me.getValue()).getCantidadProd());
+		            
+		            cantidadProd.setText( Integer.toString(((DatosCesta) me.getValue()).getCantidadProd()));
 		            cantidadProd.setTextColor(Color.BLACK);
 		            cantidadProd.setLayoutParams(new LayoutParams(
 		            LayoutParams.FILL_PARENT,
@@ -108,7 +145,7 @@ public class Cesta extends Activity {
 		            
 
 		            precioProd = new TextView(this);
-		            precioProd.setText(((DatosCesta) me.getValue()).getPrecioProd());
+		            precioProd.setText( Double.toString(((DatosCesta) me.getValue()).getPrecioProd()));
 		            precioProd.setTextColor(Color.BLACK);
 		            precioProd.setLayoutParams(new LayoutParams(
 		            LayoutParams.FILL_PARENT,

@@ -182,10 +182,20 @@ public class DescripcionProdSelec extends Activity{
 			dc.setIdProducto(producto.getIdProd());
 			dc.setImagenProducto(producto.getImagenProd());
 			dc.setNombreProducto(producto.getNombreProd());
-			dc.setCantidadProd(cantidad.getText().toString());
-			dc.setPrecioProd(producto.getPrecioProd());
+			dc.setCantidadProd(Integer.parseInt(cantidad.getText().toString()));
+			dc.setPrecioProd(Double.parseDouble(producto.getPrecioProd()));
 			
-			ListaCesta.arregloCesta.put(dc.getIdProducto(), dc); 
+			DatosCesta sumaCant =   ListaCesta.arregloCesta.get(producto.getIdProd());
+			if (sumaCant != null){
+				int cantidadDatos = sumaCant.getCantidadProd();
+				sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
+				ListaCesta.arregloCesta.put(producto.getIdProd(), sumaCant);
+			}
+			else{
+				ListaCesta.arregloCesta.put(dc.getIdProducto(), dc);	
+			}
+			
+			 
            Intent intent = new Intent();
            intent.putExtra("idProducto", producto.getIdProd());
 		   intent.putExtra("cantidad", cantidad.getText().toString());
