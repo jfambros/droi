@@ -42,7 +42,7 @@ public class ProductosListCatLV extends ListActivity{
     private static final String METHOD_NAME = "obtenerProductosPorCategorias";
     private static final String NAMESPACE = "http://www.your-company.com/categorias.wsdl";
     private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
-    private SoapSerializationEnvelope envelope;
+    private SoapSerializationEnvelope envelope; 
     private HttpTransportSE httpt;
     private JSONObject JSONObj;
     private Bundle bundleResult=new Bundle();
@@ -95,11 +95,13 @@ public class ProductosListCatLV extends ListActivity{
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
         ProductosCat producto = (ProductosCat) l.getItemAtPosition(position);        
-        Toast.makeText(this, producto.getNombreProd(), Toast.LENGTH_LONG).show();
-		Intent i = new Intent(); 
-		i.putExtra("idProducto",producto.getIdProd());
-		i.setClass(ProductosListCatLV.this, DescripcionProdSelec.class);
-		startActivity(i);        
+        //Toast.makeText(this, producto.getNombreProd(), Toast.LENGTH_LONG).show();
+        if (producto.getIdProd() != null){
+			Intent i = new Intent(); 
+			i.putExtra("idProducto",producto.getIdProd());
+			i.setClass(ProductosListCatLV.this, DescripcionProdSelec.class);
+			startActivity(i);     
+        }
     }
 	
     public Bundle valores(String cadena){
@@ -112,7 +114,7 @@ public class ProductosListCatLV extends ListActivity{
      	        String Key = (String) itr.next(); 
      	        value = JSONObj.getString(Key); 
      	        bundleResult.putString(Key, value);
-     	         Log.e(Key,bundleResult.getString(Key)); 
+     	         Log.i(Key,bundleResult.getString(Key)); 
      	    }
          }
     } catch (Exception e) {

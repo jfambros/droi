@@ -7,7 +7,12 @@ import android.util.Log;
 
 public class ObtenerValoresJSon {
 	private JSONObject JSONObj;
-	private Bundle bundleResult = new Bundle();
+	private Bundle bundleResult;
+	
+	public ObtenerValoresJSon(){
+		JSONObj = new JSONObject();
+		bundleResult = new Bundle();
+	}
 	
     public Bundle valores(String cadena){
 
@@ -18,7 +23,13 @@ public class ObtenerValoresJSon {
      	    while (itr.hasNext()) { 
      	        String Key = (String) itr.next(); 
      	        value = JSONObj.getString(Key); 
-     	        bundleResult.putString(Key, value);
+     	        if (value!=null){
+     	        	bundleResult.putString(Key, value);
+     	        }
+     	        else{
+     	        	bundleResult.putString(Key, "_");
+     	        }
+     	        
          }
     } catch (Exception e) {
     	Log.e("error" ,e.toString());
