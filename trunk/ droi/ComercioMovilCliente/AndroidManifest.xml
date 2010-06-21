@@ -48,6 +48,9 @@
        android:label="Descripción del producto">
     </activity>
 
+    <activity android:name="Cesta"
+       android:label="Cesta">
+    </activity>
     
 
     </application>

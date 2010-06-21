@@ -1,11 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
 android:layout_width="fill_parent"
 android:layout_height="fill_parent"
-android:background="#ff000099"
+ android:background="#ffffff"
 android:orientation="vertical"
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
+
+<!-- Encabezado -->
+<TableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:background="#ff0099cc"
+>
+
+<LinearLayout
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+android:background="#ff0099cc"
+>
+
+<TableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:layout_gravity="center_horizontal"
+>
+	<TableRow
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_gravity="center_horizontal"
+		>
+		<ImageView
+		android:id="@+id/ivInicioMuestraCat"
+		android:layout_width="48px"
+		android:layout_height="48px"
+		android:src="@drawable/inicio48x48"
+		/>
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ffffffff"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:text="   Categorías   "
+		/>
+		
+		<ImageView
+		android:id="@+id/ivRegresarMuestraCat"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/regresar48x48"
+		/>		
+		
+	</TableRow>
+</TableLayout>
+
+</LinearLayout>
+
+<!--Fin encabezado -->
+
 
       <GridView
 	      android:id="@+id/gridview" android:layout_width="fill_parent"
@@ -14,5 +72,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	      android:columnWidth="100dp" android:stretchMode="columnWidth"
 	      android:gravity="center"
 	      android:background="#ffffff" />
+</TableLayout>
 	      
 </LinearLayout>	  

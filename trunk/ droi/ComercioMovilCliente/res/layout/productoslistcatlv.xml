@@ -5,6 +5,66 @@
     android:layout_height="fill_parent" 
 	android:background="#ffffffff"    
     >
+
+<TableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:background="#ffffffff"
+>
+    
+    <!-- Inicio encabezado -->
+    
+    <LinearLayout
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+android:background="#ff0099cc"
+>
+
+<TableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:layout_gravity="center_horizontal"
+>
+	<TableRow
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_gravity="center_horizontal"
+		>
+		<ImageView
+		android:id="@+id/inicioProdListCatLV"
+		android:layout_width="48px"
+		android:layout_height="48px"
+		android:src="@drawable/inicio48x48"
+		/>
+		<TextView
+		android:id="@+id/tvCatNombCategoria"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ffffffff"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:text="Categoría"
+		/>
+		
+		<ImageView
+		android:id="@+id/ivRegresarProListCatLV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/regresar48x48"
+		/>		
+		
+	</TableRow>
+</TableLayout>
+
+</LinearLayout>
+    
+    <!-- Fin encabezado -->
+    
+    <!-- 
     <TextView
 		android:id="@+id/tvCatNombCategoria"
 		android:layout_width="wrap_content"
@@ -38,14 +98,15 @@
 
     	
     </LinearLayout>
-
+ -->
 		<ListView
 		    android:id="@+id/android:list"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center_horizontal"
+		    android:background="#ffffffff" 
 		    />			
-	
+</TableLayout>	
 	
     
 </LinearLayout>

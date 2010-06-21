@@ -10,27 +10,45 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.DatosCesta;
+import utils.ListaCesta;
 import utils.ObtenerValoresJSon;
 import utils.Producto;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.TableLayout.LayoutParams;
 
 public class DescripcionProdSelec extends Activity{
 
 	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
-	private static final String SOAP_ACTION = "capeconnect:categorias:categoriasPortType#obtenerProductosPorCategoria";
+	private static final String SOAP_ACTION = "capeconnect:categorias:categoriasPortType#obtenerProducto";
     private static final String METHOD_NAME = "obtenerProducto";
     private static final String NAMESPACE = "http://www.your-company.com/categorias.wsdl";
     private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
     private SoapSerializationEnvelope envelope;
     private HttpTransportSE httpt;
+    private Producto producto;
+    
+    
+    //botones
+    private ImageView ivCesta;
+    
+    //Tabla
+
     
     
     private SoapObject result;
@@ -48,7 +66,13 @@ public class DescripcionProdSelec extends Activity{
            
         request.addProperty ("idProd", bundle.getString("idProducto"));
         envelope.setOutputSoapObject(request);
-        inicializaCat();				
+        producto = new Producto();
+        inicializaCat();
+        
+        ivCesta = (ImageView) findViewById(R.id.ivAgregaCestaDescripProd);
+        ivCesta.setOnClickListener(ivCestaPress);
+        
+
      }
     
     public void inicializaCat(){
@@ -70,8 +94,8 @@ public class DescripcionProdSelec extends Activity{
              result = (SoapObject)envelope.bodyIn;
              
              SoapObject resultSoap =  (SoapObject) envelope.getResponse();
-             String resultDatos = resultSoap.toString();
-             Log.e("cadena",resultDatos);
+             String resultDatos = resultSoap.toString(); 
+             Log.i("cadena",resultDatos); 
 
             	 
           	  Bundle prodObtenidos =  valoresJSon.valores(resultDatos.substring(7));
@@ -86,7 +110,7 @@ public class DescripcionProdSelec extends Activity{
               	         //System.out.println(Key+" "+bundleResult.getString(Key));
               	    }
  */
-            	 Producto producto = new Producto();
+            	 
             	 producto.setIdProd(prodObtenidos.getString("idProd"));
             	 producto.setNombreProd(prodObtenidos.getString("nombreProd"));
             	 producto.setDescripProd(prodObtenidos.getString("descripProd"));
@@ -148,6 +172,31 @@ public class DescripcionProdSelec extends Activity{
     	}
 	
     }
+    
+    private OnClickListener ivCestaPress = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			EditText cantidad = (EditText) findViewById(R.id.etxtCantidadDescripProd);
+          
+			DatosCesta dc = new DatosCesta();
+			dc.setIdProducto(producto.getIdProd());
+			dc.setImagenProducto(producto.getImagenProd());
+			dc.setNombreProducto(producto.getNombreProd());
+			dc.setCantidadProd(cantidad.getText().toString());
+			dc.setPrecioProd(producto.getPrecioProd());
+			
+			ListaCesta.arregloCesta.put(dc.getIdProducto(), dc); 
+           Intent intent = new Intent();
+           intent.putExtra("idProducto", producto.getIdProd());
+		   intent.putExtra("cantidad", cantidad.getText().toString());
+           intent.setClass(DescripcionProdSelec.this, Cesta.class);
+           startActivity(intent);	
+           
+           
+			
+		}
+	};
+    
     
     
 }
