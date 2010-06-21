@@ -1,11 +1,11 @@
 package utils;
 
 public class DatosCesta {
-   String idProducto;
-   String imagenProducto;
-   String nombreProducto;
-   String cantidadProd;
-   String precioProd;
+   private String idProducto;
+   private String imagenProducto;
+   private String nombreProducto;
+   private int cantidadProd;
+   private double precioProd;
    
 	public String getIdProducto() {
 		return idProducto;
@@ -25,16 +25,16 @@ public class DatosCesta {
 	public void setNombreProducto(String nombreProducto) {
 		this.nombreProducto = nombreProducto;
 	}
-	public String getCantidadProd() {
+	public int getCantidadProd() {
 		return cantidadProd;
 	}
-	public void setCantidadProd(String cantidadProd) {
+	public void setCantidadProd(int cantidadProd) {
 		this.cantidadProd = cantidadProd;
 	}
-	public String getPrecioProd() {
+	public double getPrecioProd() {
 		return precioProd;
 	}
-	public void setPrecioProd(String precioProd) {
+	public void setPrecioProd(double precioProd) {
 		this.precioProd = precioProd;
 	}
    
