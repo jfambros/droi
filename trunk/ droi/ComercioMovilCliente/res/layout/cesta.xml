@@ -191,14 +191,6 @@ android:layout_gravity="center_horizontal"
 </TableLayout>    
 
 </TableLayout>  
-			<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textSize="14sp"
-			android:text="   "
-			/>
-
  			<ImageView
 			android:id="@+id/ivSinProductosCesta"
 			android:layout_width="192px"
@@ -243,6 +235,14 @@ android:layout_gravity="right"
 		android:textSize="16sp"
 		android:textStyle="bold"
 		/>
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ff000000"
+		android:textSize="14sp"
+		android:text="  "
+		/>
+		
 		
 	</TableRow>
 </TableLayout>

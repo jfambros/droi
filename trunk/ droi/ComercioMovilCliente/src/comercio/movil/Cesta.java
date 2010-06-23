@@ -76,6 +76,7 @@ public class Cesta extends Activity {
 		double total = 0.0;
 		double precioCant = 0.0;
 		double subTotalProd = 0.0;
+		TextView tvTotal = (TextView) findViewById(R.id.tvPrecioTotalCesta);
         if (!ListaCesta.arregloCesta.isEmpty()){
         	bundle = getIntent().getExtras();
         	if (bundle != null){
@@ -173,6 +174,7 @@ public class Cesta extends Activity {
 		        	cantidadCesta.put(((DatosCesta) me.getValue()).getIdProducto(), row);
 		        	total +=  Double.parseDouble(((TextView)(row.getChildAt(3))).getText().toString());
 		        	Log.i("total", Double.toString(total));
+		        	tvTotal.setText(Double.toString(total));
 		        	
 		        	cont++;
 	        	}
@@ -190,7 +192,9 @@ public class Cesta extends Activity {
            ivSinProductos = (ImageView)findViewById(R.id.ivSinProductosCesta);
            
            Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(),R.drawable.cestavacia);
-           BitmapDrawable bmd = new BitmapDrawable(bitmapOrg);
+           //BitmapDrawable bmd = new BitmapDrawable(bitmapOrg);
+           Bitmap bMapScala = Bitmap.createScaledBitmap(bitmapOrg, 192, 100, true);
+           BitmapDrawable bmd = new BitmapDrawable(bMapScala);
            ivSinProductos.setImageDrawable(bmd);
         }		
 	}
