@@ -34,7 +34,7 @@ android:id="@+id/imagenPrueba"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center_horizontal"
-android:src="@drawable/regresar"
+android:src="@drawable/regresar48x48"
 >
 </ImageView>
   <ImageView
@@ -42,7 +42,7 @@ android:id="@+id/imagenPrueba2"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center_horizontal"
-android:src="@drawable/regresar"
+android:src="@drawable/regresar48x48"
 >
 </ImageView>
 </TableRow>

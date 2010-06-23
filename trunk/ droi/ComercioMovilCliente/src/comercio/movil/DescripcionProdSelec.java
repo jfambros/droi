@@ -200,10 +200,8 @@ public class DescripcionProdSelec extends Activity{
            intent.putExtra("idProducto", producto.getIdProd());
 		   intent.putExtra("cantidad", cantidad.getText().toString());
            intent.setClass(DescripcionProdSelec.this, Cesta.class);
-           startActivity(intent);	
-           
-           
-			
+           startActivity(intent);
+           finish();
 		}
 	};
     
