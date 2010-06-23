@@ -10,6 +10,7 @@ import java.util.Iterator;
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -119,10 +120,6 @@ public class MuestraCategorias extends Activity {
 		      //Toast.makeText(Servicio3.this, "Dato: " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(); 
 				i.putExtra("idCategoria", idCat);
-				//i.putExtra("nombreCat", val);
-				//llamar al gridView
-				//i.setClass(MuestraCategorias.this, MuestraProductosPorCat.class);
-				//llamar a ListActivity
 				i.setClass(MuestraCategorias.this, ProductosListCatLV.class);
 				startActivity(i);
 				finish();
@@ -149,37 +146,6 @@ public class MuestraCategorias extends Activity {
 		}
 	};  
     
-    public Bundle valores(String cadena){
-    	String value;
-    	try{
-        if (resultData.startsWith("anyType")) { // if JSON string is an object 
-     	    JSONObj = new JSONObject(cadena); 
-     	    Iterator<String> itr = JSONObj.keys(); 
-     	    while (itr.hasNext()) { 
-     	        String Key = (String) itr.next(); 
-     	        value = JSONObj.getString(Key); 
-     	        bundleResult.putString(Key, value);
-     	         Log.e(Key,bundleResult.getString(Key)); 
-     	    }
-         }
-    } catch (Exception e) {
-    	new AlertDialog.Builder(MuestraCategorias.this)
-
-    	.setTitle("error en valores()")
-
-    	.setMessage(e.toString())
-
-    	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-    	public void onClick(DialogInterface dialog, int whichButton) {
-
-    	setResult(RESULT_OK);
-    	  }
-    	})
-    	.show();
-    }
-        return bundleResult;
-    }
     
     public void inicializaCat(){
     	listaCategorias = new ArrayList<Categorias>();
@@ -189,15 +155,17 @@ public class MuestraCategorias extends Activity {
              
              SoapObject result2 =  (SoapObject) envelope.getResponse();
              
-             for(int cont=0/*20*/; cont< result2.getPropertyCount(); cont ++){
-            	 resultData = result2.getProperty(cont).toString();
-            	 String resul2 = resultData.substring(7);
-            	 Bundle catObtenidas =  valores(resul2);
+             for(int cont=0; cont< result2.getPropertyCount(); cont ++){
+            	 SoapObject resultados = (SoapObject) result2.getProperty(cont);
+            	 //primitivas
+            	 SoapPrimitive id = (SoapPrimitive) resultados.getProperty("idCat");
+            	 SoapPrimitive nombre = (SoapPrimitive) resultados.getProperty("nombreCat");
+            	 SoapPrimitive imagen = (SoapPrimitive) resultados.getProperty("imagenCat");
             	 
                  Categorias oCategorias = new Categorias();
-                 oCategorias.setIdCat(catObtenidas.getString("idCat"));
-                 oCategorias.setNombreCat(catObtenidas.getString("nombreCat"));
-                 oCategorias.setImagenCat(catObtenidas.getString("imagenCat"));
+                 oCategorias.setIdCat(id.toString());
+                 oCategorias.setNombreCat(nombre.toString());
+                 oCategorias.setImagenCat(imagen.toString());
  
             	 listaCategorias.add(oCategorias);
              }
