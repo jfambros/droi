@@ -5,16 +5,15 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import utils.ProductosCat;
-
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -33,7 +32,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ProductosListCatLV extends ListActivity{
 
@@ -47,6 +45,7 @@ public class ProductosListCatLV extends ListActivity{
     private HttpTransportSE httpt;
     private JSONObject JSONObj;
     private Bundle bundleResult=new Bundle();
+    Bundle bundle = null;
     private String resultData;
     
     private SoapObject result;
@@ -54,19 +53,25 @@ public class ProductosListCatLV extends ListActivity{
     
     //botones
     private ImageView ivCesta = null;
+    private ImageView ivRegresa = null;
 	
 	
 	public void onCreate(Bundle savedInstanceState) {
 		try{
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.productoslistcatlv); 
+	        setContentView(R.layout.productoslistcatlv);
+	        
+	        //acciones
+	        ivRegresa = (ImageView)findViewById(R.id.ivRegresarProListCatLV);
+	        ivRegresa.setOnClickListener(ivRegresaPres);
+	        
 	        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 	
 	        httpt = new HttpTransportSE(URL);
 	        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
 	        envelope.dotNet = false;
 	        
-	        Bundle bundle = getIntent().getExtras();
+	        bundle = getIntent().getExtras();
 	        /*
 	        TextView nombreCat = (TextView) findViewById(R.id.tvCatNombCategoria);
 	        nombreCat.setText(bundle.getString("nombreCat"));
@@ -107,11 +112,12 @@ public class ProductosListCatLV extends ListActivity{
         if (producto.getIdProd() != null){
 			Intent i = new Intent(); 
 			i.putExtra("idProducto",producto.getIdProd());
+			i.putExtra("idCategoria", bundle.getString("idCategoria"));
 			i.setClass(ProductosListCatLV.this, DescripcionProdSelec.class);
 			startActivity(i);     
         }
     }
-	
+	/*
     public Bundle valores(String cadena){
     	String value;
     	try{
@@ -143,7 +149,7 @@ public class ProductosListCatLV extends ListActivity{
     }
         return bundleResult;
     }
-
+*/
 	
 	private void inicializaProd(){
 	   listaProductos = new ArrayList<ProductosCat>();
@@ -154,16 +160,20 @@ public class ProductosListCatLV extends ListActivity{
 	       SoapObject result2 =  (SoapObject) envelope.getResponse();
 	       Log.e("cadena",result2.toString());
 	       for(int cont=0; cont< result2.getPropertyCount(); cont ++){
-	      	 resultData = result2.getProperty(cont).toString();
-	      	 String resul2 = resultData.substring(7);
-	      	 Bundle prodObtenidos =  valores(resul2);
+	    	 SoapObject resultados = (SoapObject) result2.getProperty(cont);
+	    	 SoapPrimitive id = (SoapPrimitive) resultados.getProperty("idProd");
+          	 SoapPrimitive nombre = (SoapPrimitive) resultados.getProperty("nombreProd");
+          	 SoapPrimitive imagen = (SoapPrimitive) resultados.getProperty("imagenProd");
+          	 SoapPrimitive precio = (SoapPrimitive) resultados.getProperty("precioProd");
+          	 SoapPrimitive fabricante = (SoapPrimitive) resultados.getProperty("fabricanteProd");
+	    	   
 	      	 
 	      	 ProductosCat productosCat = new ProductosCat();
-	      	 productosCat.setIdProd(prodObtenidos.getString("idProd"));
-	      	 productosCat.setNombreProd(prodObtenidos.getString("nombreProd"));
-	      	 productosCat.setImagenProd(prodObtenidos.getString("imagenProd"));
-	      	 productosCat.setPrecioProd(prodObtenidos.getString("precioProd"));
-	      	 productosCat.setNombreFabricante(prodObtenidos.getString("fabricanteProd"));
+	      	 productosCat.setIdProd(id.toString());
+	      	 productosCat.setNombreProd(nombre.toString());
+	      	 productosCat.setImagenProd(imagen.toString());
+	      	 productosCat.setPrecioProd(precio.toString());
+	      	 productosCat.setNombreFabricante(fabricante.toString());
 	      	 listaProductos.add(productosCat);
 	       }
        }
@@ -263,6 +273,16 @@ public class ProductosListCatLV extends ListActivity{
 			finish();
 		}
 	};
-	
+
+	private OnClickListener ivRegresaPres = new OnClickListener() {
+		
+		public void onClick(View v) {
+           Intent intent = new Intent();
+           intent.putExtra("idCategoria", bundle.getString("idCategoria"));
+           intent.setClass(ProductosListCatLV.this, MuestraCategorias.class);
+           startActivity(intent);
+           finish();		   
+		}
+	};
 	
 }
