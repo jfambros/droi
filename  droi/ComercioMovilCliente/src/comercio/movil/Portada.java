@@ -54,13 +54,15 @@ public class Portada extends Activity {
 		
 		public void onClick(View v) {
 			verIntent();
+			finish();
  		}
 	};
 	
 	private OnClickListener txtVerCatPres = new OnClickListener() {
 		
 		public void onClick(View v) {
-		   verIntent();		
+		   verIntent();
+		   finish();
 		}
 	};
 	

@@ -3,9 +3,12 @@ package comercio.movil;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+
+import comercio.movil.R.drawable;
 
 import utils.DatosCesta;
 import utils.ListaCesta;
@@ -14,6 +17,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -29,7 +34,6 @@ import android.widget.TableRow.LayoutParams;
 
 public class Cesta extends Activity {
     private TableLayout tlCesta;
-    private TextView imaProd = null;
     private ImageView imagenProd = null;
     private TextView nombreProd = null;
     private EditText cantidadProd = null;
@@ -38,6 +42,12 @@ public class Cesta extends Activity {
     private static final String HOST = "10.0.2.2";
     private String ruta = "http://"+HOST+"/tienda/catalog/images/";
     private Bundle bundle = null;
+    private ImageView ivActualizaCesta=null;
+    private ImageView ivLimpiaCesta = null;
+    private ImageView ivRegresar = null;  
+    private TableRow row=null;
+    private HashMap<String, TableRow> cantidadCesta= new HashMap<String, TableRow>();
+//    private ArrayList<TableRow> arr = new ArrayList<TableRow>();
 	
 	
 	
@@ -47,17 +57,25 @@ public class Cesta extends Activity {
         
         //objetos obtenidos del xml
         ivInicio = (ImageView)findViewById(R.id.ivInicioCesta);
-        
         tlCesta = (TableLayout)findViewById(R.id.tlCesta);
+ 		ivActualizaCesta = (ImageView) findViewById(R.id.ivActualizaCesta);
+ 		ivLimpiaCesta = (ImageView)findViewById(R.id.ivLimpiaCesta);
+ 		ivRegresar = (ImageView)findViewById(R.id.ivRegresarCesta);
         
-        //click
+ 		//click
         ivInicio.setOnClickListener(ivInicioPres);
-        TableRow row=null;
+		ivActualizaCesta.setOnClickListener(ivActualizaCestaPres);
+		ivLimpiaCesta.setOnClickListener(ivLimpiaCestaPres);
+		ivRegresar.setOnClickListener(ivRegresarPres);
+        //row.setOnClickListener(rowPres);
 
-        
-        
-        
-        
+        llenaCesta();
+	}
+	
+	public void llenaCesta(){
+		double total = 0.0;
+		double precioCant = 0.0;
+		double subTotalProd = 0.0;
         if (!ListaCesta.arregloCesta.isEmpty()){
         	bundle = getIntent().getExtras();
         	if (bundle != null){
@@ -71,6 +89,7 @@ public class Cesta extends Activity {
 		        sumaUno.setCantidadProd(cantidad+1);
 		        ListaCesta.arregloCesta.put(id, sumaUno);
 		        */
+		       
         	}
 	        try{
 	        	int cont=0;
@@ -86,7 +105,6 @@ public class Cesta extends Activity {
 	        	
 	        	
 		        	row = new TableRow(this);
-		        	row.setId(100+cont);
 		        	row.setLayoutParams(new LayoutParams(
 		        	LayoutParams.FILL_PARENT,
 		        	LayoutParams.WRAP_CONTENT));
@@ -110,18 +128,6 @@ public class Cesta extends Activity {
 		            LayoutParams.FILL_PARENT));
 		            imagenProd.setImageBitmap(bMapScala);
 		            
-		        	
-		        	
-		            imaProd = new TextView(this);
-		            imaProd.setText(((DatosCesta) me.getValue()).getImagenProducto());
-		            imaProd.setTextColor(Color.BLACK);
-		            imaProd.setLayoutParams(new LayoutParams(
-		            LayoutParams.FILL_PARENT,
-		            LayoutParams.FILL_PARENT));
-		            imaProd.setGravity(Gravity.CENTER_VERTICAL);
-		            imaProd.setWidth(80);
-
-		
 		            nombreProd = new TextView(this);
 		            nombreProd.setText(((DatosCesta) me.getValue()).getNombreProducto());
 		            nombreProd.setTextColor(Color.BLACK);
@@ -142,10 +148,12 @@ public class Cesta extends Activity {
 		            cantidadProd.setWidth(30);
 		            cantidadProd.setHeight(5);
 		            cantidadProd.setLines(1);
+		            cantidadProd.setId(100+cont);
 		            
-
+                    precioCant = ((DatosCesta) me.getValue()).getPrecioProd();
+                    subTotalProd = precioCant * Double.parseDouble(cantidadProd.getText().toString());
 		            precioProd = new TextView(this);
-		            precioProd.setText( Double.toString(((DatosCesta) me.getValue()).getPrecioProd()));
+		            precioProd.setText(Double.toString(subTotalProd));
 		            precioProd.setTextColor(Color.BLACK);
 		            precioProd.setLayoutParams(new LayoutParams(
 		            LayoutParams.FILL_PARENT,
@@ -161,6 +169,10 @@ public class Cesta extends Activity {
 		        	
 		        	row.setBackgroundColor(Color.WHITE);
 		        	tlCesta.addView(row);
+		        	//arr.add(row);
+		        	cantidadCesta.put(((DatosCesta) me.getValue()).getIdProducto(), row);
+		        	total +=  Double.parseDouble(((TextView)(row.getChildAt(3))).getText().toString());
+		        	Log.i("total", Double.toString(total));
 		        	
 		        	cont++;
 	        	}
@@ -174,8 +186,90 @@ public class Cesta extends Activity {
 	        }
         }
         else{
-        	
+           ImageView ivSinProductos = new ImageView(this);
+           ivSinProductos = (ImageView)findViewById(R.id.ivSinProductosCesta);
+           
+           Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(),R.drawable.cestavacia);
+           BitmapDrawable bmd = new BitmapDrawable(bitmapOrg);
+           ivSinProductos.setImageDrawable(bmd);
+        }		
+	}
+	
+	private void actualizaCesta(){
+		Set set = cantidadCesta.entrySet();
+
+        Iterator i = set.iterator();
+
+        while(i.hasNext()){
+            Map.Entry<String, TableRow> me = (Map.Entry<String, TableRow>)i.next();
+            String cantProd = ((EditText) me.getValue().getChildAt(2)).getText().toString();
+            Log.i("Cajas texto: ",me.getKey() + " : " + cantProd);
+            if (Integer.parseInt(cantProd) == 0){
+            	Log.i("Borrado","La clave "+me.getKey()+" Ah sido borrado");
+            	ListaCesta.arregloCesta.remove(me.getKey());
+            	
+                Intent intent = new Intent();
+                intent.setClass(Cesta.this, Cesta.class);
+                startActivity(intent);
+                finish();
+            }
+            else{
+            	int nuevaCant = Integer.parseInt(((EditText) me.getValue().getChildAt(2)).getText().toString());
+            	DatosCesta cantidadCambiada =   ListaCesta.arregloCesta.get(me.getKey());
+            	cantidadCambiada.setCantidadProd(nuevaCant); 
+            	ListaCesta.arregloCesta.put(me.getKey(), cantidadCambiada);
+                Intent intent = new Intent();
+                intent.setClass(Cesta.this, Cesta.class);
+                startActivity(intent);
+                finish();
+            	//sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
+            }
+            	
         }
+        
+        /*
+         * System.out.println( hashMap.remove("One") + " is removed from the HashMap.");
+         */  
+		/*
+		for(int i=0; i<arr.size(); i++){
+			Log.i("Caja texto",((EditText)arr.get(i).getChildAt(2)).getText().toString());
+		}
+		*/
+		/*
+		new AlertDialog.Builder(Cesta.this)
+
+    	.setTitle("elementos")
+
+    	.setMessage("")
+
+    	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+    	public void onClick(DialogInterface dialog, int whichButton) {
+
+    	setResult(RESULT_OK);
+    	  }
+    	})
+    	.show();
+    	*/
+ 
+		/*
+		Set set = ListaCesta.arregloCesta.entrySet();
+
+        Iterator i = set.iterator();
+
+        while(i.hasNext()){
+            Map.Entry<String,DatosCesta> me = (Map.Entry<String, DatosCesta>)i.next();
+            Log.i("Datos map: ",me.getKey() + " : " + ((DatosCesta) me.getValue()).getNombreProducto());
+        }
+        */
+	}
+	
+	private void limpiaCesta(){
+		ListaCesta.arregloCesta.clear();
+        Intent intent = new Intent();
+        intent.setClass(Cesta.this, Cesta.class);
+        startActivity(intent);
+        finish();
 	}
 	
 	
@@ -184,9 +278,33 @@ public class Cesta extends Activity {
 		public void onClick(View arg0) {
            Intent intent = new Intent();
            intent.setClass(Cesta.this, Principal.class);
-           startActivity(intent);		
+           startActivity(intent);
+          
+           finish();
 		}
 	};
+	
+	private OnClickListener ivActualizaCestaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			actualizaCesta();
+		}
+	};
+	
+	private OnClickListener ivLimpiaCestaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			limpiaCesta();
+		}
+	};
+	
+	private OnClickListener ivRegresarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			finish();
+		}
+	};
+
 	
 
 }

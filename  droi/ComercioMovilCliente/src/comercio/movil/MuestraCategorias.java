@@ -14,6 +14,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import utils.Categorias;
+import utils.DatosCategorias;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -27,6 +28,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -51,6 +53,10 @@ public class MuestraCategorias extends Activity {
     
     private SoapObject result;
     
+    //botones
+    private ImageView ivCesta = null;
+    private ImageView ivRegresar = null;
+    
     
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +68,14 @@ public class MuestraCategorias extends Activity {
         envelope.dotNet = false;
        // envelope.bodyOut = request; 
         envelope.setOutputSoapObject(request);
+        
+        
+        
         inicializaCat();
         
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ((GridView) findViewById(R.id.gridview)).setOnItemClickListener(clickList);
+        
 		
 		try{
 		gridview.setAdapter(new ImageAdapter(this, listaCategorias.size(), listaCategorias));
@@ -87,6 +97,13 @@ public class MuestraCategorias extends Activity {
 	    	.show();
 	    }
 		
+		ivCesta = (ImageView) findViewById(R.id.ivCestaMuestraCat);
+		ivRegresar = (ImageView)findViewById(R.id.ivRegresarMuestraCat);
+		
+		ivCesta.setOnClickListener(ivCestaPres);
+		ivRegresar.setOnClickListener(ivRegresarPres);
+		
+		
 		
      }
     
@@ -102,12 +119,13 @@ public class MuestraCategorias extends Activity {
 		      //Toast.makeText(Servicio3.this, "Dato: " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(); 
 				i.putExtra("idCategoria", idCat);
-				i.putExtra("nombreCat", val);
+				//i.putExtra("nombreCat", val);
 				//llamar al gridView
 				//i.setClass(MuestraCategorias.this, MuestraProductosPorCat.class);
 				//llamar a ListActivity
 				i.setClass(MuestraCategorias.this, ProductosListCatLV.class);
 				startActivity(i);
+				finish();
 		   
 			}
 			catch (Exception e) {
@@ -203,6 +221,26 @@ public class MuestraCategorias extends Activity {
 	
     }
     
+	private OnClickListener ivCestaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent i = new Intent(); 
+			i.setClass(MuestraCategorias.this, Cesta.class);
+			startActivity(i);	
+			finish();
+		}
+	};
+	
+	private OnClickListener ivRegresarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent i = new Intent(); 
+			i.setClass(MuestraCategorias.this, Principal.class);
+			startActivity(i);	
+			finish();			
+		}
+	};
+	
     
 public class ImageAdapter extends BaseAdapter {
 		
@@ -236,18 +274,18 @@ public class ImageAdapter extends BaseAdapter {
 		// create a new ImageView for each item referenced by the Adapter
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
-			CatText holder;
+			DatosCategorias holder;
 			if (convertView == null) 
 			{ 
 			convertView = inflater.inflate(R.layout.cattex, null); 
-			holder = new CatText(); 
+			holder = new DatosCategorias(); 
 			holder.setImagen((ImageView)convertView.findViewById(R.id.imagenCat));
 			holder.setTexto((TextView)convertView.findViewById(R.id.textoCat));
 			convertView.setTag(holder); 
 			} 
 			else 
 			{ 
-			holder = (CatText) convertView.getTag(); 
+			holder = (DatosCategorias) convertView.getTag(); 
 
 			} 
 			try{
@@ -303,29 +341,10 @@ public class ImageAdapter extends BaseAdapter {
         i.setLayoutParams(new GridView.LayoutParams(105, 70)); 
         return i;
         */
-    } 
+    }
 		
-	
 	}
 	
-  class CatText{
-	  private ImageView imagen;
-	  private TextView texto;
-	public ImageView getImagen() {
-		return imagen;
-	}
-	public void setImagen(ImageView imagen) {
-		this.imagen = imagen;
-	}
-	public TextView getTexto() {
-		return texto;
-	}
-	public void setTexto(TextView texto) {
-		this.texto = texto;
-	}
-		
-	
-  }
     
     
  }

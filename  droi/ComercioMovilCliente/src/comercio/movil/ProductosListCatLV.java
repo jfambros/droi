@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -50,6 +51,9 @@ public class ProductosListCatLV extends ListActivity{
     
     private SoapObject result;
     private IconListViewAdapter adaptador;
+    
+    //botones
+    private ImageView ivCesta = null;
 	
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,15 +67,19 @@ public class ProductosListCatLV extends ListActivity{
 	        envelope.dotNet = false;
 	        
 	        Bundle bundle = getIntent().getExtras();
-	        
+	        /*
 	        TextView nombreCat = (TextView) findViewById(R.id.tvCatNombCategoria);
 	        nombreCat.setText(bundle.getString("nombreCat"));
-	           
+	        */ 
 	        request.addProperty ("idCategoria", bundle.getString("idCategoria"));
 	        envelope.setOutputSoapObject(request);
 	        inicializaProd();
 	        this.adaptador = new IconListViewAdapter(this, R.layout.productoslistcatlvrow, listaProductos);
 	        setListAdapter(this.adaptador);
+	        
+	        ivCesta = (ImageView)findViewById(R.id.ivCestaListCatLV);
+	        ivCesta.setOnClickListener(ivCestaPres);
+	        
 
 		}
 		catch (Exception e) {
@@ -245,6 +253,16 @@ public class ProductosListCatLV extends ListActivity{
 	                return v;
 	        }
 	}
+	 
+	 private OnClickListener ivCestaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent i = new Intent(); 
+			i.setClass(ProductosListCatLV.this, Cesta.class);
+			startActivity(i);	
+			finish();
+		}
+	};
 	
 	
 }
