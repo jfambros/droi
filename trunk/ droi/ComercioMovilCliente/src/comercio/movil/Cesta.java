@@ -38,19 +38,21 @@ public class Cesta extends Activity {
     private TextView nombreProd = null;
     private EditText cantidadProd = null;
     private TextView precioProd = null;
-    private ImageView ivInicio = null;
+    
     private static final String HOST = "10.0.2.2";
     private String ruta = "http://"+HOST+"/tienda/catalog/images/";
     private Bundle bundle = null;
+    private TableRow row=null;
+    private HashMap<String, TableRow> cantidadCesta= new HashMap<String, TableRow>();
+
+	
+	//botones
+    private ImageView ivInicio = null;
     private ImageView ivActualizaCesta=null;
     private ImageView ivLimpiaCesta = null;
     private ImageView ivRegresar = null;  
-    private TableRow row=null;
-    private HashMap<String, TableRow> cantidadCesta= new HashMap<String, TableRow>();
-//    private ArrayList<TableRow> arr = new ArrayList<TableRow>();
-	
-	
-	
+    
+    
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cesta);
@@ -67,7 +69,6 @@ public class Cesta extends Activity {
 		ivActualizaCesta.setOnClickListener(ivActualizaCestaPres);
 		ivLimpiaCesta.setOnClickListener(ivLimpiaCestaPres);
 		ivRegresar.setOnClickListener(ivRegresarPres);
-        //row.setOnClickListener(rowPres);
 
         llenaCesta();
 	}
@@ -192,10 +193,10 @@ public class Cesta extends Activity {
            ivSinProductos = (ImageView)findViewById(R.id.ivSinProductosCesta);
            
            Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(),R.drawable.cestavacia);
-           //BitmapDrawable bmd = new BitmapDrawable(bitmapOrg);
            Bitmap bMapScala = Bitmap.createScaledBitmap(bitmapOrg, 192, 100, true);
            BitmapDrawable bmd = new BitmapDrawable(bMapScala);
            ivSinProductos.setImageDrawable(bmd);
+          ivRegresar.setOnClickListener(ivRegresarPresIni); 
         }		
 	}
 	
@@ -309,6 +310,15 @@ public class Cesta extends Activity {
 		}
 	};
 
+	private OnClickListener ivRegresarPresIni = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+	        Intent intent = new Intent();
+	        intent.setClass(Cesta.this, Principal.class);
+	        startActivity(intent);
+	        finish();
+		}
+	};
 	
 
 }

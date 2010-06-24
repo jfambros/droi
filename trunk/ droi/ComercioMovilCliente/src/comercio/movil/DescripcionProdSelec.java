@@ -41,8 +41,9 @@ public class DescripcionProdSelec extends Activity{
     Bundle bundle = null;
     
     //botones
-    private ImageView ivCesta;
-    private ImageView ivRegresa;
+    private ImageView ivCesta = null;
+    private ImageView ivRegresa = null;
+    private ImageView ivInicio = null;
    
     
     
@@ -56,7 +57,10 @@ public class DescripcionProdSelec extends Activity{
         //acciones
         ivRegresa = (ImageView)findViewById(R.id.ivRegresarDescripProd);
         ivRegresa.setOnClickListener(ivRegresaPres);
-        
+        ivCesta = (ImageView) findViewById(R.id.ivAgregaCestaDescripProd);
+        ivCesta.setOnClickListener(ivCestaPress);
+        ivInicio = (ImageView) findViewById(R.id.ivInicioDescripProdSelec);
+        ivInicio.setOnClickListener(ivInicioPres);       
         
         SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 
@@ -71,8 +75,7 @@ public class DescripcionProdSelec extends Activity{
         producto = new Producto();
         inicializaCat();
         
-        ivCesta = (ImageView) findViewById(R.id.ivAgregaCestaDescripProd);
-        ivCesta.setOnClickListener(ivCestaPress);
+
         
 
      }
@@ -198,6 +201,14 @@ public class DescripcionProdSelec extends Activity{
 		}
 	};
     
-    
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+           Intent intent = new Intent();
+           intent.setClass(DescripcionProdSelec.this, Principal.class);
+           startActivity(intent);
+           finish();		
+		}
+	};
     
 }

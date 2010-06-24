@@ -54,6 +54,7 @@ public class ProductosListCatLV extends ListActivity{
     //botones
     private ImageView ivCesta = null;
     private ImageView ivRegresa = null;
+    private ImageView ivInicio = null;
 	
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,8 @@ public class ProductosListCatLV extends ListActivity{
 	        //acciones
 	        ivRegresa = (ImageView)findViewById(R.id.ivRegresarProListCatLV);
 	        ivRegresa.setOnClickListener(ivRegresaPres);
+	        ivInicio = (ImageView) findViewById(R.id.ivInicioProdListCatLV);
+	        ivInicio.setOnClickListener(ivInicioPres);
 	        
 	        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 	
@@ -158,24 +161,37 @@ public class ProductosListCatLV extends ListActivity{
 	       result = (SoapObject)envelope.bodyIn;
 	       
 	       SoapObject result2 =  (SoapObject) envelope.getResponse();
-	       Log.e("cadena",result2.toString());
-	       for(int cont=0; cont< result2.getPropertyCount(); cont ++){
-	    	 SoapObject resultados = (SoapObject) result2.getProperty(cont);
-	    	 SoapPrimitive id = (SoapPrimitive) resultados.getProperty("idProd");
-          	 SoapPrimitive nombre = (SoapPrimitive) resultados.getProperty("nombreProd");
-          	 SoapPrimitive imagen = (SoapPrimitive) resultados.getProperty("imagenProd");
-          	 SoapPrimitive precio = (SoapPrimitive) resultados.getProperty("precioProd");
-          	 SoapPrimitive fabricante = (SoapPrimitive) resultados.getProperty("fabricanteProd");
-	    	   
-	      	 
-	      	 ProductosCat productosCat = new ProductosCat();
-	      	 productosCat.setIdProd(id.toString());
-	      	 productosCat.setNombreProd(nombre.toString());
-	      	 productosCat.setImagenProd(imagen.toString());
-	      	 productosCat.setPrecioProd(precio.toString());
-	      	 productosCat.setNombreFabricante(fabricante.toString());
-	      	 listaProductos.add(productosCat);
-	       }
+	      
+		   SoapObject prod = (SoapObject) result2.getProperty("productos");
+		   if (prod.getPropertyCount()!=0){
+		       for(int cont=0; cont< result2.getPropertyCount(); cont ++){
+		    	 SoapObject resultados = (SoapObject) result2.getProperty(cont);
+		    	 SoapPrimitive id = (SoapPrimitive) resultados.getProperty("idProd");
+	          	 SoapPrimitive nombre = (SoapPrimitive) resultados.getProperty("nombreProd");
+	          	 SoapPrimitive imagen = (SoapPrimitive) resultados.getProperty("imagenProd");
+	          	 SoapPrimitive precio = (SoapPrimitive) resultados.getProperty("precioProd");
+	          	 SoapPrimitive fabricante = (SoapPrimitive) resultados.getProperty("fabricanteProd");
+		    	   
+		      	 
+		      	 ProductosCat productosCat = new ProductosCat();
+		      	 productosCat.setIdProd(id.toString());
+		      	 productosCat.setNombreProd(nombre.toString());
+		      	 productosCat.setImagenProd(imagen.toString());
+		      	 productosCat.setPrecioProd(precio.toString());
+		      	 productosCat.setNombreFabricante(fabricante.toString());
+		      	 listaProductos.add(productosCat);
+		       }
+		   }
+		   else{
+		      	 ProductosCat productosCat = new ProductosCat();
+		      	 productosCat.setIdProd(null);
+		      	 productosCat.setNombreProd(null);
+		      	 productosCat.setImagenProd(null);
+		      	 productosCat.setPrecioProd(null);
+		      	 productosCat.setNombreFabricante(null);
+		      	 listaProductos.add(productosCat);			   
+		   }
+			   
        }
    	catch(Exception err){
     	new AlertDialog.Builder(ProductosListCatLV.this)
@@ -282,6 +298,16 @@ public class ProductosListCatLV extends ListActivity{
            intent.setClass(ProductosListCatLV.this, MuestraCategorias.class);
            startActivity(intent);
            finish();		   
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+           Intent intent = new Intent();
+           intent.setClass(ProductosListCatLV.this, Principal.class);
+           startActivity(intent);
+           finish();		
 		}
 	};
 	
