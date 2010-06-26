@@ -44,13 +44,14 @@ public class Cesta extends Activity {
     private Bundle bundle = null;
     private TableRow row=null;
     private HashMap<String, TableRow> cantidadCesta= new HashMap<String, TableRow>();
-
+    private double total = 0.0;
 	
 	//botones
     private ImageView ivInicio = null;
     private ImageView ivActualizaCesta=null;
     private ImageView ivLimpiaCesta = null;
     private ImageView ivRegresar = null;  
+    private ImageView ivConfirmarPedido = null;
     
     
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,20 +64,23 @@ public class Cesta extends Activity {
  		ivActualizaCesta = (ImageView) findViewById(R.id.ivActualizaCesta);
  		ivLimpiaCesta = (ImageView)findViewById(R.id.ivLimpiaCesta);
  		ivRegresar = (ImageView)findViewById(R.id.ivRegresarCesta);
+ 		ivConfirmarPedido = (ImageView) findViewById(R.id.ivConfirmaPedido);
         
  		//click
         ivInicio.setOnClickListener(ivInicioPres);
 		ivActualizaCesta.setOnClickListener(ivActualizaCestaPres);
 		ivLimpiaCesta.setOnClickListener(ivLimpiaCestaPres);
 		ivRegresar.setOnClickListener(ivRegresarPres);
-
+		ivConfirmarPedido.setOnClickListener(ivConfirmarPedidoPres);
+		
         llenaCesta();
 	}
 	
 	public void llenaCesta(){
-		double total = 0.0;
 		double precioCant = 0.0;
 		double subTotalProd = 0.0;
+		
+		total = 0.0;
 		TextView tvTotal = (TextView) findViewById(R.id.tvPrecioTotalCesta);
         if (!ListaCesta.arregloCesta.isEmpty()){
         	bundle = getIntent().getExtras();
@@ -102,7 +106,7 @@ public class Cesta extends Activity {
 
 	            while(i.hasNext()){
 		            Map.Entry<String,DatosCesta> me = (Map.Entry<String, DatosCesta>)i.next();
-		            Log.i("Datos map: ",me.getKey() + " : " + ((DatosCesta) me.getValue()).getNombreProducto());
+		            //Log.i("Datos map: ",me.getKey() + " : " + ((DatosCesta) me.getValue()).getNombreProducto());
 	            
 	        	
 	        	
@@ -306,7 +310,10 @@ public class Cesta extends Activity {
 	private OnClickListener ivRegresarPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			finish();
+	        Intent intent = new Intent();
+	        intent.setClass(Cesta.this, MuestraCategorias.class);
+	        startActivity(intent);
+	        finish();
 		}
 	};
 
@@ -320,5 +327,25 @@ public class Cesta extends Activity {
 		}
 	};
 	
-
+	private OnClickListener ivConfirmarPedidoPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			if (!cantidadCesta.isEmpty()){
+	        	Set set = cantidadCesta.entrySet();
+	
+	            Iterator i = set.iterator();
+	
+	            while(i.hasNext()){
+		            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
+		            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(1)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(2)).getText().toString() );
+	            }
+	            Log.i("Total: ",Double.toString(total));
+			}
+			
+	        Intent intent = new Intent();
+	        intent.setClass(Cesta.this, VerificaCliente.class);
+	        startActivity(intent);
+	        finish();			
+		}
+	};
 }

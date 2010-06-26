@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, Principal!</string>
-    <string name="app_name">Tienda</string>
-    <string name="catego1">Teclado</string>
+    <string name="app_name">Android m-commerce</string>
+    <string name="item_spinner">Seleccione</string>
 </resources>

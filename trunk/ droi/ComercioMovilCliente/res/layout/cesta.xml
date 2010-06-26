@@ -137,7 +137,7 @@ android:layout_gravity="left"
 			android:text="   "
 			/>
 			<ImageView
-			android:id="@+id/ivConfirmarCesta"
+			android:id="@+id/ivConfirmaPedido"
 			android:layout_width="48px"
 			android:layout_height="48px"
 			android:src="@drawable/confirmar48x48"
