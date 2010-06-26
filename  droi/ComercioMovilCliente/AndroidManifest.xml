@@ -3,7 +3,7 @@
       package="comercio.movil"
       android:versionCode="1"
       android:versionName="1.0">
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/iconomcom" android:label="@string/app_name">
         <activity android:name=".Principal"
                   android:label="@string/app_name">
             <intent-filter>
@@ -51,8 +51,15 @@
     <activity android:name="Cesta"
        android:label="Cesta">
     </activity>
-    
 
+    <activity android:name="VerificaCliente"
+       android:label="Cliente">
+    </activity>    
+
+    <activity android:name="NuevoCliente"
+       android:label="Datos de mi cuenta">
+    </activity>
+    
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-sdk android:minSdkVersion="3" />

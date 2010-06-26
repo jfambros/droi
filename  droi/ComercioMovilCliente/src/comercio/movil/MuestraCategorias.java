@@ -116,7 +116,7 @@ public class MuestraCategorias extends Activity {
 			try{
 				String val = ((Categorias) parent.getAdapter().getItem(position)).getNombreCat();
 				String idCat =((Categorias) parent.getAdapter().getItem(position)).getIdCat();
-				Toast.makeText(MuestraCategorias.this, "Id: " + idCat +" categoria "+  val,Toast.LENGTH_SHORT).show();
+				//Toast.makeText(MuestraCategorias.this, "Id: " + idCat +" categoria "+  val,Toast.LENGTH_SHORT).show();
 		      //Toast.makeText(Servicio3.this, "Dato: " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(); 
 				i.putExtra("idCategoria", idCat);
