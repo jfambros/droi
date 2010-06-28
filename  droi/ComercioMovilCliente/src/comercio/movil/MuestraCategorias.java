@@ -40,13 +40,12 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class MuestraCategorias extends Activity {
 	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
-	private static final String SOAP_ACTION = "capeconnect:categorias:categoriasPortType#obtenerCategorias";
+	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerCategorias";
     private static final String METHOD_NAME = "obtenerCategorias";
-    private static final String NAMESPACE = "http://www.your-company.com/categorias.wsdl";
-    private static final String URL = "http://"+HOST+"/tienda/servicios/consultacat.php";
+    private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+    private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
     private SoapSerializationEnvelope envelope;
     private HttpTransportSE httpt;
-    private JSONObject JSONObj;
     private Bundle bundleResult=new Bundle();
     private String resultData;
     
