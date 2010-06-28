@@ -451,7 +451,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Fax: "
 							/>
 							<EditText
-							android:id="@+id/etTelefonoNvoCte"
+							android:id="@+id/etFaxNvoCte"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"

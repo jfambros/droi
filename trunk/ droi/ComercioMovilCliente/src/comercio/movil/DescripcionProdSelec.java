@@ -31,9 +31,9 @@ import android.widget.TextView;
 public class DescripcionProdSelec extends Activity{
 
 	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
-	private static final String SOAP_ACTION = "capeconnect:categorias:categoriasPortType#obtenerProducto";
+	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerProducto";
     private static final String METHOD_NAME = "obtenerProducto";
-    private static final String NAMESPACE = "http://www.your-company.com/categorias.wsdl";
+    private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
     private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
     private SoapSerializationEnvelope envelope;
     private HttpTransportSE httpt;

@@ -37,9 +37,9 @@ public class ProductosListCatLV extends ListActivity{
 
 	private ArrayList<ProductosCat> listaProductos = null;
 	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
-	private static final String SOAP_ACTION = "capeconnect:categorias:categoriasPortType#obtenerProductosPorCategoria";
+	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerProductosPorCategoria";
     private static final String METHOD_NAME = "obtenerProductosPorCategorias";
-    private static final String NAMESPACE = "http://www.your-company.com/categorias.wsdl";
+    private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
     private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
     private SoapSerializationEnvelope envelope; 
     private HttpTransportSE httpt;
