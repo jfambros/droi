@@ -1,5 +1,7 @@
 package comercio.movil;
 
-public class RevisaPedido1 {
+import android.app.Activity;
+
+public class RevisaPedido1 extends Activity{
 
 }

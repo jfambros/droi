@@ -60,6 +60,9 @@
        android:label="Datos de mi cuenta">
     </activity>
     
+    <activity android:name="RevisaPedido1"
+       android:label="Datos del envío">
+    </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-sdk android:minSdkVersion="3" />
