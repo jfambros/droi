@@ -14,7 +14,7 @@ public class Validaciones {
         Pattern pat = null;
         Matcher mat = null;        
         pat = Pattern.compile("^[\\w\\-\\_\\+]+(\\.[\\w\\-\\_]+)*@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$");
-        mat = pat.matcher(correo);
+        mat = pat.matcher(correo); 
         if (mat.find()) {
             //System.out.println("[" + mat.group() + "]");
             return true;
