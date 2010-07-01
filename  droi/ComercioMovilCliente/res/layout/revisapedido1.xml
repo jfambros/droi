@@ -160,6 +160,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							/>
 						</TableRow>
 						<!-- Datos de entrega -->
+						<!-- Empresa -->
 						<TableRow
 						android:layout_width="fill_parent"
 						android:layout_height="fill_parent"
@@ -167,14 +168,118 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 						android:orientation="horizontal">
 						
 							<TextView
-							android:id="@+id/tvEmpresa"
+							android:id="@+id/tvEmpresaRevisaPed1"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:textStyle="bold"
 							android:text="Empresa"
 							/>
-						</TableRow>						
+						</TableRow>
+						<!-- Nombre -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvNombCteRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Nombre"
+							/>
+						</TableRow>
+						<!-- Calle -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvCalleRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Calle"
+							/>
+						</TableRow>
+						<!-- Colonia -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvColoniaRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Colonia"
+							/>
+						</TableRow>
+						<!-- Ciudad -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvCiudadRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Ciudad"
+							/>
+						</TableRow>
+						<!-- CP -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvCPRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Código postal"
+							/>
+						</TableRow>
+						<!-- Ciudad -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvCiudadRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Ciudad"
+							/>
+						</TableRow>
+						<!-- País -->
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:layout_gravity="left"
+						android:orientation="horizontal">
+						
+							<TextView
+							android:id="@+id/tvPaisRevisaPed1"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="País"
+							/>
+						</TableRow>																			
 						
 						<!-- Fin datos entrega -->
 						
