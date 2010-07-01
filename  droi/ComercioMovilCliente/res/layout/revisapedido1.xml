@@ -250,21 +250,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Código postal"
 							/>
 						</TableRow>
-						<!-- Ciudad -->
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
-							<TextView
-							android:id="@+id/tvCiudadRevisaPed1"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Ciudad"
-							/>
-						</TableRow>
 						<!-- País -->
 						<TableRow
 						android:layout_width="fill_parent"
@@ -288,7 +273,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </TableLayout>
             <!-- fin info personal -->
             
-            <!-- empresa -->
+            <!-- Forma de envío -->
             <TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -301,7 +286,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textStyle="bold"
-			android:text="Empresa"
+			android:text="Forma de envío"
 			/>
    			<TableLayout
 		    android:layout_width="wrap_content"
@@ -324,345 +309,37 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Empresa:      "
+							android:text="Pago por envío: "
 							/>
-							<EditText
-							android:id="@+id/etEmpresaNvoCte"
+						</TableRow>
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="fill_parent"
+						android:orientation="horizontal">
+							<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:textStyle="bold"
+							android:text="Tarifa única: "
+							/>
+							<TextView
+							android:id="@+id/etTarifaRevisaPed1"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
 							android:textColor="#ff000000" 
-							android:maxLines="1"
+							android:text="$"
 							/>
 						</TableRow>
 					</TableLayout>
 				</TableRow>
 			</TableLayout>
-            <!-- fin empresa -->
+            <!-- fin Forma de envío -->
             
-            <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textSize="12sp"
-			android:text=" "
-			/>                
-            <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textStyle="bold"
-			android:text="Dirección"
-			/>
-            <!-- dirección -->
-   			<TableLayout
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:stretchColumns="*" 
-		    android:background="#000000">
-			   
-		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" 
-		       android:layout_gravity="center_horizontal">
-		       		<TableLayout
-					android:layout_width="fill_parent"
-					android:layout_height="fill_parent"
-					android:orientation="vertical"
-					android:layout_gravity="left">
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Dirección: "
-							/>
-							<EditText
-							android:id="@+id/etDireccionNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Colonia: "
-							/>
-							<EditText
-							android:id="@+id/etColoniaNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Código postal: "
-							/>
-							<EditText
-							android:id="@+id/etCodPostalNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Ciudad: "
-							/>
-							<EditText
-							android:id="@+id/etCiudadNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Estado: "
-							/>
-							<EditText
-							android:id="@+id/etEstadoNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="País: "
-							/>
-							<Spinner android:id="@+id/spinnerNvoCte"
-        					android:layout_width="fill_parent"
-        					android:layout_height="wrap_content"
-        					android:drawSelectorOnTop="true"
-        					android:prompt="@string/item_spinner"
-    						/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Teléfono: "
-							/>
-							<EditText
-							android:id="@+id/etTelefonoNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Fax: "
-							/>
-							<EditText
-							android:id="@+id/etFaxNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000" 
-							android:maxLines="1"
-							/>
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:textSize="12sp"
-							android:text="(Opcional)"
-							/>							
-						</TableRow>
-					</TableLayout>
-				</TableRow>
-			</TableLayout>
-            <!-- fin dirección -->
             
-            <!-- Contraseña -->
-            <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textSize="12sp"
-			android:text=" "
-			/>                
-            <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textStyle="bold"
-			android:text="Contraseña"
-			/>
-   			<TableLayout
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:stretchColumns="*" 
-		    android:background="#000000">
-			   
-		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" 
-		       android:layout_gravity="center_horizontal">
-		       		<TableLayout
-					android:layout_width="fill_parent"
-					android:layout_height="fill_parent"
-					android:orientation="vertical"
-					android:layout_gravity="left">
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Contraseña:      "
-							/>
-							<EditText
-							android:id="@+id/etContraNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000"
-							android:password="true" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal">
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Confirmar contraseña:      "
-							/>
-							<EditText
-							android:id="@+id/etConfContraNvoCte"
-							android:layout_width="150px"
-							android:layout_height="40px"
-							android:textSize="16sp"
-							android:textColor="#ff000000"
-							android:password="true" 
-							android:maxLines="1"
-							/>
-						</TableRow>
-					</TableLayout>
-				</TableRow>
-			</TableLayout>
-            <!-- fin contraseña -->
-            
-            <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textSize="14sp"
-			android:text=" "
-			/>    
-			
-			<TableLayout
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:stretchColumns="*" 
-		    android:background="#000000">
-		       			
-		       <TableRow  android:background="#ff0099cc" android:layout_margin="1dip" android:layout_gravity="center_horizontal">
-		          		<LinearLayout
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:background="#ff0099cc"
-		android:layout_gravity="right"
-		>
-		       		<TableLayout
-					android:layout_width="fill_parent"
-					android:layout_height="fill_parent"
-					android:orientation="vertical"
-					android:layout_gravity="right">
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:orientation="horizontal"
-						android:layout_gravity="right"
-						>
-						
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Continuar"
-							/>
-							<ImageView
-							android:id="@+id/ivContinuarNvoCte"
-							android:layout_width="48px"
-							android:layout_height="48px"
-							android:src="@drawable/continuar48x48" 
-							/>
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="  "
-							/>
-
-						</TableRow>
-					</TableLayout>
-								   </LinearLayout>
-			   </TableRow>
 
 		    
-         </TableLayout>
 		</LinearLayout>
 
         <!-- Contenido -->
