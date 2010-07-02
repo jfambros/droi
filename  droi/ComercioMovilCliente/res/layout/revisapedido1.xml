@@ -273,6 +273,48 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             </TableLayout>
             <!-- fin info personal -->
             
+
+            
+ 
+ <!-- comentarios -->
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="12sp"
+			android:text=" "
+			/>                
+            <TextView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:text="Escriba su comentario"
+			/>
+   			<TableLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:stretchColumns="*" 
+		    android:background="#000000">
+			   
+		       <TableRow  android:background="#F6F6F6" 
+		       android:layout_margin="1dip" 
+		       android:layout_gravity="center_horizontal"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:orientation="vertical"
+		       >
+		       
+							<EditText
+							android:id="@+id/etComentarioRevisaPed1"
+							android:layout_width="fill_parent"
+							android:layout_height="fill_parent"
+							android:textColor="#ff000000" 
+							android:gravity="fill"							
+							/>
+				</TableRow>
+			</TableLayout>
+            <!-- fin comentarios -->    
             <!-- Forma de envío -->
             <TextView
 			android:layout_width="wrap_content"
@@ -335,9 +377,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					</TableLayout>
 				</TableRow>
 			</TableLayout>
-            <!-- fin Forma de envío -->
-            
-            
+            <!-- fin Forma de envío -->                   
 
 		    
 		</LinearLayout>
