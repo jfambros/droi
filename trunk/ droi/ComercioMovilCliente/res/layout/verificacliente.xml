@@ -117,7 +117,7 @@
 							/>
 							<EditText
 							   android:id="@+id/etEmailVerificaCte"
-							   android:layout_width="150px"
+							   android:layout_width="160px"
 								android:layout_height="40px"
 								android:textSize="16sp"
 								android:textColor="#ff000000" 
@@ -137,8 +137,8 @@
 							android:text="Contraseña:  "
 							/>
 							<EditText
-							   android:id="@+id/etContraseniaVerificaCte"
-							   android:layout_width="150px"
+							   android:id="@+id/etPasswdVerificaCte"
+							   android:layout_width="160px"
 								android:layout_height="40px"
 								android:textSize="16sp"
 								android:textColor="#ff000000" 
@@ -154,6 +154,7 @@
 					    android:layout_height="fill_parent" 
 					>
 					    <ImageView
+					    android:id="@+id/ivValidaClienteVerificaCte"
 						android:layout_width="48px"
 						android:layout_height="48px"
 						android:src="@drawable/inicia_sesion48x48" 
