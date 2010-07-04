@@ -342,16 +342,18 @@ public class Cesta extends Activity {
 	            Log.i("Total: ",Double.toString(total));
 			}
 			
-			/*//prueba
+			//prueba
 	        Intent intent = new Intent();
 	        intent.setClass(Cesta.this, VerificaCliente.class);
 	        startActivity(intent);
 	        finish();
-	        */			
+	        
+			/*
 	        Intent intent = new Intent();
 	        intent.setClass(Cesta.this, RevisaPedido1.class);
 	        startActivity(intent);
 	        finish();
+	        */
 		}
 	};
 }
