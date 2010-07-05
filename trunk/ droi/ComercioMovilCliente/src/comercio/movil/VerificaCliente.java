@@ -23,6 +23,7 @@ public class VerificaCliente extends Activity{
 	private ImageView ivVerificaCliente;
 	
 	private String HOST = "10.0.2.2"; //esto es para el equipo local
+	private String emailCorrecto = null;
 	
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class VerificaCliente extends Activity{
 		public void onClick(View arg0) {
 			if (validaCliente() == true){
 	            Intent intent = new Intent();
-	            //intent.putExtra("comentario", value);
+	            intent.putExtra("emailCliente", emailCorrecto);
 	            intent.setClass(VerificaCliente.this, RevisaPedido1.class);
 	            startActivity(intent);
 	            finish();			
@@ -84,28 +85,21 @@ public class VerificaCliente extends Activity{
 		        envelope.setOutputSoapObject(request);
 		        httpt.call(SOAP_ACTION, envelope);
 	            result =  (SoapObject) envelope.bodyIn;
-	           
-	            Log.i("total", Integer.toString(result.getPropertyCount()));
-	            SoapPrimitive email = (SoapPrimitive) result.getProperty("email");
-		        Log.i("resultado", email.toString());
+	            if (result.getProperty("email").toString().equals("anyType{}")){
+	            	//SoapPrimitive email = (SoapPrimitive) result.getProperty("email");
+	            	mensajeError("Error", "e-mail o contraseña incorrecta");
+	            	return false;
+	            }else{
+	            	SoapPrimitive email = (SoapPrimitive) result.getProperty("email");
+	            	emailCorrecto = email.toString();
+	            	return true;
+	            }
 		    }
 		    catch(Exception err){
 		    	mensajeError("Error", "e-mail o contraseña incorrecta");
 		       Log.e("Error", err.toString());
 		       return false;
 		    }   
-	            
-	            
-	            //Log.i("total", Integer.toString(result.getPropertyCount()));
-
-	            if (result.getPropertyCount() == 0){
-	            	mensajeError("Error", "e-mail o contraseña incorrecta");
-	            	return false;
-	            }
-	            else{
-	            	return true;
-	            }
-
 	    }//fin valida datos
 	    else{
 	    	return false;
