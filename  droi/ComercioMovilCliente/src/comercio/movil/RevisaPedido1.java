@@ -2,6 +2,7 @@ package comercio.movil;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -55,6 +56,11 @@ public class RevisaPedido1 extends Activity{
 	        httpt.call(SOAP_ACTION, envelope);
 	        result =  (SoapObject) envelope.bodyIn;
 	        SoapObject resultSoap =  (SoapObject) envelope.getResponse();
+	        
+	        SoapPrimitive empresaCliente = (SoapPrimitive) resultSoap.getProperty("empresaCliente");
+	        SoapPrimitive nombreCliente = (SoapPrimitive) resultSoap.getProperty("nombreCliente");
+	        SoapPrimitive apellidoCliente = (SoapPrimitive) resultSoap.getProperty("apellidoCliente");
+	        SoapPrimitive direccCliente = (SoapPrimitive) resultSoap.getProperty("direccCliente");
 	        
 	    }
 	    catch(Exception err){
