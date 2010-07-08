@@ -7,11 +7,11 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -134,6 +134,13 @@ public class RevisaPedido1 extends Activity{
 		
 		public void onClick(View arg0) {
 			Log.i("comentario",tvComentario.getText().toString());
+			
+	        Intent intent = new Intent();
+	        //i.putExtra("idProducto",producto.getIdProd());
+	        intent.putExtra("comentario", tvComentario.getText().toString());
+	        intent.setClass(RevisaPedido1.this, RevisaPedido2.class);
+	        startActivity(intent);
+	        finish();
 		}
 	};
 	
