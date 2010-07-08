@@ -98,21 +98,13 @@ android:layout_gravity="left"
 			android:layout_height="48px"
 			android:src="@drawable/actualizacesta48x48"
 			/>
-	  		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textSize="14sp"
-			android:width="80px"
-			android:text="Capture 0 para quitar producto"
-			/>
-			
+		
 			<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="14sp"
-			android:text="   "
+			android:text="     "
 			/>
 			<ImageView
 			android:id="@+id/ivLimpiaCesta"
@@ -134,7 +126,7 @@ android:layout_gravity="left"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="14sp"
-			android:text="   "
+			android:text="     "
 			/>
 			<ImageView
 			android:id="@+id/ivConfirmaPedido"
@@ -159,6 +151,41 @@ android:layout_gravity="left"
 		android:orientation="horizontal"
 		android:layout_gravity="center_horizontal"
 		>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text="Actualizar"
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text="     "
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text="Limpiar"
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text="     "
+			/>			
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text="Confirmar"
+			/>			
 		</TableRow>
 	</TableLayout>
 
@@ -174,9 +201,10 @@ android:layout_gravity="left"
     android:background="#000000">
  
     <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="center_horizontal">
-        <TextView android:text="        "  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="2px"/>
+        <TextView android:text="Borrar"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="0.5px"/>
+        <TextView android:text="       "  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="1px"/>
         <TextView android:text="Descripción"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip"/>
-        <TextView android:text="Cantidad" android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="15px"/>
+        <TextView android:text="Cant." android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="15px"/>
         <TextView android:text="Total" android:background="#CCCCCC" android:textColor="#000000" android:layout_width="1px" android:layout_margin="1dip"/>
     </TableRow>
   

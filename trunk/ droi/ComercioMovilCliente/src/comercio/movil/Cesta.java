@@ -13,6 +13,8 @@ import comercio.movil.R.drawable;
 import utils.DatosCesta;
 import utils.ListaCesta;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,6 +26,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -34,6 +37,7 @@ import android.widget.TableRow.LayoutParams;
 
 public class Cesta extends Activity {
     private TableLayout tlCesta;
+    private CheckBox borrar = null;
     private ImageView imagenProd = null;
     private TextView nombreProd = null;
     private EditText cantidadProd = null;
@@ -128,6 +132,13 @@ public class Cesta extends Activity {
 		            Bitmap bmImg = BitmapFactory.decodeStream(is);
 		            Bitmap bMapScala = Bitmap.createScaledBitmap(bmImg, 80, 80, true);
 		            
+		            
+		            borrar = new CheckBox(this);
+		            borrar.setLayoutParams(new LayoutParams(
+				            LayoutParams.FILL_PARENT,
+				            LayoutParams.FILL_PARENT));
+		            
+		            
 		            imagenProd = new ImageView(this);
 		            imagenProd.setLayoutParams(new LayoutParams(
 		            LayoutParams.FILL_PARENT,
@@ -167,7 +178,7 @@ public class Cesta extends Activity {
 		            precioProd.setGravity(Gravity.CENTER_VERTICAL);
 		            precioProd.setWidth(20);
 		            
-		            
+		            row.addView(borrar);
 		        	row.addView(imagenProd);
 		        	row.addView(nombreProd);
 		        	row.addView(cantidadProd);
@@ -177,7 +188,7 @@ public class Cesta extends Activity {
 		        	tlCesta.addView(row);
 		        	//arr.add(row);
 		        	cantidadCesta.put(((DatosCesta) me.getValue()).getIdProducto(), row);
-		        	total +=  Double.parseDouble(((TextView)(row.getChildAt(3))).getText().toString());
+		        	total +=  Double.parseDouble(((TextView)(row.getChildAt(4))).getText().toString());
 		        	Log.i("total", Double.toString(total));
 		        	tvTotal.setText(Double.toString(total));
 		        	
@@ -211,9 +222,10 @@ public class Cesta extends Activity {
 
         while(i.hasNext()){
             Map.Entry<String, TableRow> me = (Map.Entry<String, TableRow>)i.next();
-            String cantProd = ((EditText) me.getValue().getChildAt(2)).getText().toString();
+            String cantProd = ((EditText) me.getValue().getChildAt(3)).getText().toString();
+            
             Log.i("Cajas texto: ",me.getKey() + " : " + cantProd);
-            if (Integer.parseInt(cantProd) == 0){
+            if (Integer.parseInt(cantProd) == 0 || ((CheckBox) me.getValue().getChildAt(0)).isChecked()){
             	Log.i("Borrado","La clave "+me.getKey()+" Ah sido borrado");
             	ListaCesta.arregloCesta.remove(me.getKey());
             	
@@ -223,7 +235,7 @@ public class Cesta extends Activity {
                 finish();
             }
             else{
-            	int nuevaCant = Integer.parseInt(((EditText) me.getValue().getChildAt(2)).getText().toString());
+            	int nuevaCant = Integer.parseInt(((EditText) me.getValue().getChildAt(3)).getText().toString());
             	DatosCesta cantidadCambiada =   ListaCesta.arregloCesta.get(me.getKey());
             	cantidadCambiada.setCantidadProd(nuevaCant); 
             	ListaCesta.arregloCesta.put(me.getKey(), cantidadCambiada);
@@ -337,17 +349,27 @@ public class Cesta extends Activity {
 	
 	            while(i.hasNext()){
 		            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
-		            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(1)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(2)).getText().toString() );
+		            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(2)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(3)).getText().toString() );
 	            }
 	            Log.i("Total: ",Double.toString(total));
+				//prueba
+		        Intent intent = new Intent();
+		        intent.setClass(Cesta.this, VerificaCliente.class);
+		        startActivity(intent);
+		        finish();
+	            
 			}
-			
-			//prueba
-	        Intent intent = new Intent();
-	        intent.setClass(Cesta.this, VerificaCliente.class);
-	        startActivity(intent);
-	        finish();
-	        
+			else{
+				new AlertDialog.Builder(Cesta.this)
+		     	.setTitle("Mensaje")
+		     	.setMessage("No hay productos en la cesta")
+		     	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		     	public void onClick(DialogInterface dialog, int whichButton) {
+		     	setResult(RESULT_OK);
+		     	  }
+		     	})
+		     	.show(); 
+			}
 			/*
 	        Intent intent = new Intent();
 	        intent.setClass(Cesta.this, RevisaPedido1.class);
