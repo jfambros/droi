@@ -189,7 +189,7 @@ public class Cesta extends Activity {
 		        	//arr.add(row);
 		        	cantidadCesta.put(((DatosCesta) me.getValue()).getIdProducto(), row);
 		        	total +=  Double.parseDouble(((TextView)(row.getChildAt(4))).getText().toString());
-		        	Log.i("total", Double.toString(total));
+		        	//Log.i("total", Double.toString(total));
 		        	tvTotal.setText(Double.toString(total));
 		        	
 		        	cont++;

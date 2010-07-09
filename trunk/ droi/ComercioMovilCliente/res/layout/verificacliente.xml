@@ -122,6 +122,7 @@
 								android:textSize="16sp"
 								android:textColor="#ff000000" 
 								android:maxLines="1"
+								android:text="jferaa007@gmail.com"
 							/>
 						</TableRow>
 						<TableRow
@@ -144,6 +145,7 @@
 								android:textColor="#ff000000" 
 								android:maxLines="1"
 								android:password="true"
+								android:text="123456"
 							/>
 						</TableRow>
 						
