@@ -25,6 +25,7 @@ public class RevisaPedido1 extends Activity{
 	
 	private String HOST = "10.0.2.2";
 	private Bundle bundle= null;
+	private String email;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,9 @@ public class RevisaPedido1 extends Activity{
         
         bundle = getIntent().getExtras();
         Log.i("email",bundle.getString("emailCliente"));
-        llenaDireccion(bundle.getString("emailCliente"));
+        email = bundle.getString("emailCliente");
+        
+        llenaDireccion(email);
 
 	}
 	
@@ -60,9 +63,8 @@ public class RevisaPedido1 extends Activity{
 	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed1);
 	    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionRevisaPed1);
 	    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaRevisaPed1);
-	    TextView tvCiudadCte = (TextView)findViewById(R.id.tvCiudadRevisaPed1);
-	    TextView tvCPCte = (TextView)findViewById(R.id.tvCPRevisaPed1);
-	    TextView tvPaisCte = (TextView)findViewById(R.id.tvPaisRevisaPed1);
+	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadCPRevisaPed1);
+	    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisRevisaPed1);
 	    //
 	    try{
 		    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -82,15 +84,15 @@ public class RevisaPedido1 extends Activity{
 	        SoapPrimitive coloniaCliente = (SoapPrimitive) resultSoap.getProperty("coloniaCliente");
 	        SoapPrimitive cpCliente = (SoapPrimitive) resultSoap.getProperty("cpCliente");
 	        SoapPrimitive ciudadCliente = (SoapPrimitive) resultSoap.getProperty("ciudadCliente");
+	        SoapPrimitive estadoCliente = (SoapPrimitive) resultSoap.getProperty("estadoCliente");
 	        SoapPrimitive paisCliente = (SoapPrimitive) resultSoap.getProperty("paisCliente");
 	        
 	        tvEmpresaCte.setText(empresaCliente.toString());
 	        tvNombreCte.setText(nombreCliente.toString() + " "+apellidoCliente.toString());
 	        tvDireccionCte.setText(direccCliente.toString());
 	        tvColoniaCte.setText(coloniaCliente.toString());
-	        tvCiudadCte.setText(ciudadCliente.toString());
-	        tvCPCte.setText(cpCliente.toString());
-	        tvPaisCte.setText(paisCliente.toString());
+	        tvCiudadYCPCte.setText(ciudadCliente.toString()+", C.P. "+cpCliente.toString());
+	        tvEsatdoYPaisCte.setText(estadoCliente.toString()+", "+paisCliente.toString());
 	        
 	    }
 	    catch(Exception err){
@@ -138,6 +140,7 @@ public class RevisaPedido1 extends Activity{
 	        Intent intent = new Intent();
 	        //i.putExtra("idProducto",producto.getIdProd());
 	        intent.putExtra("comentario", tvComentario.getText().toString());
+	        intent.putExtra("emailCliente", email);
 	        intent.setClass(RevisaPedido1.this, RevisaPedido2.class);
 	        startActivity(intent);
 	        finish();

@@ -1,53 +1,65 @@
 package comercio.movil;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.DatosCesta;
+import utils.ListaCesta;
+
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.util.Log;
 import android.widget.TextView;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class RevisaPedido2 extends Activity{
-	private Bundle bundle = null;
-	private EditText etComentario = null;
-	private ImageView ivContinuar = null;
-	private RadioGroup rgFormaPago = null;
+public class RevisaPedido3 extends Activity{
+	private TextView tvComentario = null;
+	private TextView tvTipoPago = null;
 	
-	
-	private String email = null;
-	private String tipoPago = null;
 	private String HOST = "10.0.2.2";
-
+	private String email = null;
+	private Bundle bundle = null;
+	
+	
+	
 	public void onCreate(Bundle savedInstanceState) {
+		try{
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.revisapedido2);
-        
-        //objetos
-        etComentario = (EditText) findViewById(R.id.etComentarioRevisaPed2);
-        
-        ivContinuar = (ImageView)findViewById(R.id.ivContinuarRevisaPed2);
-        ivContinuar.setOnClickListener(ivContinuarPres);
-    
-        rgFormaPago = (RadioGroup) findViewById(R.id.rgFormaPagoEnvioRevisaPed2);
-        rgFormaPago.setOnCheckedChangeListener(rgFormaPagoPres);
+        setContentView(R.layout.revisapedido3);
         
         bundle = getIntent().getExtras();
         email = bundle.getString("emailCliente");
         
-        etComentario.setText(bundle.getString("comentario"));
+        //objetos del xml
+        tvComentario = (TextView) findViewById(R.id.tvComentarioRevisaPed3);
+        tvComentario.setText(bundle.getString("comentario"));
+        
+        tvTipoPago = (TextView) findViewById(R.id.tvTipoPagoRevisaPed3);
+//REVISAR EL Tipo pago, tiene null        
+        //mostrar el tipo de pago
+        if (bundle.getString("TipoPago").equals("Tienda")){
+        	tvTipoPago.setText("Pago en tienda");
+        }
+        
+        if (bundle.getString("TipoPago").equals("Depósito")){
+        	pagoBancario();
+        }
         
         llenaDireccion(email);
-	}
+        //llenaProductos();
+		}
+	    catch(Exception err){
+	    	Log.e("error create", err.toString());
+	    	
+	    }
+     }
+	
 	
 	private void llenaDireccion(String email){
 		//Definición para servicio Web
@@ -60,12 +72,12 @@ public class RevisaPedido2 extends Activity{
 	    SoapObject result=null;
 	 //Fin definición
 	    //objetos para visualizar
-	    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaRevisaPed2);
-	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed2);
-	    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionRevisaPed2);
-	    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaRevisaPed2);
-	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadYCPRevisaPed2);
-	    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisRevisaPed2);
+	    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaRevisaPed3);
+	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed3);
+	    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionRevisaPed3);
+	    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaRevisaPed3);
+	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadYCPRevisaPed3);
+	    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisRevisaPed3);
 	    //
 	    try{
 		    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
@@ -97,35 +109,25 @@ public class RevisaPedido2 extends Activity{
 	        
 	    }
 	    catch(Exception err){
+	    	Log.e("error", err.toString());
 	    	
 	    }
 	}
 	
-	private OnCheckedChangeListener rgFormaPagoPres = new OnCheckedChangeListener() {
-		
-		public void onCheckedChanged(RadioGroup arg0, int check) {
-			if (check == R.id.rgEnTiendaEnvioRevisaPed2){
-				tipoPago = "Tienda";
-			}
-			
-			if (check == R.id.rgDepositoEnvioRevisaPed2){
-				tipoPago = "Depósito";
-			}
-			
-		}
-	};
+	private void llenaProductos(){
+		Set set = ListaCesta.arregloCesta.entrySet();
+
+        Iterator i = set.iterator();
+
+        while(i.hasNext()){
+            Map.Entry<String,DatosCesta> me = (Map.Entry<String, DatosCesta>)i.next();
+            Log.i("Datos map: ",me.getKey() + " : " + ((DatosCesta) me.getValue()).getNombreProducto()+" cantidad: "+ ((DatosCesta) me.getValue()).getCantidadProd()+" Precio:"+((DatosCesta) me.getValue()).getPrecioProd() );
+        }
+        
+	}
 	
-	private OnClickListener ivContinuarPres = new OnClickListener() {
+	private void pagoBancario(){
 		
-		public void onClick(View arg0) {
-			Intent intent = new Intent();
-			intent.putExtra("TipoPago", tipoPago);
-			intent.putExtra("comentario", etComentario.getText().toString());
-			intent.putExtra("emailCliente", email);
-	        intent.setClass(RevisaPedido2.this, RevisaPedido3.class);
-	        startActivity(intent);
-	        finish();
-		}
-	};
-	
+	}
+
 }

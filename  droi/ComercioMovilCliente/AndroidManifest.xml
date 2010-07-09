@@ -68,6 +68,10 @@
        android:label="Forma de pago">
     </activity>
     
+    <activity android:name="RevisaPedido3"
+       android:label="Resumen de su pedido">
+    </activity>
+    
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-sdk android:minSdkVersion="3" />

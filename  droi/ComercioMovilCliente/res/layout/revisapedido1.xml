@@ -186,7 +186,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Nombre"
 							/>
 						</TableRow>
-						<!-- Calle -->
+						<!-- Dirección -->
 						<TableRow
 						android:layout_width="fill_parent"
 						android:layout_height="fill_parent"
@@ -222,14 +222,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 						android:orientation="horizontal">
 						
 							<TextView
-							android:id="@+id/tvCiudadRevisaPed1"
+							android:id="@+id/tvCiudadCPRevisaPed1"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Ciudad"
+							android:text="Ciudad y CP"
 							/>
 						</TableRow>
-						<!-- CP -->
+						<!-- Estado y País -->
 						<TableRow
 						android:layout_width="fill_parent"
 						android:layout_height="fill_parent"
@@ -237,26 +237,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 						android:orientation="horizontal">
 						
 							<TextView
-							android:id="@+id/tvCPRevisaPed1"
+							android:id="@+id/tvEstadoYPaisRevisaPed1"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Código postal"
-							/>
-						</TableRow>
-						<!-- País -->
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
-							<TextView
-							android:id="@+id/tvPaisRevisaPed1"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="País"
+							android:text="Estado y País"
 							/>
 						</TableRow>																			
 						
