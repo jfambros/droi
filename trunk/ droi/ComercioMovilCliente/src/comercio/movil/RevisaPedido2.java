@@ -45,6 +45,7 @@ public class RevisaPedido2 extends Activity{
         email = bundle.getString("emailCliente");
         
         etComentario.setText(bundle.getString("comentario"));
+        tipoPago = "Tienda";
         
         llenaDireccion(email);
 	}

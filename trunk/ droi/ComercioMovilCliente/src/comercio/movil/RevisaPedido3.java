@@ -14,13 +14,18 @@ import utils.DatosCesta;
 import utils.ListaCesta;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class RevisaPedido3 extends Activity{
 	private TextView tvComentario = null;
 	private TextView tvTipoPago = null;
+	private ImageView ivRegresar = null;
 	
 	private String HOST = "10.0.2.2";
 	private String email = null;
@@ -39,6 +44,9 @@ public class RevisaPedido3 extends Activity{
         //objetos del xml
         tvComentario = (TextView) findViewById(R.id.tvComentarioRevisaPed3);
         tvComentario.setText(bundle.getString("comentario"));
+        
+        ivRegresar = (ImageView) findViewById(R.id.ivRegresaRevisaPed3);
+        ivRegresar.setOnClickListener(ivRegresarPres);
         
         tvTipoPago = (TextView) findViewById(R.id.tvTipoPagoRevisaPed3);
 //REVISAR EL Tipo pago, tiene null        
@@ -129,5 +137,19 @@ public class RevisaPedido3 extends Activity{
 	private void pagoBancario(){
 		
 	}
+	
+	
+	private OnClickListener ivRegresarPres = new OnClickListener() {
+		
+		public void onClick(View v) {
+			TextView tvComentario = (TextView) findViewById(R.id.tvComentarioRevisaPed3);
+			Intent intent = new Intent();
+			intent.putExtra("comentario", tvComentario.getText().toString());
+			intent.putExtra("emailCliente", email);
+	        intent.setClass(RevisaPedido3.this, RevisaPedido2.class);
+	        finish();
+	        startActivity(intent);
+		}
+	};
 
 }
