@@ -26,6 +26,7 @@ public class RevisaPedido1 extends Activity{
 	private String HOST = "10.0.2.2";
 	private Bundle bundle= null;
 	private String email;
+	private String envioProd;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,15 @@ public class RevisaPedido1 extends Activity{
         bundle = getIntent().getExtras();
         Log.i("email",bundle.getString("emailCliente"));
         email = bundle.getString("emailCliente");
+        
+        if (bundle.getString("comentario")!= null){
+        	tvComentario.setText(bundle.getString("comentario"));
+        }
+        if (bundle.getString("envioProd")!= null){
+        	obtieneCostoEnvio();
+        }        
+        
+        envioProd = "No";
         
         llenaDireccion(email);
 
@@ -125,6 +135,7 @@ public class RevisaPedido1 extends Activity{
 		        	SoapPrimitive costo = (SoapPrimitive) result.getProperty("costo");
 		        	tvCostoEnvio.setText("$"+costo.toString());
 		        }
+		        envioProd = "Si";
 		        
 	    }
 	    catch(Exception err){
@@ -141,6 +152,7 @@ public class RevisaPedido1 extends Activity{
 	        //i.putExtra("idProducto",producto.getIdProd());
 	        intent.putExtra("comentario", tvComentario.getText().toString());
 	        intent.putExtra("emailCliente", email);
+	        intent.putExtra("envioProd", envioProd);
 	        intent.setClass(RevisaPedido1.this, RevisaPedido2.class);
 	        startActivity(intent);
 	        finish();
@@ -153,6 +165,7 @@ public class RevisaPedido1 extends Activity{
 			if (check == R.id.rgNoEnvioRevisaPed1){
 				TextView tvCostoEnvio = (TextView) findViewById(R.id.tvCostoEnvioRevisaPed1);
 				tvCostoEnvio.setText("$0");
+				envioProd = "No";
 			}
 			else{
 				obtieneCostoEnvio();

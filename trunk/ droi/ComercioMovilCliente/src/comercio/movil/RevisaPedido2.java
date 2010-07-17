@@ -22,11 +22,13 @@ public class RevisaPedido2 extends Activity{
 	private EditText etComentario = null;
 	private ImageView ivContinuar = null;
 	private RadioGroup rgFormaPago = null;
+	private ImageView ivRegresar = null;
 	
 	
 	private String email = null;
 	private String tipoPago = null;
 	private String HOST = "10.0.2.2";
+	private String envioProd = null;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +43,16 @@ public class RevisaPedido2 extends Activity{
         rgFormaPago = (RadioGroup) findViewById(R.id.rgFormaPagoEnvioRevisaPed2);
         rgFormaPago.setOnCheckedChangeListener(rgFormaPagoPres);
         
+        ivRegresar = (ImageView) findViewById(R.id.ivRegresaRevisaPed2);
+        ivRegresar.setOnClickListener(ivRegresarPres);
+        
         bundle = getIntent().getExtras();
         email = bundle.getString("emailCliente");
         
         etComentario.setText(bundle.getString("comentario"));
         tipoPago = "Tienda";
+        
+        envioProd = bundle.getString("envioProd");
         
         llenaDireccion(email);
 	}
@@ -124,6 +131,18 @@ public class RevisaPedido2 extends Activity{
 			intent.putExtra("comentario", etComentario.getText().toString());
 			intent.putExtra("emailCliente", email);
 	        intent.setClass(RevisaPedido2.this, RevisaPedido3.class);
+	        startActivity(intent);
+	        finish();
+		}
+	};
+	
+	private OnClickListener ivRegresarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.putExtra("emailCliente", email);			
+			intent.putExtra("comentario", etComentario.getText().toString());
+	        intent.setClass(RevisaPedido2.this, RevisaPedido1.class);
 	        startActivity(intent);
 	        finish();
 		}
