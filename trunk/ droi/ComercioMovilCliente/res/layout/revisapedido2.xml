@@ -67,9 +67,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="14sp"
-			android:textStyle="bold"
-			android:text="Dirección de entrega"
-			/>
+			android:textStyle="bold" android:text="Dirección de facturación"/>
 			<!-- Dirección de entrega -->
 			<TableLayout
 		    android:layout_width="wrap_content"
@@ -108,8 +106,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 						   <TextView android:layout_width="wrap_content"
 	                        android:layout_height="wrap_content"
 	                        android:textColor="#ff000000"
-	                        android:layout_gravity="left"
-    	                    android:text="entrega de los productos de este pedido."/>
+	                        android:layout_gravity="left" android:text="entrega de la factura"/>
 						</TableRow>
 						<TableRow
 						android:layout_width="wrap_content"
@@ -134,8 +131,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
    						     android:layout_width="wrap_content"
 	                        android:layout_height="wrap_content"
 	                        android:textColor="#ff000000"
-	                        android:layout_gravity="center_vertical"
-    	                    android:text="Cambiar  a  otra  dirección  de  entrega"/>
+	                        android:layout_gravity="center_vertical" android:text="Cambiar  a  otra  dirección  de  factura"/>
     	                    
 				    
 						    <ImageView
@@ -157,9 +153,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:textStyle="bold"
-							android:text="Dirección de entrega actual: "
-							/>
+							android:textStyle="bold" android:text="Dirección de facturación:"/>
 						</TableRow>
 						<!-- Datos de entrega -->
 						<!-- Empresa -->
