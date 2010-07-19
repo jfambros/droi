@@ -127,9 +127,10 @@ public class RevisaPedido2 extends Activity{
 		
 		public void onClick(View arg0) {
 			Intent intent = new Intent();
-			intent.putExtra("TipoPago", tipoPago);
+			intent.putExtra("tipoPago", tipoPago);
 			intent.putExtra("comentario", etComentario.getText().toString());
 			intent.putExtra("emailCliente", email);
+			intent.putExtra("envioProd", envioProd);
 	        intent.setClass(RevisaPedido2.this, RevisaPedido3.class);
 	        startActivity(intent);
 	        finish();

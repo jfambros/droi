@@ -211,8 +211,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			    android:background="#000000">
 			 
 			    <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="center_horizontal">
-			        <TextView android:text="Cantidad"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="0.5px"/>
-			        <TextView android:text="Descripción"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip"/>
+			        <TextView android:text="Cantidad"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="3px"/>
+			        <TextView android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:text="Nombre"/>
 			        <TextView android:text="Total" android:background="#CCCCCC" android:textColor="#000000" android:layout_width="1px" android:layout_margin="1dip"/>
 			    </TableRow>
 			
@@ -221,15 +221,45 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             <!-- fin Tabla de productos -->                   
             
             <TextView
+            android:id="@+id/tvTotalRevisaPed3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textStyle="bold"
 			android:layout_gravity="right"
-			android:text="Total: "
+			android:text="Total: $"
 			/>
+
+
+
+<!-- tipo de pago -->
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="12sp"
+			android:text=" "
+			/>   
+			
+			<TableLayout
+				android:id="@+id/tlTipoPagoRevisaPed3" 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:stretchColumns="*" 
+			    android:background="#000000">
+			 
+			    <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="center_horizontal">
+			        <TextView android:text="Tipo de pago"  android:textColor="#000000" android:layout_margin="1dip" android:layout_width="3px" android:layout_gravity="center_horizontal"/>
+			    </TableRow>
+			
+			  
+			</TableLayout>    
+
+
+<!-- Fin tipo de pago -->
+		
             
-<!-- Tipo de pago -->
+<!-- Comentario -->
             <TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -243,7 +273,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="12sp"
-			android:text="Tipo de pago seleccionado"
+			android:text="Comentario"
 			android:textStyle="bold"
 			/>  			             
    			<TableLayout
@@ -251,7 +281,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:layout_height="wrap_content"
 		    android:stretchColumns="*" 
 		    android:background="#000000">
-			   
+<!-- 			   
 		       <TableRow  android:background="#F6F6F6" 
 		       android:layout_margin="1dip" 
 		       android:layout_gravity="left"
@@ -259,7 +289,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		       android:layout_height="wrap_content"
 		       android:orientation="horizontal"
 		       >
-		       
+	       
 		            <TextView
 		            android:id="@+id/tvTipoPagoRevisaPed3"
 					android:layout_width="wrap_content"
@@ -269,8 +299,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:layout_gravity="left"
 					android:text="Información forma de pago"
 					/>
-					
+			
 				</TableRow>	
+	-->					
 		       <TableRow  android:background="#F6F6F6" 
 		       android:layout_margin="1dip" 
 		       android:layout_gravity="left"
