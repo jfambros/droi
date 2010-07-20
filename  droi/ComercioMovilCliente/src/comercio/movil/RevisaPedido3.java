@@ -1,5 +1,8 @@
 package comercio.movil;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -11,8 +14,8 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import utils.DatosCesta;
+import utils.DatosOrdenKS;
 import utils.ListaCesta;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,14 +33,18 @@ import android.widget.TableRow.LayoutParams;
 public class RevisaPedido3 extends Activity{
 	private TextView tvComentario = null;
 	private ImageView ivRegresar = null;
+	private ImageView ivFinalizar = null;
 	
 	private String HOST = "10.0.2.2";
 	private String email = null;
 	private String tipoPago = null;
+	private String comentario = null;
+	private double envioProd = 0.0;
+	private double subTotal = 0.0;
+	private double total = 0.0;
+	private ArrayList<String> direccionCliente = new ArrayList<String>();
 	private Bundle bundle = null;
-	
-	
-	
+
 	
 	public void onCreate(Bundle savedInstanceState) {
 		try{
@@ -54,9 +61,18 @@ public class RevisaPedido3 extends Activity{
         ivRegresar = (ImageView) findViewById(R.id.ivRegresaRevisaPed3);
         ivRegresar.setOnClickListener(ivRegresarPres);
         
+        ivFinalizar = (ImageView)findViewById(R.id.ivFinalizarRevisaPed3);
+        ivFinalizar.setOnClickListener(ivFinalizarPres);
+        
         //ontener el tipo de pago
         tipoPago = bundle.getString("tipoPago");
         obtieneTipoPago(tipoPago);
+        
+        direccionCliente = bundle.getStringArrayList("direccionCliente");
+        
+        envioProd = bundle.getDouble("envioProd");
+        
+        comentario = bundle.getString("comentario");
         
         llenaDireccion(email);
         llenaProductos();
@@ -122,11 +138,14 @@ public class RevisaPedido3 extends Activity{
 	}
 	
 	private void llenaProductos(){
+		total = 0.0;
 		try{
 			Set set = ListaCesta.arregloCesta.entrySet();
 			TableLayout tlProductos = (TableLayout)findViewById(R.id.tlProductosRevisaPed3);
+			TextView tvSubtotal = (TextView)findViewById(R.id.tvSubtotalEnvioRevisaPed3);
 			TextView tvTotal = (TextView)findViewById(R.id.tvTotalRevisaPed3);
-			double total = 0.0;
+			TextView tvCostoEnvio = (TextView) findViewById(R.id.tvCostoEnvioRevisaPed3);
+			
 	
 	        Iterator i = set.iterator();
 	        
@@ -161,25 +180,34 @@ public class RevisaPedido3 extends Activity{
 		        
 		        double subTot = ((DatosCesta) me.getValue()).getCantidadProd() * ((DatosCesta) me.getValue()).getPrecioProd();
 		        
-		        TextView tvSubTotal = new TextView(this);
-	        	tvSubTotal.setText(Double.toString(subTot));
-		        tvSubTotal.setTextColor(Color.BLACK);
-		        tvSubTotal.setLayoutParams(new LayoutParams(
+		        TextView tvSubTotalProd = new TextView(this);
+	        	tvSubTotalProd.setText(Double.toString(subTot));
+		        tvSubTotalProd.setTextColor(Color.BLACK);
+		        tvSubTotalProd.setLayoutParams(new LayoutParams(
 		        LayoutParams.FILL_PARENT,
 		        LayoutParams.FILL_PARENT));
-		        tvSubTotal.setGravity(Gravity.CENTER_VERTICAL);
+		        tvSubTotalProd.setGravity(Gravity.RIGHT);
 	            
 		        row.addView(tvCantidad);
 		        row.addView(tvNombre);
-		        row.addView(tvSubTotal);
+		        row.addView(tvSubTotalProd);
 		        row.setBackgroundColor(Color.WHITE);
 		        
 		        tlProductos.addView(row);
 		        
-		        total +=  Double.parseDouble(((TextView)(row.getChildAt(2))).getText().toString());
-		        tvTotal.setText("Total: $"+Double.toString(total)+" ");
+		        subTotal +=  Double.parseDouble(((TextView)(row.getChildAt(2))).getText().toString());
+		        tvSubtotal.setText("Subtotal: $"+Double.toString(subTotal)+" ");
 		        
 	        }
+	        if (envioProd == 0.0){
+	        	tvCostoEnvio.setText("Costo envío: $"+Double.toString(envioProd)+" ");
+	        }
+	        else{
+	        	tvCostoEnvio.setText("Costo envío: $"+Double.toString(envioProd)+" ");
+	        	total = subTotal + envioProd;
+	        	tvTotal.setText("Total: $"+Double.toString(total)+" ");
+	        }
+	        
 		}
 		catch(Exception err){
 			Log.e("Error llena prod", err.toString());
@@ -238,6 +266,9 @@ public class RevisaPedido3 extends Activity{
     	        SoapPrimitive nombreBanco = (SoapPrimitive) resultSoap.getProperty("nombreBanco");
     	        SoapPrimitive titularCuenta = (SoapPrimitive) resultSoap.getProperty("titularCuenta");
     	        
+    	        TextView tvTitulo = (TextView)findViewById(R.id.tvTituloTipoPagoRevisaPed3);
+    	        tvTitulo.setText("Información para el depósito bancario");
+    	        
     	        TableRow filaNumCta = new TableRow(this);
             	filaNumCta.setLayoutParams(new LayoutParams(
             	LayoutParams.FILL_PARENT,
@@ -250,12 +281,50 @@ public class RevisaPedido3 extends Activity{
     	        LayoutParams.FILL_PARENT,
     	        LayoutParams.FILL_PARENT));
     	        tvNumCta.setGravity(Gravity.CENTER_VERTICAL);
-    	        tvNumCta.setWidth(50);
     	        
     	        filaNumCta.setBackgroundColor(Color.WHITE);
     	        filaNumCta.addView(tvNumCta);
+    	        //tvNumCta.setWidth(50);
+    	        
+    	        TableRow filaNombreBanco = new TableRow(this);
+    	        filaNombreBanco.setLayoutParams(new LayoutParams(
+            	LayoutParams.FILL_PARENT,
+            	LayoutParams.WRAP_CONTENT));
+    	        
+            	TextView tvNombreBanco = new TextView(this);
+            	tvNombreBanco.setText("Banco: "+nombreBanco.toString());
+            	tvNombreBanco.setTextColor(Color.BLACK);
+            	tvNombreBanco.setLayoutParams(new LayoutParams(
+    	        LayoutParams.FILL_PARENT,
+    	        LayoutParams.FILL_PARENT));
+            	tvNombreBanco.setGravity(Gravity.CENTER_VERTICAL);
+            	//tvNombreBanco.setWidth(50);
+
+            	filaNombreBanco.setBackgroundColor(Color.WHITE);
+    	        filaNombreBanco.addView(tvNombreBanco);
+    	        
+    	        TableRow filaTitular = new TableRow(this);
+    	        filaTitular.setLayoutParams(new LayoutParams(
+            	LayoutParams.FILL_PARENT,
+            	LayoutParams.WRAP_CONTENT));
+
+            	TextView tvTitular = new TextView(this);
+            	tvTitular.setText("Titular: "+titularCuenta.toString());
+            	tvTitular.setTextColor(Color.BLACK);
+            	tvTitular.setLayoutParams(new LayoutParams(
+    	        LayoutParams.FILL_PARENT,
+    	        LayoutParams.FILL_PARENT));
+            	tvTitular.setGravity(Gravity.CENTER_VERTICAL);
+            	//tvNombreBanco.setWidth(50);
+            	
+            	filaTitular.setBackgroundColor(Color.WHITE);
+    	        filaTitular.addView(tvTitular);
+            	
+    	        
     	        tlTipoPago.addView(filaNumCta);
-    	        //Faltan los demás datos
+    	        tlTipoPago.addView(filaNombreBanco);
+    	        tlTipoPago.addView(filaTitular);
+
     	        
     	        
     	        //Log.i("cuenta: ", numeroCuenta.toString()+" "+nombreBanco.toString()+" "+titularCuenta.toString());
@@ -269,6 +338,223 @@ public class RevisaPedido3 extends Activity{
         }
 
 	}
+    
+	//insertar los productos comprados
+	private void insertaProductos(String ordenId){
+        try{
+			Set set = ListaCesta.arregloCesta.entrySet();
+			Iterator i = set.iterator();
+	    
+	        while(i.hasNext()){
+	            Map.Entry<String,DatosCesta> me = (Map.Entry<String, DatosCesta>)i.next();
+	            int cant = ((DatosCesta) me.getValue()).getCantidadProd();
+	            insertaProdSW(Integer.parseInt(ordenId), Integer.parseInt(me.getKey()), cant);
+	        }
+		}
+		catch (Exception err) {
+			Log.e("Error insertaProd iterator", err.toString());
+		}
+			
+	}
+	
+	//método para servicio Web que inserta productos
+	private void insertaProdSW(int ordenId, int idProd, int cant){
+		//Definición para servicio Web
+		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#insertaProductoOrden";
+	    String METHOD_NAME = "insertaProductoOrden";
+	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    SoapSerializationEnvelope envelope;
+	    HttpTransportSE httpt;
+	    try{
+		    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+	        httpt = new HttpTransportSE(URL);
+	        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+	        envelope.dotNet = false;
+
+	        request.addProperty ("ordenId", ordenId);
+	        request.addProperty ("idProd", idProd);
+	        request.addProperty ("cantidadProd", cant);
+	        envelope.setOutputSoapObject(request);
+	        httpt.call(SOAP_ACTION, envelope);
+	        SoapObject result =  (SoapObject) envelope.bodyIn;
+	        SoapPrimitive actualizado = (SoapPrimitive) result.getProperty("result");;
+	        Log.i("insertado", actualizado.toString());
+
+	    }
+	    catch (Exception err) {
+          Log.i("error insertaProdSW", err.toString());
+		}
+	}
+	
+	
+	private DatosOrdenKS llenaOrden(){
+		//Definición para servicio Web
+		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosCliente";
+	    String METHOD_NAME = "obtenerDatosCliente";
+	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    SoapSerializationEnvelope envelope;
+	    HttpTransportSE httpt;
+	    SoapObject result=null;
+
+	    DatosOrdenKS orden = new DatosOrdenKS();
+	    
+	    try{
+		    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+	        httpt = new HttpTransportSE(URL);
+	        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+	        envelope.dotNet = false;
+	        request.addProperty ("emailCliente", email);
+	        envelope.setOutputSoapObject(request);
+	        httpt.call(SOAP_ACTION, envelope);
+	        result =  (SoapObject) envelope.bodyIn;
+	        SoapObject resultSoap =  (SoapObject) envelope.getResponse();
+	        
+	        SoapPrimitive idCliente = (SoapPrimitive) resultSoap.getProperty("idCliente");
+	        SoapPrimitive nombreCliente = (SoapPrimitive) resultSoap.getProperty("nombreCliente");
+	        SoapPrimitive apellidoCliente = (SoapPrimitive) resultSoap.getProperty("apellidoCliente");
+	        SoapPrimitive empresaCliente = (SoapPrimitive) resultSoap.getProperty("empresaCliente");
+	        SoapPrimitive direccCliente = (SoapPrimitive) resultSoap.getProperty("direccCliente");
+	        SoapPrimitive coloniaCliente = (SoapPrimitive) resultSoap.getProperty("coloniaCliente");
+	        SoapPrimitive ciudadCliente = (SoapPrimitive) resultSoap.getProperty("ciudadCliente");
+	        SoapPrimitive cpCliente = (SoapPrimitive) resultSoap.getProperty("cpCliente");
+	        SoapPrimitive estadoCliente = (SoapPrimitive) resultSoap.getProperty("estadoCliente");
+	        SoapPrimitive paisCliente = (SoapPrimitive) resultSoap.getProperty("paisCliente");
+	        SoapPrimitive telefonoCliente = (SoapPrimitive) resultSoap.getProperty("telefonoCliente");
+
+	        /*
+			orden.setIdCliente(idCliente.toString());
+			orden.setNombreCliente(nombreCliente.toString()+" "+apellidoCliente.toString());
+			orden.setEmpresaCliente(empresaCliente.toString());
+			orden.setDireccCliente(direccCliente.toString());
+			orden.setColoniaCliente(coloniaCliente.toString());
+			orden.setCiudadCliente(ciudadCliente.toString());
+			orden.setCpCliente(cpCliente.toString());
+			orden.setEstadoCliente(estadoCliente.toString());
+			orden.setPaisCliente(paisCliente.toString());
+			orden.setTelefonoCliente(telefonoCliente.toString());
+			orden.setEmailCliente(email);
+			orden.setIdDireccFormatCliente("1");
+			*/
+			orden.setIdCliente(direccionCliente.get(0));
+			orden.setNombreCliente(direccionCliente.get(1));
+			orden.setEmpresaCliente(direccionCliente.get(2));
+			orden.setDireccCliente(direccionCliente.get(3));
+			orden.setColoniaCliente(direccionCliente.get(4));
+			orden.setCiudadCliente(direccionCliente.get(5));
+			orden.setCpCliente(direccionCliente.get(6));
+			orden.setEstadoCliente(direccionCliente.get(7));
+			orden.setPaisCliente(direccionCliente.get(8));
+			orden.setTelefonoCliente(direccionCliente.get(9));
+			orden.setEmailCliente(email);
+			orden.setIdDireccFormatCliente("1");
+			
+			orden.setNombreEntrega(direccionCliente.get(1));
+			orden.setEmpresaEntrega(direccionCliente.get(2));
+			orden.setDireccEntrega(direccionCliente.get(3));
+			orden.setColoniaEntrega(direccionCliente.get(4));
+			orden.setCiudadEntrega(direccionCliente.get(5));
+			orden.setCpEntrega(direccionCliente.get(6));
+			orden.setEstadoEntrega(direccionCliente.get(7));
+			orden.setPaisEntrega(direccionCliente.get(8));
+			orden.setIdDireccFormatEntrega("1");
+
+			orden.setNombreFactura(direccionCliente.get(1));
+			orden.setEmpresaFactura(direccionCliente.get(2));
+			orden.setDireccFactura(direccionCliente.get(3));
+			orden.setColoniaFactura(direccionCliente.get(4));
+			orden.setCiudadFactura(direccionCliente.get(5));
+			orden.setCpFactura(direccionCliente.get(6));
+			orden.setEstadoFactura(direccionCliente.get(7));
+			orden.setPaisFactura(direccionCliente.get(8));
+			orden.setIdDireccFormatFactura("1");
+		
+			if (tipoPago.equals("Tienda")){
+				orden.setFormaPago("Pagar en tienda");	
+			}
+			if (tipoPago.equals("Depósito")){
+				orden.setFormaPago("Transferencia Bancaria");
+			}
+			
+			orden.setTipoTarjetaCred("");
+			orden.setPropietarioTarjetaCred("");
+			orden.setNumeroTarjetaCred("");
+			orden.setExpiraTarjetaCred("");
+			orden.setUltimaModificacion("");
+
+			orden.setEstadoOrden("1");
+			orden.setFechaOrdenTerminada("");
+			orden.setMoneda("MX");
+			orden.setValorMoneda("1");
+			orden.setComentario(comentario);
+			orden.setSubTotal(Double.toString(subTotal));
+			orden.setTarifa(Double.toString(envioProd));
+			if (envioProd == 0.0){
+				orden.setTipoEnvio("No");	
+			}
+			
+			if (envioProd > 0.0){
+				orden.setTipoEnvio("Si");
+			}
+		
+/*
+ * 
+ * <idCliente>String</idCliente>
+				<nombreCliente>String</nombreCliente>
+				<empresaCliente>String</empresaCliente>
+				<direccCliente>String</direccCliente>
+				<coloniaCliente>String</coloniaCliente>
+				<ciudadCliente>String</ciudadCliente>
+				<cpCliente>String</cpCliente>
+				<estadoCliente>String</estadoCliente>
+				<paisCliente>String</paisCliente>
+				<telefonoCliente>String</telefonoCliente>
+				<emailCliente>String</emailCliente>
+				<idDireccFormatCliente>String</idDireccFormatCliente>
+				<nombreEntrega>String</nombreEntrega>
+				<empresaEntrega>String</empresaEntrega>
+				<direccEntrega>String</direccEntrega>
+				<coloniaEntrega>String</coloniaEntrega>
+				<ciudadEntrega>String</ciudadEntrega>
+				<cpEntrega>String</cpEntrega>
+				<estadoEntrega>String</estadoEntrega>
+				<paisEntrega>String</paisEntrega>
+				<idDireccFormatEntrega>String</idDireccFormatEntrega>
+				<nombreFactura>String</nombreFactura>
+				<empresaFactura>String</empresaFactura>
+				<direccFactura>String</direccFactura>
+				<coloniaFactura>String</coloniaFactura>
+				<ciudadFactura>String</ciudadFactura>
+				<cpFactura>String</cpFactura>
+				<estadoFactura>String</estadoFactura>
+				<paisFactura>String</paisFactura>
+				<idDireccFormatFactura>String</idDireccFormatFactura>
+				<formaPago>String</formaPago>
+				<tipoTarjetaCred>String</tipoTarjetaCred>
+				<propietarioTarjetaCred>String</propietarioTarjetaCred>
+				<numeroTarjetaCred>String</numeroTarjetaCred>
+				<expiraTarjetaCred>String</expiraTarjetaCred>
+				<ultimaModificacion>String</ultimaModificacion>
+				<estadoOrden>String</estadoOrden>
+				<fechaOrdenTerminada>String</fechaOrdenTerminada>
+				<moneda>String</moneda>
+				<valorMoneda>String</valorMoneda>
+				<comentario>String</comentario>
+				<subTotal>String</subTotal>
+				<tarifa>String</tarifa>
+				<tipoEnvio>String</tipoEnvio>	        
+ */
+	    
+	        
+	    }
+	    catch(Exception err){
+	    	Log.e("error", err.toString());
+	    	return null;
+	    }
+	    
+	    return orden;
+	}
 	
 	
 	private OnClickListener ivRegresarPres = new OnClickListener() {
@@ -278,9 +564,43 @@ public class RevisaPedido3 extends Activity{
 			Intent intent = new Intent();
 			intent.putExtra("comentario", tvComentario.getText().toString());
 			intent.putExtra("emailCliente", email);
+			intent.putExtra("envioProd", envioProd);
+			intent.putStringArrayListExtra("direccionCliente", direccionCliente);
 	        intent.setClass(RevisaPedido3.this, RevisaPedido2.class);
 	        finish();
 	        startActivity(intent);
+		}
+	};
+	
+	private OnClickListener ivFinalizarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+           try{
+        	 //Definición para servicio Web
+				String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#insertaOrden";
+			    String METHOD_NAME = "insertaOrden";
+			    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+			    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+			    SoapSerializationEnvelope envelope;
+			    HttpTransportSE httpt;
+			 //Fin definición
+			    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+		        httpt = new HttpTransportSE(URL);
+		        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+		        envelope.dotNet = false;
+  
+		        
+		        request.addProperty ("orden", llenaOrden());
+		        
+		        envelope.setOutputSoapObject(request);
+		        httpt.call(SOAP_ACTION, envelope);
+		        SoapObject result =  (SoapObject) envelope.bodyIn;
+	            SoapPrimitive idPedido = (SoapPrimitive) result.getProperty("result");
+	            insertaProductos(idPedido.toString());
+           }
+           catch(Exception err){
+        	   Log.e("Error en finalizar",err.toString());
+           }
 		}
 	};
 

@@ -1,5 +1,7 @@
 package comercio.movil;
 
+import java.util.ArrayList;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -21,12 +23,14 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 public class RevisaPedido1 extends Activity{
 	private EditText tvComentario = null;
 	private ImageView ivContinuar = null;
-	private RadioGroup rgSiNoEnvio = null; 
+	private RadioGroup rgSiNoEnvio = null;
+	private ImageView ivCambiaDirecc = null;
 	
 	private String HOST = "10.0.2.2";
 	private Bundle bundle= null;
 	private String email;
-	private String envioProd;
+	private double envioProd;
+	private ArrayList<String> direccionCliente = new ArrayList<String>();
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,9 @@ public class RevisaPedido1 extends Activity{
         rgSiNoEnvio = (RadioGroup) findViewById(R.id.rgSiNoEnvioRevisaPed1);
         rgSiNoEnvio.setOnCheckedChangeListener(rgSiNoEnvioPres);
         
+        ivCambiaDirecc = (ImageView) findViewById(R.id.ivCambiaDireccRevisaPed1);
+        ivCambiaDirecc.setOnClickListener(ivCambiaDireccPres);
+        
         bundle = getIntent().getExtras();
         Log.i("email",bundle.getString("emailCliente"));
         email = bundle.getString("emailCliente");
@@ -52,7 +59,7 @@ public class RevisaPedido1 extends Activity{
         	obtieneCostoEnvio();
         }        
         
-        envioProd = "No";
+        envioProd = 0.0;
         
         llenaDireccion(email);
 
@@ -87,6 +94,7 @@ public class RevisaPedido1 extends Activity{
 	        result =  (SoapObject) envelope.bodyIn;
 	        SoapObject resultSoap =  (SoapObject) envelope.getResponse();
 	        
+	        SoapPrimitive idCliente = (SoapPrimitive) resultSoap.getProperty("idCliente");
 	        SoapPrimitive empresaCliente = (SoapPrimitive) resultSoap.getProperty("empresaCliente");
 	        SoapPrimitive nombreCliente = (SoapPrimitive) resultSoap.getProperty("nombreCliente");
 	        SoapPrimitive apellidoCliente = (SoapPrimitive) resultSoap.getProperty("apellidoCliente");
@@ -96,6 +104,8 @@ public class RevisaPedido1 extends Activity{
 	        SoapPrimitive ciudadCliente = (SoapPrimitive) resultSoap.getProperty("ciudadCliente");
 	        SoapPrimitive estadoCliente = (SoapPrimitive) resultSoap.getProperty("estadoCliente");
 	        SoapPrimitive paisCliente = (SoapPrimitive) resultSoap.getProperty("paisCliente");
+	        SoapPrimitive telefonoCliente = (SoapPrimitive) resultSoap.getProperty("telefonoCliente");
+	        
 	        
 	        tvEmpresaCte.setText(empresaCliente.toString());
 	        tvNombreCte.setText(nombreCliente.toString() + " "+apellidoCliente.toString());
@@ -104,6 +114,16 @@ public class RevisaPedido1 extends Activity{
 	        tvCiudadYCPCte.setText(ciudadCliente.toString()+", C.P. "+cpCliente.toString());
 	        tvEsatdoYPaisCte.setText(estadoCliente.toString()+", "+paisCliente.toString());
 	        
+	        direccionCliente.add(idCliente.toString());
+	        direccionCliente.add(nombreCliente.toString()+" "+apellidoCliente.toString());
+	        direccionCliente.add(empresaCliente.toString());
+	        direccionCliente.add(direccCliente.toString());
+	        direccionCliente.add(coloniaCliente.toString());
+	        direccionCliente.add(ciudadCliente.toString());
+	        direccionCliente.add(cpCliente.toString());
+	        direccionCliente.add(estadoCliente.toString());
+	        direccionCliente.add(paisCliente.toString());
+	        direccionCliente.add(telefonoCliente.toString());
 	    }
 	    catch(Exception err){
 	    	
@@ -134,8 +154,9 @@ public class RevisaPedido1 extends Activity{
 		        if (!result.getProperty("costo").toString().equals("anyType{}")){
 		        	SoapPrimitive costo = (SoapPrimitive) result.getProperty("costo");
 		        	tvCostoEnvio.setText("$"+costo.toString());
+		        	envioProd = Double.parseDouble(costo.toString());
 		        }
-		        envioProd = "Si";
+		        //envioProd = "Si";
 		        
 	    }
 	    catch(Exception err){
@@ -153,6 +174,7 @@ public class RevisaPedido1 extends Activity{
 	        intent.putExtra("comentario", tvComentario.getText().toString());
 	        intent.putExtra("emailCliente", email);
 	        intent.putExtra("envioProd", envioProd);
+	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
 	        intent.setClass(RevisaPedido1.this, RevisaPedido2.class);
 	        startActivity(intent);
 	        finish();
@@ -165,10 +187,19 @@ public class RevisaPedido1 extends Activity{
 			if (check == R.id.rgNoEnvioRevisaPed1){
 				TextView tvCostoEnvio = (TextView) findViewById(R.id.tvCostoEnvioRevisaPed1);
 				tvCostoEnvio.setText("$0");
-				envioProd = "No";
+				envioProd = 0.0;
 			}
 			else{
 				obtieneCostoEnvio();
+			}
+		}
+	};
+	
+	private OnClickListener ivCambiaDireccPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			for (int i=0; i<direccionCliente.size(); i++){
+				Log.i("datos: ", direccionCliente.get(i));
 			}
 		}
 	};

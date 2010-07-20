@@ -43,7 +43,6 @@ public class DatosOrdenKS extends OBDatosOrden{
 				<numeroTarjetaCred>String</numeroTarjetaCred>
 				<expiraTarjetaCred>String</expiraTarjetaCred>
 				<ultimaModificacion>String</ultimaModificacion>
-				<fechaCompra>String</fechaCompra>
 				<private String >String</estadoOrden>
 				<fechaOrdenTerminada>String</fechaOrdenTerminada>
 				<moneda>String</moneda>
@@ -91,7 +90,6 @@ public class DatosOrdenKS extends OBDatosOrden{
 	private String numeroTarjetaCred;
 	private String expiraTarjetaCred;
 	private String ultimaModificacion;
-	private String fechaCompra;
 	private String estadoOrden;
 	private String fechaOrdenTerminada;
 	private String moneda;
@@ -317,12 +315,7 @@ public class DatosOrdenKS extends OBDatosOrden{
 	public void setUltimaModificacion(String ultimaModificacion) {
 		this.ultimaModificacion = ultimaModificacion;
 	}
-	public String getFechaCompra() {
-		return fechaCompra;
-	}
-	public void setFechaCompra(String fechaCompra) {
-		this.fechaCompra = fechaCompra;
-	}
+
 	public String getEstadoOrden() {
 		return estadoOrden;
 	}
@@ -446,22 +439,20 @@ public class DatosOrdenKS extends OBDatosOrden{
         case 35:
             return ultimaModificacion;
         case 36:
-            return fechaCompra;
-        case 37:
             return estadoOrden;
-        case 38:
+        case 37:
             return fechaOrdenTerminada;
-        case 39:
+        case 38:
             return moneda;
-        case 40:
+        case 39:
             return valorMoneda;
-        case 41:
+        case 40:
             return comentario;
-        case 42:
+        case 41:
             return subTotal;
-        case 43:
+        case 42:
             return tarifa;
-        case 44:
+        case 43:
             return tipoEnvio;              
         default:
             return null;
@@ -469,145 +460,186 @@ public class DatosOrdenKS extends OBDatosOrden{
 	
 	}
 	public int getPropertyCount() {
-		return 45;
+		return 44;
 	}
 	public void getPropertyInfo(int index, Hashtable arg1, PropertyInfo info) {
 		switch (index) {
         case 0:
         	info.type = PropertyInfo.STRING_CLASS;
             info.name = "idCliente";
+            break;
         case 1: 
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "nombreCliente";
+        	 break;
         case 2:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "empresaCliente";
+        	 break;
         case 3:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "direccCliente";
+        	 break;
         case 4:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "coloniaCliente";
+        	 break;
         case 5:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "ciudadCliente";
+        	 break;
         case 6:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "cpCliente";
+        	 break;
         case 7:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "estadoCliente";
+        	 break;
         case 8:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "paisCliente";
+        	 break;
         case 9:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "telefonoCliente";
+        	 break;
         case 10:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "emailCliente";
+        	 break;
         case 11:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "idDireccFormatCliente";
+        	 break;
         case 12:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "nombreEntrega";
+        	 break;
         case 13:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "empresaEntrega";
+        	 break;
         case 14:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "direccEntrega";
+        	 break;
         case 15:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "coloniaEntrega";
+        	 break;
         case 16:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "ciudadEntrega";
+        	 break;
         case 17:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "cpEntrega";
+        	 break;
         case 18:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "estadoEntrega";
+        	 break;
         case 19:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "paisEntrega";            
+        	info.name = "paisEntrega";
+        	 break;
         case 20:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "idDireccFormatEntrega";
+        	 break;
         case 21:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "nombreFactura";
+        	 break;
         case 22:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "empresaFactura";
+        	 break;
         case 23:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "direccFactura";
+        	 break;
         case 24:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "coloniaFactura";
+        	 break;
         case 25:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "ciudadFactura";
+        	 break;
         case 26:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "cpFactura";
+        	 break;
         case 27:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "estadoFactura";
+        	 break;
         case 28:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "paisFactura";
+        	 break;
         case 29:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "idDireccFormatFactura";
+        	 break;
         case 30:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "formaPago";
+        	 break;
         case 31:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "tipoTarjetaCred";
+        	 break;
         case 32:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "propietarioTarjetaCred";
+        	 break;
         case 33:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "numeroTarjetaCred";
+        	 break;
         case 34:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "expiraTarjetaCred";
+        	 break;
         case 35:
         	info.type = PropertyInfo.STRING_CLASS;
         	info.name = "ultimaModificacion";
+        	 break;
         case 36:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "fechaCompra";
+        	info.name = "estadoOrden";
+        	 break;
         case 37:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "estadoOrden";
+        	info.name = "fechaOrdenTerminada";
+        	 break;
         case 38:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "fechaOrdenTerminada";
+        	info.name = "moneda";
+        	 break;
         case 39:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "moneda";
+        	info.name = "valorMoneda";
+        	 break;
         case 40:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "valorMoneda";
+        	info.name = "comentario";
+        	 break;
         case 41:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "comentario";
+        	info.name = "subTotal";
+        	 break;
         case 42:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "subTotal";
+        	info.name = "tarifa";
+        	 break;
         case 43:
         	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "tarifa";
-        case 44:
-        	info.type = PropertyInfo.STRING_CLASS;
-        	info.name = "tipoEnvio";              
+        	info.name = "tipoEnvio";
+        	 break;
         default:
             break;
         }
@@ -724,30 +756,27 @@ public class DatosOrdenKS extends OBDatosOrden{
         	ultimaModificacion = value.toString();
         	break;
         case 36:
-        	fechaCompra = value.toString();
-        	break;
-        case 37:
         	estadoOrden = value.toString();
         	break;
-        case 38:
+        case 37:
         	fechaOrdenTerminada = value.toString();
         	break;
-        case 39:
+        case 38:
         	moneda = value.toString();
         	break;
-        case 40:
+        case 39:
         	valorMoneda = value.toString();
         	break;
-        case 41:
+        case 40:
         	comentario = value.toString();
         	break;
-        case 42:
+        case 41:
         	subTotal = value.toString();
         	break;
-        case 43:
+        case 42:
         	tarifa = value.toString();
         	break;
-        case 44:
+        case 43:
         	tipoEnvio = value.toString(); 
         	break;
         default:

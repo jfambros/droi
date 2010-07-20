@@ -1,5 +1,7 @@
 package comercio.movil;
 
+import java.util.ArrayList;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -27,8 +29,9 @@ public class RevisaPedido2 extends Activity{
 	
 	private String email = null;
 	private String tipoPago = null;
+	private ArrayList<String> direccionCliente = new ArrayList<String>();
 	private String HOST = "10.0.2.2";
-	private String envioProd = null;
+	private double envioProd = 0.0;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +52,13 @@ public class RevisaPedido2 extends Activity{
         bundle = getIntent().getExtras();
         email = bundle.getString("emailCliente");
         
+        direccionCliente = bundle.getStringArrayList("direccionCliente");
+        
         etComentario.setText(bundle.getString("comentario"));
         tipoPago = "Tienda";
         
-        envioProd = bundle.getString("envioProd");
+        envioProd = bundle.getDouble("envioProd");
+        
         
         llenaDireccion(email);
 	}
@@ -131,6 +137,9 @@ public class RevisaPedido2 extends Activity{
 			intent.putExtra("comentario", etComentario.getText().toString());
 			intent.putExtra("emailCliente", email);
 			intent.putExtra("envioProd", envioProd);
+			//direccion del cliente
+			intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+			//falta dirección de facturacion
 	        intent.setClass(RevisaPedido2.this, RevisaPedido3.class);
 	        startActivity(intent);
 	        finish();
