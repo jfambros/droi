@@ -117,13 +117,9 @@
 							/>
 							<EditText
 							   android:id="@+id/etEmailVerificaCte"
-							   android:layout_width="160px"
-								android:layout_height="40px"
-								android:textSize="16sp"
-								android:textColor="#ff000000" 
+							   android:textColor="#ff000000" 
 								android:maxLines="1"
-								android:text="jferaa007@gmail.com"
-							/>
+								android:text="jferaa007@gmail.com" android:layout_height="40px" android:layout_width="180px" android:textSize="15sp"/>
 						</TableRow>
 						<TableRow
 						android:layout_width="fill_parent"
@@ -139,14 +135,11 @@
 							/>
 							<EditText
 							   android:id="@+id/etPasswdVerificaCte"
-							   android:layout_width="160px"
-								android:layout_height="40px"
-								android:textSize="16sp"
+							   android:layout_height="40px"
 								android:textColor="#ff000000" 
 								android:maxLines="1"
 								android:password="true"
-								android:text="123456"
-							/>
+								android:text="123456" android:layout_width="180px" android:textSize="15sp"/>
 						</TableRow>
 						
 					</TableLayout>    
