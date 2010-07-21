@@ -71,6 +71,10 @@
     <activity android:name="RevisaPedido3"
        android:label="Resumen de su pedido">
     </activity>
+
+    <activity android:name="NuevaDireccionEntrega"
+       android:label="Nueva dirección de entrega">
+    </activity>
     
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

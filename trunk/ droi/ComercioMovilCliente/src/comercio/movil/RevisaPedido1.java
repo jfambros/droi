@@ -25,12 +25,16 @@ public class RevisaPedido1 extends Activity{
 	private ImageView ivContinuar = null;
 	private RadioGroup rgSiNoEnvio = null;
 	private ImageView ivCambiaDirecc = null;
+	private ArrayList<String> direccionCliente = new ArrayList<String>();
 	
 	private String HOST = "10.0.2.2";
 	private Bundle bundle= null;
-	private String email;
-	private double envioProd;
-	private ArrayList<String> direccionCliente = new ArrayList<String>();
+	private String email=null;
+	private int idClienteA = 0;
+	private double envioProd=0.0;
+	
+	
+
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +53,10 @@ public class RevisaPedido1 extends Activity{
         ivCambiaDirecc.setOnClickListener(ivCambiaDireccPres);
         
         bundle = getIntent().getExtras();
-        Log.i("email",bundle.getString("emailCliente"));
-        email = bundle.getString("emailCliente");
+        //Log.i("email",bundle.getString("emailCliente"));
+        if (bundle.getString("emailCliente") != null){
+        	email = bundle.getString("emailCliente");
+        }
         
         if (bundle.getString("comentario")!= null){
         	tvComentario.setText(bundle.getString("comentario"));
@@ -61,7 +67,13 @@ public class RevisaPedido1 extends Activity{
         
         envioProd = 0.0;
         
-        llenaDireccion(email);
+        if (bundle.getStringArrayList("direccionCliente") == null){
+        	llenaDireccion(email);
+        }
+        else{
+        	llenaDirNueva();
+        	idClienteA = bundle.getInt("idCliente");
+        }
 
 	}
 	
@@ -75,6 +87,11 @@ public class RevisaPedido1 extends Activity{
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
 	 //Fin definición
+	    
+		
+		
+		
+	    
 	    //objetos para visualizar
 	    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaRevisaPed1);
 	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed1);
@@ -104,9 +121,9 @@ public class RevisaPedido1 extends Activity{
 	        SoapPrimitive ciudadCliente = (SoapPrimitive) resultSoap.getProperty("ciudadCliente");
 	        SoapPrimitive estadoCliente = (SoapPrimitive) resultSoap.getProperty("estadoCliente");
 	        SoapPrimitive paisCliente = (SoapPrimitive) resultSoap.getProperty("paisCliente");
-	        SoapPrimitive telefonoCliente = (SoapPrimitive) resultSoap.getProperty("telefonoCliente");
+	       // SoapPrimitive telefonoCliente = (SoapPrimitive) resultSoap.getProperty("telefonoCliente");
 	        
-	        
+	        idClienteA = Integer.parseInt(idCliente.toString());
 	        tvEmpresaCte.setText(empresaCliente.toString());
 	        tvNombreCte.setText(nombreCliente.toString() + " "+apellidoCliente.toString());
 	        tvDireccionCte.setText(direccCliente.toString());
@@ -114,7 +131,6 @@ public class RevisaPedido1 extends Activity{
 	        tvCiudadYCPCte.setText(ciudadCliente.toString()+", C.P. "+cpCliente.toString());
 	        tvEsatdoYPaisCte.setText(estadoCliente.toString()+", "+paisCliente.toString());
 	        
-	        direccionCliente.add(idCliente.toString());
 	        direccionCliente.add(nombreCliente.toString()+" "+apellidoCliente.toString());
 	        direccionCliente.add(empresaCliente.toString());
 	        direccionCliente.add(direccCliente.toString());
@@ -123,11 +139,34 @@ public class RevisaPedido1 extends Activity{
 	        direccionCliente.add(cpCliente.toString());
 	        direccionCliente.add(estadoCliente.toString());
 	        direccionCliente.add(paisCliente.toString());
-	        direccionCliente.add(telefonoCliente.toString());
+	        //direccionCliente.add(telefonoCliente.toString());
+	        
+
 	    }
 	    catch(Exception err){
 	    	
 	    }
+	}
+	
+	private void llenaDirNueva(){
+		//objetos para visualizar
+	    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaRevisaPed1);
+	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed1);
+	    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionRevisaPed1);
+	    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaRevisaPed1);
+	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadCPRevisaPed1);
+	    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisRevisaPed1);
+	    //
+        
+	    direccionCliente = bundle.getStringArrayList("direccionCliente");
+	    
+	    tvNombreCte.setText(direccionCliente.get(0));
+	    tvEmpresaCte.setText(direccionCliente.get(1));
+        tvDireccionCte.setText(direccionCliente.get(2));
+        tvColoniaCte.setText(direccionCliente.get(3));
+        tvCiudadYCPCte.setText(direccionCliente.get(4)+", C.P. "+direccionCliente.get(5));
+        tvEsatdoYPaisCte.setText(direccionCliente.get(6)+", "+direccionCliente.get(7));
+	    
 	}
 	
 	private void obtieneCostoEnvio(){
@@ -201,6 +240,12 @@ public class RevisaPedido1 extends Activity{
 			for (int i=0; i<direccionCliente.size(); i++){
 				Log.i("datos: ", direccionCliente.get(i));
 			}
+			Intent intent = new Intent();
+	        intent.putExtra("idCliente", idClienteA);
+	        intent.setClass(RevisaPedido1.this, NuevaDireccionEntrega.class);
+	        startActivity(intent);
+	        finish();
+
 		}
 	};
 

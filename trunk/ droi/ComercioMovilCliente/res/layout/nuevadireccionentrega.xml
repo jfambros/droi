@@ -199,20 +199,19 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:text=" "
 			/> 
 
-			<TableLayout
-				android:id="@+id/tlLibretaDireccNvaDirecc1" 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:stretchColumns="*" 
-			    android:background="#000000">
-			 
-			    <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="center_horizontal">
-			        <TextView android:text="Libreta de direcciones"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="3px"
-			        android:layout_gravity="center_vertical"/>
-			    </TableRow>
-			
-			  
-			</TableLayout>  
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text="Seleccione otra dirección de entrega"
+			/> 
+			<Spinner android:id="@+id/spinnerSelDireccNuevaDirec1"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:drawSelectorOnTop="true"
+			android:prompt="@string/comboDirecc"
+			/>
     
 
 		    <!-- Fin libreta de direcciones -->
@@ -238,7 +237,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		       android:layout_gravity="right">
 
 							<ImageView
-							android:id="@+id/ivContinuarRevisaPed1"
+							android:id="@+id/ivContinuarNuevaDirecc1"
 							android:layout_width="48px"
 							android:layout_height="48px"
 							android:layout_gravity="right"

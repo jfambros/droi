@@ -2,11 +2,10 @@ package comercio.movil;
 
 import java.net.URL;
 
-import utils.ListaCesta;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -17,12 +16,12 @@ public class Portada extends Activity {
 	private ImageView categorias;
 	private TextView txtVerCategorias;
 	URL rutaUrl;
+
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
        // String url = "http://www.terra.es/personal3/javaja/android/img/logoAndroid_2_camiseta.png";
-       
         categorias = (ImageView)findViewById(R.id.imgCategorias);
         categorias.setOnClickListener(imgCategoriasPres);
         
