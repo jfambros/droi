@@ -437,7 +437,7 @@ public class RevisaPedido3 extends Activity{
 			orden.setEmailCliente(email);
 			orden.setIdDireccFormatCliente("1");
 			*/
-			orden.setIdCliente(direccionCliente.get(0));
+			orden.setIdCliente(idCliente.toString());
 			orden.setNombreCliente(direccionCliente.get(1));
 			orden.setEmpresaCliente(direccionCliente.get(2));
 			orden.setDireccCliente(direccionCliente.get(3));

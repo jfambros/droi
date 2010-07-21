@@ -3,4 +3,6 @@
     <string name="hello">Hello World, Principal!</string>
     <string name="app_name">Android m-commerce</string>
     <string name="item_spinner">Seleccione</string>
+    <string name="HOST">10.0.2.2</string>
+    <string name="comboDirecc">Seleccione una dirección</string>
 </resources>
