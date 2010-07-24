@@ -37,12 +37,14 @@ public class RevisaPedido3 extends Activity{
 	
 	private String HOST = "10.0.2.2";
 	private String email = null;
+	private int idClienteA = 0;
 	private String tipoPago = null;
 	private String comentario = null;
 	private double envioProd = 0.0;
 	private double subTotal = 0.0;
 	private double total = 0.0;
 	private ArrayList<String> direccionCliente = new ArrayList<String>();
+	private ArrayList<String> direccionFactura = new ArrayList<String>();
 	private Bundle bundle = null;
 
 	
@@ -69,10 +71,13 @@ public class RevisaPedido3 extends Activity{
         obtieneTipoPago(tipoPago);
         
         direccionCliente = bundle.getStringArrayList("direccionCliente");
+        direccionFactura = bundle.getStringArrayList("direccionFactura");
         
         envioProd = bundle.getDouble("envioProd");
         
         comentario = bundle.getString("comentario");
+        
+        idClienteA =  bundle.getInt("idCliente");
         
         llenaDireccion(email);
         llenaProductos();
@@ -201,6 +206,7 @@ public class RevisaPedido3 extends Activity{
 	        }
 	        if (envioProd == 0.0){
 	        	tvCostoEnvio.setText("Costo envío: $"+Double.toString(envioProd)+" ");
+	        	tvTotal.setText("Total: $"+Double.toString(subTotal)+" ");
 	        }
 	        else{
 	        	tvCostoEnvio.setText("Costo envío: $"+Double.toString(envioProd)+" ");
@@ -438,36 +444,36 @@ public class RevisaPedido3 extends Activity{
 			orden.setIdDireccFormatCliente("1");
 			*/
 			orden.setIdCliente(idCliente.toString());
-			orden.setNombreCliente(direccionCliente.get(1));
-			orden.setEmpresaCliente(direccionCliente.get(2));
-			orden.setDireccCliente(direccionCliente.get(3));
-			orden.setColoniaCliente(direccionCliente.get(4));
-			orden.setCiudadCliente(direccionCliente.get(5));
-			orden.setCpCliente(direccionCliente.get(6));
-			orden.setEstadoCliente(direccionCliente.get(7));
-			orden.setPaisCliente(direccionCliente.get(8));
-			orden.setTelefonoCliente(direccionCliente.get(9));
+			orden.setNombreCliente(nombreCliente.toString()+" "+apellidoCliente.toString());
+			orden.setEmpresaCliente(empresaCliente.toString());
+			orden.setDireccCliente(direccCliente.toString());
+			orden.setColoniaCliente(coloniaCliente.toString());
+			orden.setCiudadCliente(ciudadCliente.toString());
+			orden.setCpCliente(cpCliente.toString());
+			orden.setEstadoCliente(estadoCliente.toString());
+			orden.setPaisCliente(paisCliente.toString());
+			orden.setTelefonoCliente(telefonoCliente.toString());
 			orden.setEmailCliente(email);
 			orden.setIdDireccFormatCliente("1");
 			
-			orden.setNombreEntrega(direccionCliente.get(1));
-			orden.setEmpresaEntrega(direccionCliente.get(2));
-			orden.setDireccEntrega(direccionCliente.get(3));
-			orden.setColoniaEntrega(direccionCliente.get(4));
-			orden.setCiudadEntrega(direccionCliente.get(5));
-			orden.setCpEntrega(direccionCliente.get(6));
-			orden.setEstadoEntrega(direccionCliente.get(7));
-			orden.setPaisEntrega(direccionCliente.get(8));
+			orden.setNombreEntrega(direccionCliente.get(0));
+			orden.setEmpresaEntrega(direccionCliente.get(1));
+			orden.setDireccEntrega(direccionCliente.get(2));
+			orden.setColoniaEntrega(direccionCliente.get(3));
+			orden.setCiudadEntrega(direccionCliente.get(4));
+			orden.setCpEntrega(direccionCliente.get(5));
+			orden.setEstadoEntrega(direccionCliente.get(6));
+			orden.setPaisEntrega(direccionCliente.get(7));
 			orden.setIdDireccFormatEntrega("1");
 
-			orden.setNombreFactura(direccionCliente.get(1));
-			orden.setEmpresaFactura(direccionCliente.get(2));
-			orden.setDireccFactura(direccionCliente.get(3));
-			orden.setColoniaFactura(direccionCliente.get(4));
-			orden.setCiudadFactura(direccionCliente.get(5));
-			orden.setCpFactura(direccionCliente.get(6));
-			orden.setEstadoFactura(direccionCliente.get(7));
-			orden.setPaisFactura(direccionCliente.get(8));
+			orden.setNombreFactura(direccionFactura.get(0));
+			orden.setEmpresaFactura(direccionFactura.get(1));
+			orden.setDireccFactura(direccionFactura.get(2));
+			orden.setColoniaFactura(direccionFactura.get(3));
+			orden.setCiudadFactura(direccionFactura.get(4));
+			orden.setCpFactura(direccionFactura.get(5));
+			orden.setEstadoFactura(direccionFactura.get(6));
+			orden.setPaisFactura(direccionFactura.get(7));
 			orden.setIdDireccFormatFactura("1");
 		
 			if (tipoPago.equals("Tienda")){
@@ -498,54 +504,6 @@ public class RevisaPedido3 extends Activity{
 				orden.setTipoEnvio("Si");
 			}
 		
-/*
- * 
- * <idCliente>String</idCliente>
-				<nombreCliente>String</nombreCliente>
-				<empresaCliente>String</empresaCliente>
-				<direccCliente>String</direccCliente>
-				<coloniaCliente>String</coloniaCliente>
-				<ciudadCliente>String</ciudadCliente>
-				<cpCliente>String</cpCliente>
-				<estadoCliente>String</estadoCliente>
-				<paisCliente>String</paisCliente>
-				<telefonoCliente>String</telefonoCliente>
-				<emailCliente>String</emailCliente>
-				<idDireccFormatCliente>String</idDireccFormatCliente>
-				<nombreEntrega>String</nombreEntrega>
-				<empresaEntrega>String</empresaEntrega>
-				<direccEntrega>String</direccEntrega>
-				<coloniaEntrega>String</coloniaEntrega>
-				<ciudadEntrega>String</ciudadEntrega>
-				<cpEntrega>String</cpEntrega>
-				<estadoEntrega>String</estadoEntrega>
-				<paisEntrega>String</paisEntrega>
-				<idDireccFormatEntrega>String</idDireccFormatEntrega>
-				<nombreFactura>String</nombreFactura>
-				<empresaFactura>String</empresaFactura>
-				<direccFactura>String</direccFactura>
-				<coloniaFactura>String</coloniaFactura>
-				<ciudadFactura>String</ciudadFactura>
-				<cpFactura>String</cpFactura>
-				<estadoFactura>String</estadoFactura>
-				<paisFactura>String</paisFactura>
-				<idDireccFormatFactura>String</idDireccFormatFactura>
-				<formaPago>String</formaPago>
-				<tipoTarjetaCred>String</tipoTarjetaCred>
-				<propietarioTarjetaCred>String</propietarioTarjetaCred>
-				<numeroTarjetaCred>String</numeroTarjetaCred>
-				<expiraTarjetaCred>String</expiraTarjetaCred>
-				<ultimaModificacion>String</ultimaModificacion>
-				<estadoOrden>String</estadoOrden>
-				<fechaOrdenTerminada>String</fechaOrdenTerminada>
-				<moneda>String</moneda>
-				<valorMoneda>String</valorMoneda>
-				<comentario>String</comentario>
-				<subTotal>String</subTotal>
-				<tarifa>String</tarifa>
-				<tipoEnvio>String</tipoEnvio>	        
- */
-	    
 	        
 	    }
 	    catch(Exception err){
@@ -565,10 +523,12 @@ public class RevisaPedido3 extends Activity{
 			intent.putExtra("comentario", tvComentario.getText().toString());
 			intent.putExtra("emailCliente", email);
 			intent.putExtra("envioProd", envioProd);
+			intent.putExtra("idCliente", idClienteA);
 			intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+			intent.putStringArrayListExtra("direccionFactura", direccionFactura);
 	        intent.setClass(RevisaPedido3.this, RevisaPedido2.class);
-	        finish();
 	        startActivity(intent);
+	        finish();
 		}
 	};
 	
@@ -597,6 +557,14 @@ public class RevisaPedido3 extends Activity{
 		        SoapObject result =  (SoapObject) envelope.bodyIn;
 	            SoapPrimitive idPedido = (SoapPrimitive) result.getProperty("result");
 	            insertaProductos(idPedido.toString());
+	            
+	            //se limpia la cesta
+	            ListaCesta.arregloCesta.clear();
+	            
+	            Intent intent = new Intent();
+	            intent.setClass(RevisaPedido3.this, CompraFinalizada.class);
+		        startActivity(intent);
+	             finish();
            }
            catch(Exception err){
         	   Log.e("Error en finalizar",err.toString());

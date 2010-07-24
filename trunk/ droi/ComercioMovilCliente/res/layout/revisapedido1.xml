@@ -42,7 +42,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:layout_height="wrap_content"
 					android:textColor="#ff000000"
 					android:textSize="14sp"
-					android:text="   "
+					android:text="    "
 					/>
 				</TableRow>
 			</TableLayout>	

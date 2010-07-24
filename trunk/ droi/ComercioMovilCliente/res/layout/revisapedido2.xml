@@ -42,7 +42,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:layout_height="wrap_content"
 					android:textColor="#ff000000"
 					android:textSize="14sp"
-					android:text="   "
+					android:text="    "
 					/>
 					<ImageView
 					android:id="@+id/ivRegresaRevisaPed2"
@@ -135,12 +135,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
     	                    
 				    
 						    <ImageView
-							android:id="@+id/ivActualizaRevisaPed2"
 							android:layout_width="48px"
 							android:layout_height="48px"
 							android:layout_gravity="center_vertical"
-							android:src="@drawable/actualizalibreta48x48"
-							/>
+							android:src="@drawable/actualizalibreta48x48" android:id="@+id/ivCambiaDireccRevisaPed2"/>
 						</TableRow>
 										
 						<TableRow
@@ -223,12 +221,11 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 						android:orientation="horizontal">
 						
 							<TextView
-							android:id="@+id/tvCiudadYCPRevisaPed2"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
 							android:text="Ciudad y código postal"
-							/>
+							android:id="@+id/tvCiudadCPRevisaPed2"/>
 						</TableRow>
 						<!-- País -->
 						<TableRow

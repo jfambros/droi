@@ -75,6 +75,14 @@
     <activity android:name="NuevaDireccionEntrega"
        android:label="Nueva dirección de entrega">
     </activity>
+
+    <activity android:name="NuevaDireccionFactura"
+       android:label="Nueva dirección de facturación">
+    </activity>
+
+    <activity android:name="CompraFinalizada"
+       android:label="Compra finalizada">
+    </activity>
     
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

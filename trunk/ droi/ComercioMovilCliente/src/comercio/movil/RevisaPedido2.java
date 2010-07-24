@@ -11,6 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -25,13 +26,16 @@ public class RevisaPedido2 extends Activity{
 	private ImageView ivContinuar = null;
 	private RadioGroup rgFormaPago = null;
 	private ImageView ivRegresar = null;
+	private ImageView ivCambiaDir = null;
 	
 	
 	private String email = null;
 	private String tipoPago = null;
 	private ArrayList<String> direccionCliente = new ArrayList<String>();
+	private ArrayList<String> direccionFactura = new ArrayList<String>();
 	private String HOST = "10.0.2.2";
 	private double envioProd = 0.0;
+	private int idClienteA = 0;
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,18 +53,29 @@ public class RevisaPedido2 extends Activity{
         ivRegresar = (ImageView) findViewById(R.id.ivRegresaRevisaPed2);
         ivRegresar.setOnClickListener(ivRegresarPres);
         
+        ivCambiaDir = (ImageView)findViewById(R.id.ivCambiaDireccRevisaPed2);
+        ivCambiaDir.setOnClickListener(ivCambiaDirPres);
+        
         bundle = getIntent().getExtras();
         email = bundle.getString("emailCliente");
         
         direccionCliente = bundle.getStringArrayList("direccionCliente");
         
-        etComentario.setText(bundle.getString("comentario"));
+        if (bundle.getString("comentario") != null){
+        	etComentario.setText(bundle.getString("comentario"));
+        }
+        
         tipoPago = "Tienda";
         
         envioProd = bundle.getDouble("envioProd");
-        
-        
-        llenaDireccion(email);
+    	idClienteA = bundle.getInt("idCliente");
+    	
+        if (bundle.getStringArrayList("direccionFactura") == null){
+        	llenaDireccion(email);
+        }
+        else{
+        	llenaDirNueva();
+        }
 	}
 	
 	private void llenaDireccion(String email){
@@ -78,7 +93,7 @@ public class RevisaPedido2 extends Activity{
 	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed2);
 	    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionRevisaPed2);
 	    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaRevisaPed2);
-	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadYCPRevisaPed2);
+	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadCPRevisaPed2);
 	    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisRevisaPed2);
 	    //
 	    try{
@@ -111,9 +126,31 @@ public class RevisaPedido2 extends Activity{
 	        
 	    }
 	    catch(Exception err){
-	    	
+	    	Log.e("error llena dir ", err.toString());
 	    }
 	}
+	
+	private void llenaDirNueva(){
+		//objetos para visualizar
+	    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaRevisaPed2);
+	    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteRevisaPed2);
+	    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionRevisaPed2);
+	    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaRevisaPed2);
+	    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadCPRevisaPed2);
+	    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisRevisaPed2);
+	    //
+        
+	    direccionFactura = bundle.getStringArrayList("direccionFactura");
+	    
+	    tvNombreCte.setText(direccionFactura.get(0));
+	    tvEmpresaCte.setText(direccionFactura.get(1));
+        tvDireccionCte.setText(direccionFactura.get(2));
+        tvColoniaCte.setText(direccionFactura.get(3));
+        tvCiudadYCPCte.setText(direccionFactura.get(4)+", C.P. "+direccionFactura.get(5));
+        tvEsatdoYPaisCte.setText(direccionFactura.get(6)+", "+direccionFactura.get(7));
+	    
+	}
+	
 	
 	private OnCheckedChangeListener rgFormaPagoPres = new OnCheckedChangeListener() {
 		
@@ -137,9 +174,15 @@ public class RevisaPedido2 extends Activity{
 			intent.putExtra("comentario", etComentario.getText().toString());
 			intent.putExtra("emailCliente", email);
 			intent.putExtra("envioProd", envioProd);
+			intent.putExtra("idCliente", idClienteA);
 			//direccion del cliente
 			intent.putStringArrayListExtra("direccionCliente", direccionCliente);
-			//falta dirección de facturacion
+			if (bundle.getStringArrayList("direccionFactura")==null){
+				intent.putStringArrayListExtra("direccionFactura", direccionCliente);
+			}
+			else{
+				intent.putStringArrayListExtra("direccionFactura", direccionFactura);
+			}
 	        intent.setClass(RevisaPedido2.this, RevisaPedido3.class);
 	        startActivity(intent);
 	        finish();
@@ -150,11 +193,32 @@ public class RevisaPedido2 extends Activity{
 		
 		public void onClick(View arg0) {
 			Intent intent = new Intent();
+	        intent.putExtra("idCliente", idClienteA);			
 			intent.putExtra("emailCliente", email);			
 			intent.putExtra("comentario", etComentario.getText().toString());
+			intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+			if (bundle.getStringArrayList("direccionFactura")==null){
+				intent.putStringArrayListExtra("direccionFactura", direccionCliente);
+			}
+			else{
+				intent.putStringArrayListExtra("direccionFactura", bundle.getStringArrayList("direccionFactura"));
+			}			
 	        intent.setClass(RevisaPedido2.this, RevisaPedido1.class);
 	        startActivity(intent);
 	        finish();
+		}
+	};
+	
+	private OnClickListener ivCambiaDirPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.putExtra("idCliente", idClienteA);
+			intent.putExtra("emailCliente", email);					
+	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+	        intent.setClass(RevisaPedido2.this, NuevaDireccionFactura.class);
+	        startActivity(intent);
+	        finish();			
 		}
 	};
 	

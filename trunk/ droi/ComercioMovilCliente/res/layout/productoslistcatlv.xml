@@ -45,7 +45,7 @@ android:layout_gravity="left"
 		android:layout_height="wrap_content"
 		android:textColor="#ff000000"
 		android:textSize="14sp"
-		android:text="   "
+		android:text="    "
 		/>
 		<!-- 
 		<TextView
@@ -70,7 +70,7 @@ android:layout_gravity="left"
 		android:layout_height="wrap_content"
 		android:textColor="#ff000000"
 		android:textSize="14sp"
-		android:text="   "
+		android:text="    "
 		/>
 		<ImageView
 		android:id="@+id/ivCestaListCatLV"
