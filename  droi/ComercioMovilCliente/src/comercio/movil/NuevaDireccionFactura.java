@@ -30,11 +30,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class NuevaDireccionEntrega extends Activity{
+public class NuevaDireccionFactura extends Activity{
 	private Bundle bundle = null;
 	private String HOST = "10.0.2.2";
 	private ArrayList<DatosDireccion> arrayDireccCliente = new ArrayList<DatosDireccion>();
-	private ArrayList<String> direccionCliente;
+	private ArrayList<String> direccionFactura;
 	private ArrayList<String> direccActualCliente = new ArrayList<String>();
 	private ArrayList<Pais> arregloPaises;
 	private ArrayList<String> nombPais;
@@ -52,41 +52,45 @@ public class NuevaDireccionEntrega extends Activity{
 	private ImageView ivGuardarDir = null;
 	
 	
-	
+
 	 public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
-	        setContentView(R.layout.nuevadireccionentrega);
+	        setContentView(R.layout.nuevadireccionfactura);
 	        
-	        rgSexo = (RadioGroup)findViewById(R.id.rgSexoNuevaDirecc1);
+	        rgSexo = (RadioGroup)findViewById(R.id.rgSexoDireccFactura);
 	        rgSexo.setOnCheckedChangeListener(rgSexoPres);
 	        
-	        ivContinuar = (ImageView)findViewById(R.id.ivContinuarNuevaDirecc1);
+	        ivContinuar = (ImageView)findViewById(R.id.ivContinuarDireccFactura);
 	        ivContinuar.setOnClickListener(ivContinuarPres);
 	        
-	        ivContinuarArr = (ImageView)findViewById(R.id.ivContinuarArrNuevaDir1);
+	        ivContinuarArr = (ImageView)findViewById(R.id.ivContinuarArrDireccFactura);
 	        ivContinuarArr.setOnClickListener(ivContinuarPres);
-
 	        
-	        ivGuardarDir = (ImageView)findViewById(R.id.ivGuardarNuevaDirecc1);
+	        ivGuardarDir = (ImageView)findViewById(R.id.ivGuardarDireccFactura);
 	        ivGuardarDir.setOnClickListener(ivGuardarDirPres);
 	        
 	        bundle = getIntent().getExtras();
 	        idCliente = bundle.getInt("idCliente");
 	        email = bundle.getString("emailCliente");
 	        
+	        if(bundle.getStringArrayList("direccionFactura") == null){
+		        direccActualCliente = bundle.getStringArrayList("direccionCliente");
+		        llenaDirecc(direccActualCliente);
+	        }
+	        else{
+	        	llenaDirecc(bundle.getStringArrayList("direccionFactura"));
+	        }
+       
 	        llenaDirecciones(idCliente);
 	        llenaPais();
 	        
-	        direccActualCliente = new ArrayList<String>();
-	        direccActualCliente = bundle.getStringArrayList("direccionCliente");
-	        llenaDirecc(direccActualCliente);
-	        
 	 }
+	 
 	 
 	 private void llenaDirecciones(int idClienteP){
 		 String empresa = "";
 		 
-		 Spinner spinnDirecc = (Spinner)findViewById(R.id.spinnerSelDireccNuevaDirecc1);
+		 Spinner spinnDirecc = (Spinner)findViewById(R.id.spinnerSelDireccDireccFactura);
 				 
 		//Definición para servicio Web
 			String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerLibretaDirecciones";
@@ -179,20 +183,20 @@ public class NuevaDireccionEntrega extends Activity{
 	                            long id) {
 	                        DatosDireccion d = arrayDireccCliente.get(position);
  
-	                        direccionCliente  = new ArrayList<String>();
-	            	        direccionCliente.add(d.getNombreCliente());
-	            	        direccionCliente.add(d.getEmpresaCliente());
-	            	        direccionCliente.add(d.getDireccCliente());
-	            	        direccionCliente.add(d.getColoniaCliente());
-	            	        direccionCliente.add(d.getCiudadCliente());
-	            	        direccionCliente.add(d.getCpCliente());
-	            	        direccionCliente.add(d.getEstadoCliente());
-	            	        direccionCliente.add(d.getPaisCliente());
-	            	        llenaDirecc(direccionCliente);
+	                        direccionFactura  = new ArrayList<String>();
+	            	        direccionFactura.add(d.getNombreCliente());
+	            	        direccionFactura.add(d.getEmpresaCliente());
+	            	        direccionFactura.add(d.getDireccCliente());
+	            	        direccionFactura.add(d.getColoniaCliente());
+	            	        direccionFactura.add(d.getCiudadCliente());
+	            	        direccionFactura.add(d.getCpCliente());
+	            	        direccionFactura.add(d.getEstadoCliente());
+	            	        direccionFactura.add(d.getPaisCliente());
+	            	        llenaDirecc(direccionFactura);
 	                    }
 	                    
 						public void onNothingSelected(AdapterView<?> arg0) {
-							//direccionCliente = bundle.getStringArrayList("direccionCliente");
+							
 						}
 	                }
             );
@@ -209,23 +213,23 @@ public class NuevaDireccionEntrega extends Activity{
 	 }
 	 
 	 private void llenaDirecc(ArrayList<String> direccionActualCliente){
-		//objetos para visualizar
-		    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaNuevaDirecc1);
-		    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteNuevaDirecc1);
-		    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionNuevaDirecc1);
-		    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaNuevaDirecc1);
-		    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadCPNuevaDirecc1);
-		    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisNuevaDirecc1);
-		    
-		   
-		    
-		    tvNombreCte.setText(direccionActualCliente.get(0));
-		    tvEmpresaCte.setText(direccionActualCliente.get(1));
-	        tvDireccionCte.setText(direccionActualCliente.get(2));
-	        tvColoniaCte.setText(direccionActualCliente.get(3));
-	        tvCiudadYCPCte.setText(direccionActualCliente.get(4)+", C.P. "+direccionActualCliente.get(5));
-	        tvEsatdoYPaisCte.setText(direccionActualCliente.get(6)+", "+direccionActualCliente.get(7));
-	 }
+			//objetos para visualizar
+			    TextView tvEmpresaCte = (TextView)findViewById(R.id.tvEmpresaDireccFactura);
+			    TextView tvNombreCte = (TextView)findViewById(R.id.tvNombCteDireccFactura);
+			    TextView tvDireccionCte = (TextView)findViewById(R.id.tvDireccionDireccFactura);
+			    TextView tvColoniaCte = (TextView)findViewById(R.id.tvColoniaDireccFactura);
+			    TextView tvCiudadYCPCte = (TextView)findViewById(R.id.tvCiudadCPDireccFactura);
+			    TextView tvEsatdoYPaisCte = (TextView)findViewById(R.id.tvEstadoYPaisDireccFactura);
+			    
+			   
+			    
+			    tvNombreCte.setText(direccionActualCliente.get(0));
+			    tvEmpresaCte.setText(direccionActualCliente.get(1));
+		        tvDireccionCte.setText(direccionActualCliente.get(2));
+		        tvColoniaCte.setText(direccionActualCliente.get(3));
+		        tvCiudadYCPCte.setText(direccionActualCliente.get(4)+", C.P. "+direccionActualCliente.get(5));
+		        tvEsatdoYPaisCte.setText(direccionActualCliente.get(6)+", "+direccionActualCliente.get(7));
+		 }
 	 
 	 private void llenaPais(){
 		 //Definición para servicio Web
@@ -238,7 +242,7 @@ public class NuevaDireccionEntrega extends Activity{
 		    SoapObject result;
 		 //Fin definición
 		    
-		    Spinner spinnPais = (Spinner)findViewById(R.id.spinnerPaisNuevaDirecc1);
+		    Spinner spinnPais = (Spinner)findViewById(R.id.spinnerPaisDireccFactura);
 		    try{
 			    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
 				
@@ -263,11 +267,6 @@ public class NuevaDireccionEntrega extends Activity{
 		        	 arregloPaises.add(p);
 		        	 nombPais.add(nombrePais.toString());
 	             }
-	            
-		        
-		        
-		        
-
 		        
 		        ArrayAdapter<String> adapterPais = new ArrayAdapter<String>( 
 		                this,
@@ -329,24 +328,24 @@ public class NuevaDireccionEntrega extends Activity{
 	            Log.i("Dirección insertada", id.toString());
 	            
 	            //cambiamos a la nueva dirección
-                direccionCliente  = new ArrayList<String>();
-    	        direccionCliente.add(ddks.getNombreCliente()+" "+ddks.getApellidoCliente());
-    	        direccionCliente.add(ddks.getEmpresaCliente());
-    	        direccionCliente.add(ddks.getDireccCliente());
-    	        direccionCliente.add(ddks.getColoniaCliente());
-    	        direccionCliente.add(ddks.getCiudadCliente());
-    	        direccionCliente.add(ddks.getCpCliente());
-    	        direccionCliente.add(ddks.getEstadoCliente());
-    	        direccionCliente.add(nombrePais);
+                direccionFactura  = new ArrayList<String>();
+    	        direccionFactura.add(ddks.getNombreCliente()+" "+ddks.getApellidoCliente());
+    	        direccionFactura.add(ddks.getEmpresaCliente());
+    	        direccionFactura.add(ddks.getDireccCliente());
+    	        direccionFactura.add(ddks.getColoniaCliente());
+    	        direccionFactura.add(ddks.getCiudadCliente());
+    	        direccionFactura.add(ddks.getCpCliente());
+    	        direccionFactura.add(ddks.getEstadoCliente());
+    	        direccionFactura.add(nombrePais);
     	        
     	        Intent intent = new Intent();
     	        intent.putExtra("idCliente", idCliente);
-    	        intent.putExtra("emailCliente", email);
-    	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+    	        intent.putStringArrayListExtra("direccionCliente", direccActualCliente);
+    	        intent.putStringArrayListExtra("direccionFactura", direccionFactura);
     	        if (bundle.getString("comentario") != null ){
     	        	intent.putExtra("comentario", bundle.getString("comentario"));
     	        }
-    	        intent.setClass(NuevaDireccionEntrega.this, RevisaPedido1.class);
+    	        intent.setClass(NuevaDireccionFactura.this, RevisaPedido2.class);
     	        Toast.makeText(this, "Dirección actualizada", Toast.LENGTH_SHORT);
     	        startActivity(intent);
     	        finish();
@@ -363,14 +362,14 @@ public class NuevaDireccionEntrega extends Activity{
 	 }
 	 
 	 private boolean validaDatos(){
-		 EditText etNombre = (EditText) findViewById(R.id.etNombreNuevaDirecc1);
-		 EditText etApellidos = (EditText) findViewById(R.id.etApellidosNuevaDirecc1);
-		 EditText etEmpresa = (EditText) findViewById(R.id.etEmpresaNuevaDirecc1);
-		 EditText etDireccion = (EditText) findViewById(R.id.etDireccionNuevaDirecc1);
-		 EditText etColonia = (EditText) findViewById(R.id.etColoniaNuevaDirecc1);
-		 EditText etCP = (EditText) findViewById(R.id.etCodPostalNuevaDirecc1);
-		 EditText etCiudad = (EditText) findViewById(R.id.etCiudadNuevaDirecc1);
-		 EditText etEstado = (EditText) findViewById(R.id.etEstadoNuevaDirecc);
+		 EditText etNombre = (EditText) findViewById(R.id.etNombreDireccFactura);
+		 EditText etApellidos = (EditText) findViewById(R.id.etApellidosDireccFactura);
+		 EditText etEmpresa = (EditText) findViewById(R.id.etEmpresaDireccFactura);
+		 EditText etDireccion = (EditText) findViewById(R.id.etDireccionDireccFactura);
+		 EditText etColonia = (EditText) findViewById(R.id.etColoniaDireccFactura);
+		 EditText etCP = (EditText) findViewById(R.id.etCodPostalDireccFactura);
+		 EditText etCiudad = (EditText) findViewById(R.id.etCiudadDireccFactura);
+		 EditText etEstado = (EditText) findViewById(R.id.etEstadoDireccFactura);
 		 
 		 if (etApellidos.length()== 0 ||
 			 etCiudad.length() == 0 ||
@@ -429,19 +428,11 @@ public class NuevaDireccionEntrega extends Activity{
 
 			 return true;
 		 }
-/*		 
-        if(sexo == '0'){
-            
-        	mensajeError("Seleccione el sexo");
-        }
-        else{
-        	Log.i("sexo",String.valueOf(sexo));
-        }
-        */
+
 	 }
 	 
 	 private void mensajeError(String titulo, String msj){
-		 new AlertDialog.Builder(NuevaDireccionEntrega.this)
+		 new AlertDialog.Builder(NuevaDireccionFactura.this)
 
      	.setTitle(titulo)
 
@@ -458,43 +449,41 @@ public class NuevaDireccionEntrega extends Activity{
 	 } 
 	 
 	 private OnCheckedChangeListener rgSexoPres = new OnCheckedChangeListener() {
-		
-		public void onCheckedChanged(RadioGroup arg0, int check) {
-			if(check == R.id.rgFemeninoNuevaDirecc1){
-				Log.i("Sexo","Femenino f");
-				sexo='f';
+			
+			public void onCheckedChanged(RadioGroup arg0, int check) {
+				if(check == R.id.rgFemeninoNuevaDirecc1){
+					Log.i("Sexo","Femenino f");
+					sexo='f';
+				}
+				if (check == R.id.rgMasculinoNuevaDirecc1){
+					Log.i("Sexo","Masculino m");
+					sexo='m';
+				}			
 			}
-			if (check == R.id.rgMasculinoNuevaDirecc1){
-				Log.i("Sexo","Masculino m");
-				sexo='m';
-			}			
-		}
-	};
-	 
-	 private OnClickListener ivContinuarPres = new OnClickListener() {
+		};
+		 
+		 private OnClickListener ivContinuarPres = new OnClickListener() {
+			
+			public void onClick(View arg0) {
+		        Intent intent = new Intent();
+		        intent.putExtra("idCliente", idCliente);
+		        intent.putExtra("emailCliente", email);
+		        intent.putStringArrayListExtra("direccionFactura", direccionFactura);
+		        intent.putStringArrayListExtra("direccionCliente", bundle.getStringArrayList("direccionCliente"));
+    	        if (bundle.getString("comentario") != null ){
+    	        	intent.putExtra("comentario", bundle.getString("comentario"));
+    	        }
+		        intent.setClass(NuevaDireccionFactura.this, RevisaPedido2.class);
+		        startActivity(intent);
+		        finish();
+			}
+		};
 		
-		public void onClick(View arg0) {
-	        Intent intent = new Intent();
-	        intent.putExtra("idCliente", idCliente);
-	        intent.putExtra("emailCliente", email);
-	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
-	        if (bundle.getStringArrayList("direccionFactura")!= null){
-		        intent.putStringArrayListExtra("direccionFactura", bundle.getStringArrayList("direccionFactura"));
-	        }
-	        if (bundle.getString("comentario") != null ){
-	        	intent.putExtra("comentario", bundle.getString("comentario"));
-	        }
-	        intent.setClass(NuevaDireccionEntrega.this, RevisaPedido1.class);
-	        startActivity(intent);
-	        finish();
-		}
-	};
-	
-	private OnClickListener ivGuardarDirPres = new OnClickListener() {
-		
-		public void onClick(View arg0) {
-			guardaDireccion();
-		}
-	};
+		private OnClickListener ivGuardarDirPres = new OnClickListener() {
+			
+			public void onClick(View arg0) {
+				guardaDireccion();
+			}
+		};
 	 
 }

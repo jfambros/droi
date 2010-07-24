@@ -48,7 +48,13 @@ android:layout_gravity="left"
 		android:layout_height="48px"
 		android:src="@drawable/inicio48x48"
 		/>
-		
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ff000000"
+		android:textSize="14sp"
+		android:text="    "
+		/>		
 		<ImageView
 		android:id="@+id/ivRegresarCesta"
 		android:layout_width="wrap_content"

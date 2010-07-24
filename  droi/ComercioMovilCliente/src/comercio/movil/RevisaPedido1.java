@@ -144,7 +144,7 @@ public class RevisaPedido1 extends Activity{
 
 	    }
 	    catch(Exception err){
-	    	
+	    	Log.e("error llena dir ped1", err.toString());
 	    }
 	}
 	
@@ -209,11 +209,14 @@ public class RevisaPedido1 extends Activity{
 			Log.i("comentario",tvComentario.getText().toString());
 			
 	        Intent intent = new Intent();
-	        //i.putExtra("idProducto",producto.getIdProd());
+	        intent.putExtra("idCliente", idClienteA);
 	        intent.putExtra("comentario", tvComentario.getText().toString());
 	        intent.putExtra("emailCliente", email);
 	        intent.putExtra("envioProd", envioProd);
 	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+	        if (bundle.getStringArrayList("direccionFactura")!= null){
+		        intent.putStringArrayListExtra("direccionFactura", bundle.getStringArrayList("direccionFactura"));
+	        }
 	        intent.setClass(RevisaPedido1.this, RevisaPedido2.class);
 	        startActivity(intent);
 	        finish();
@@ -242,6 +245,11 @@ public class RevisaPedido1 extends Activity{
 			}
 			Intent intent = new Intent();
 	        intent.putExtra("idCliente", idClienteA);
+	        intent.putExtra("emailCliente", email);
+	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
+	        if (bundle.getStringArrayList("direccionFactura")!= null){
+		        intent.putStringArrayListExtra("direccionFactura", bundle.getStringArrayList("direccionFactura"));
+	        }
 	        intent.setClass(RevisaPedido1.this, NuevaDireccionEntrega.class);
 	        startActivity(intent);
 	        finish();
