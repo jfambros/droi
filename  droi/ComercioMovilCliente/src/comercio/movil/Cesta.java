@@ -227,10 +227,13 @@ public class Cesta extends Activity {
             
             if (((EditText) me.getValue().getChildAt(3)).getText().toString().length() == 0 || !Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
             	mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
+            	break;
             }
             else{
             
 	            String cantProd = ((EditText) me.getValue().getChildAt(3)).getText().toString();
+	            
+	            
 	            
 	            Log.i("Cajas texto: ",me.getKey() + " : " + cantProd);
 	            if (Integer.parseInt(cantProd) == 0 || ((CheckBox) me.getValue().getChildAt(0)).isChecked()){
@@ -277,7 +280,7 @@ public class Cesta extends Activity {
 	            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
 	            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(2)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(3)).getText().toString() );
 	            if (((EditText) me.getValue().getChildAt(3)).getText().toString().length() == 0 || !Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
-	            	mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
+	            	//mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
 	            	return false;
 	            }
 	            else{
@@ -343,7 +346,7 @@ public class Cesta extends Activity {
 			        finish();
 			}
 			else{
-				mensajeError("Error","Verifique cantidad");
+				mensajeError("Error", "Verifique cantidad");
 			}
 		}
 	};
