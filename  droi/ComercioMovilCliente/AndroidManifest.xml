@@ -84,6 +84,10 @@
        android:label="Compra finalizada">
     </activity>
     
+        <activity android:name="ProductosListCatLVBuscar"
+       android:label="Listado de productos encontrados">
+    </activity>
+    
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-sdk android:minSdkVersion="3" />

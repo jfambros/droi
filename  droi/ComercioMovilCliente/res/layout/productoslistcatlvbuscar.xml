@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" 
+	android:background="#ffffffff"    
+    >
+
+<TableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:background="#ffffffff"
+>
+    
+    <!-- Inicio encabezado -->
+    
+    <LinearLayout
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:orientation="vertical"
+android:background="#ff0099cc"
+>
+
+<TableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:layout_gravity="left"
+>
+	<TableRow
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_gravity="center_horizontal"
+		>
+		<ImageView
+		android:id="@+id/ivInicioProdListCatLVBuscar"
+		android:layout_width="48px"
+		android:layout_height="48px"
+		android:src="@drawable/inicio48x48"
+		/>
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ff000000"
+		android:textSize="14sp"
+		android:text="    "
+		/>
+		<!-- 
+		<TextView
+		android:id="@+id/tvCatNombCategoria"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ffffffff"
+		android:textSize="16sp"
+		android:textStyle="bold"
+		android:text="Categoría"
+		/>
+		-->
+		
+		<ImageView
+		android:id="@+id/ivRegresarProListCatLVBuscar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/regresar48x48"
+		/>
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ff000000"
+		android:textSize="14sp"
+		android:text="    "
+		/>
+		<ImageView
+		android:id="@+id/ivCestaListCatLVBuscar"
+		android:layout_width="48px"
+		android:layout_height="48px"
+		android:src="@drawable/cesta48x48" 
+		/>			
+		
+	</TableRow>
+</TableLayout>
+
+</LinearLayout>
+    
+    <!-- Fin encabezado -->
+    
+    <!-- 
+    <TextView
+		android:id="@+id/tvCatNombCategoria"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="categoria"
+		android:textColor="#ff000000"
+		android:layout_gravity="center_horizontal"
+		/>
+    
+    <LinearLayout
+    	android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:gravity="center" >
+    <ImageView
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/regresar" />
+     <TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="   "
+		android:textColor="#ff000000"
+		android:layout_gravity="center_horizontal"
+		/>
+    <ImageView
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:src="@drawable/inicio" />
+    	
+
+    	
+    </LinearLayout>
+ -->
+		<ListView
+		    android:id="@+id/android:list" 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center_horizontal"
+		    android:background="#ffffffff" 
+		    />			
+</TableLayout>	
+	
+    
+</LinearLayout>

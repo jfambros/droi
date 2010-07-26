@@ -194,10 +194,19 @@ public class DescripcionProdSelec extends Activity{
 		
 		public void onClick(View v) {
            Intent intent = new Intent();
-           intent.putExtra("idCategoria", bundle.getString("idCategoria"));
-           intent.setClass(DescripcionProdSelec.this, ProductosListCatLV.class);
-           startActivity(intent);
-           finish();		   
+           if (bundle.getInt("busca") != 0){
+	           intent.putExtra("palabra", bundle.getString("palabra"));
+	           intent.setClass(DescripcionProdSelec.this, ProductosListCatLVBuscar.class);
+	           startActivity(intent);
+	           finish();
+           }
+           else{
+     
+	           intent.putExtra("idCategoria", bundle.getString("idCategoria"));
+	           intent.setClass(DescripcionProdSelec.this, ProductosListCatLV.class);
+	           startActivity(intent);
+	           finish();
+           }
 		}
 	};
     

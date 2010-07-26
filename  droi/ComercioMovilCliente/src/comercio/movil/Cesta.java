@@ -12,6 +12,7 @@ import comercio.movil.R.drawable;
 
 import utils.DatosCesta;
 import utils.ListaCesta;
+import utils.Validaciones;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -220,69 +221,42 @@ public class Cesta extends Activity {
 
         Iterator i = set.iterator();
 
+
         while(i.hasNext()){
             Map.Entry<String, TableRow> me = (Map.Entry<String, TableRow>)i.next();
-            String cantProd = ((EditText) me.getValue().getChildAt(3)).getText().toString();
             
-            Log.i("Cajas texto: ",me.getKey() + " : " + cantProd);
-            if (Integer.parseInt(cantProd) == 0 || ((CheckBox) me.getValue().getChildAt(0)).isChecked()){
-            	Log.i("Borrado","La clave "+me.getKey()+" Ah sido borrado");
-            	ListaCesta.arregloCesta.remove(me.getKey());
-            	
-                Intent intent = new Intent();
-                intent.setClass(Cesta.this, Cesta.class);
-                startActivity(intent);
-                finish();
+            if (((EditText) me.getValue().getChildAt(3)).getText().toString().length() == 0 || !Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
+            	mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
             }
             else{
-            	int nuevaCant = Integer.parseInt(((EditText) me.getValue().getChildAt(3)).getText().toString());
-            	DatosCesta cantidadCambiada =   ListaCesta.arregloCesta.get(me.getKey());
-            	cantidadCambiada.setCantidadProd(nuevaCant); 
-            	ListaCesta.arregloCesta.put(me.getKey(), cantidadCambiada);
-                Intent intent = new Intent();
-                intent.setClass(Cesta.this, Cesta.class);
-                startActivity(intent);
-                finish();
-            	//sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
-            }
-            	
+            
+	            String cantProd = ((EditText) me.getValue().getChildAt(3)).getText().toString();
+	            
+	            Log.i("Cajas texto: ",me.getKey() + " : " + cantProd);
+	            if (Integer.parseInt(cantProd) == 0 || ((CheckBox) me.getValue().getChildAt(0)).isChecked()){
+	            	Log.i("Borrado","La clave "+me.getKey()+" Ah sido borrado");
+	            	ListaCesta.arregloCesta.remove(me.getKey());
+	            	
+	                Intent intent = new Intent();
+	                intent.setClass(Cesta.this, Cesta.class);
+	                startActivity(intent);
+	                finish();
+	            }
+	            else{
+	            	int nuevaCant = Integer.parseInt(((EditText) me.getValue().getChildAt(3)).getText().toString());
+	            	DatosCesta cantidadCambiada =   ListaCesta.arregloCesta.get(me.getKey());
+	            	cantidadCambiada.setCantidadProd(nuevaCant); 
+	            	ListaCesta.arregloCesta.put(me.getKey(), cantidadCambiada);
+	                Intent intent = new Intent();
+	                intent.setClass(Cesta.this, Cesta.class);
+	                startActivity(intent);
+	                finish();
+	            	//sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
+	            }
+	            	
+	        }
         }
-        
-        /*
-         * System.out.println( hashMap.remove("One") + " is removed from the HashMap.");
-         */  
-		/*
-		for(int i=0; i<arr.size(); i++){
-			Log.i("Caja texto",((EditText)arr.get(i).getChildAt(2)).getText().toString());
-		}
-		*/
-		/*
-		new AlertDialog.Builder(Cesta.this)
 
-    	.setTitle("elementos")
-
-    	.setMessage("")
-
-    	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
-    	public void onClick(DialogInterface dialog, int whichButton) {
-
-    	setResult(RESULT_OK);
-    	  }
-    	})
-    	.show();
-    	*/
- 
-		/*
-		Set set = ListaCesta.arregloCesta.entrySet();
-
-        Iterator i = set.iterator();
-
-        while(i.hasNext()){
-            Map.Entry<String,DatosCesta> me = (Map.Entry<String, DatosCesta>)i.next();
-            Log.i("Datos map: ",me.getKey() + " : " + ((DatosCesta) me.getValue()).getNombreProducto());
-        }
-        */
 	}
 	
 	private void limpiaCesta(){
@@ -293,6 +267,26 @@ public class Cesta extends Activity {
         finish();
 	}
 	
+	private boolean validaCesta(){
+		if (!cantidadCesta.isEmpty()){
+        	Set set = cantidadCesta.entrySet();
+
+            Iterator i = set.iterator();
+
+            while(i.hasNext()){
+	            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
+	            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(2)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(3)).getText().toString() );
+	            if (((EditText) me.getValue().getChildAt(3)).getText().toString().length() == 0 || !Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
+	            	mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
+	            	return false;
+	            }
+	            else{
+	            	return true;
+	            }
+            }
+		}
+		return false;
+	}
 	
 	private OnClickListener ivInicioPres = new OnClickListener() {
 		
@@ -342,40 +336,32 @@ public class Cesta extends Activity {
 	private OnClickListener ivConfirmarPedidoPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			if (!cantidadCesta.isEmpty()){
-	        	Set set = cantidadCesta.entrySet();
-	
-	            Iterator i = set.iterator();
-	
-	            while(i.hasNext()){
-		            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
-		            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(2)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(3)).getText().toString() );
-	            }
-	            Log.i("Total: ",Double.toString(total));
-				//prueba
-		        Intent intent = new Intent();
-		        intent.setClass(Cesta.this, VerificaCliente.class);
-		        startActivity(intent);
-		        finish();
-	            
+			if (validaCesta() == true){
+			        Intent intent = new Intent();
+			        intent.setClass(Cesta.this, VerificaCliente.class);
+			        startActivity(intent);
+			        finish();
 			}
 			else{
-				new AlertDialog.Builder(Cesta.this)
-		     	.setTitle("Mensaje")
-		     	.setMessage("No hay productos en la cesta")
-		     	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		     	public void onClick(DialogInterface dialog, int whichButton) {
-		     	setResult(RESULT_OK);
-		     	  }
-		     	})
-		     	.show(); 
+				mensajeError("Error","Verifique cantidad");
 			}
-			/*
-	        Intent intent = new Intent();
-	        intent.setClass(Cesta.this, RevisaPedido1.class);
-	        startActivity(intent);
-	        finish();
-	        */
 		}
 	};
+	
+	 private void mensajeError(String titulo, String msj){
+		 new AlertDialog.Builder(Cesta.this)
+
+     	.setTitle(titulo)
+
+     	.setMessage(msj)
+
+     	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+     	public void onClick(DialogInterface dialog, int whichButton) {
+
+     	setResult(RESULT_OK);
+     	  }
+     	})
+     	.show();   
+	 }
 }
