@@ -10,6 +10,7 @@ import android.widget.TabHost;
 
 public class Principal extends TabActivity {
     /** Called when the activity is first created. */
+	private Bundle bundle = new Bundle();
     private TabHost mTabHost;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,12 @@ public class Principal extends TabActivity {
         mTabHost.addTab(mTabHost.newTabSpec("Buscar").setIndicator("Buscar",getResources().getDrawable(R.drawable.buscar)).setContent(new Intent(this, Buscar.class)));
         mTabHost.addTab(mTabHost.newTabSpec("Mapa").setIndicator("Mapa",getResources().getDrawable(R.drawable.iconomapa)).setContent(new Intent(this, Mapa.class)));
         //mTabHost.addTab(mTabHost.newTabSpec("Producto").setIndicator("Producto",getResources().getDrawable(R.drawable.icon)).setContent(new Intent(this, Producto.class)));
-       
-        mTabHost.setCurrentTab(0);   
+        bundle = getIntent().getExtras();
+        if (bundle != null){ 
+        	mTabHost.setCurrentTab(1);   
+        }else{
+        	mTabHost.setCurrentTab(0);
+        }
+        	
     }
 }
