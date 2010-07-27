@@ -221,7 +221,7 @@ public class Cesta extends Activity {
 
         Iterator i = set.iterator();
 
-
+       if (validaCesta() == false){
         while(i.hasNext()){
             Map.Entry<String, TableRow> me = (Map.Entry<String, TableRow>)i.next();
             
@@ -259,6 +259,10 @@ public class Cesta extends Activity {
 	            	
 	        }
         }
+       }
+       else{
+    	   mensajeError("Error", "Revise cantidad");
+       }
 
 	}
 	
@@ -271,6 +275,7 @@ public class Cesta extends Activity {
 	}
 	
 	private boolean validaCesta(){
+		boolean encontrado = false;
 		if (!cantidadCesta.isEmpty()){
         	Set set = cantidadCesta.entrySet();
 
@@ -279,16 +284,24 @@ public class Cesta extends Activity {
             while(i.hasNext()){
 	            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
 	            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(2)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(3)).getText().toString() );
-	            if (((EditText) me.getValue().getChildAt(3)).getText().toString().length() == 0 || !Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
+	            if (((EditText) me.getValue().getChildAt(3)).getText().toString().length()>0 && Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString())){
+	            	int num = Integer.parseInt(((EditText) me.getValue().getChildAt(3)).getText().toString());
+	            	if (num < 0){
+	            		encontrado = true;
+	            		break;
+	            	}
+	            }
+	            if (!Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
 	            	//mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
-	            	return false;
+	            	encontrado = true;
+	            	break;
 	            }
 	            else{
-	            	return true;
+	            	encontrado = false;
 	            }
             }
 		}
-		return false;
+		return encontrado;
 	}
 	
 	private OnClickListener ivInicioPres = new OnClickListener() {
@@ -339,7 +352,7 @@ public class Cesta extends Activity {
 	private OnClickListener ivConfirmarPedidoPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			if (validaCesta() == true){
+			if (validaCesta() == false){
 			        Intent intent = new Intent();
 			        intent.setClass(Cesta.this, VerificaCliente.class);
 			        startActivity(intent);
