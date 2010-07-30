@@ -4,6 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
     <application android:icon="@drawable/iconomcom" android:label="@string/app_name">
+    <uses-library android:name="com.google.android.maps" /> 
         <activity android:name=".Principal"
                   android:label="@string/app_name">
             <intent-filter>
@@ -84,9 +85,18 @@
        android:label="Compra finalizada">
     </activity>
     
-        <activity android:name="ProductosListCatLVBuscar"
+    <activity android:name="ProductosListCatLVBuscar"
        android:label="Listado de productos encontrados">
     </activity>
+
+    <activity android:name="InicioMapa"
+       android:label="Ir al mapa">
+    </activity>
+        
+    <activity android:name="Mapa"
+       android:label="Ubicación de la tienda">
+    </activity>
+    
     
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

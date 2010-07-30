@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+   android:background="#ffffff"
+   android:orientation="vertical">
+  
+  
+   	<TextView android:layout_width="wrap_content"
+	android:layout_height="wrap_content" android:textColor="#ff000000"
+	android:textSize="14sp"
+	android:text="Bienvenido, en esta sección podrá localizar la tienda utilizando el mapa disponible a continuación"
+	android:layout_gravity="center_horizontal" />
+  
+  
+  		<ImageView
+  		android:id = "@+id/ivMapa"
+		android:layout_width="64px"
+		android:layout_height="64px"
+		android:layout_gravity="center_horizontal"
+		android:src="@drawable/mapa64x64" 
+		/>
+  
+</LinearLayout>

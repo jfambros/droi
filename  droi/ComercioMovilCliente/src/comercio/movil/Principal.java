@@ -4,7 +4,7 @@ package comercio.movil;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.widget.TabHost;
 
 
@@ -14,6 +14,7 @@ public class Principal extends TabActivity {
     private TabHost mTabHost;
 	
     public void onCreate(Bundle savedInstanceState) {
+    	try{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
@@ -28,6 +29,9 @@ public class Principal extends TabActivity {
         }else{
         	mTabHost.setCurrentTab(0);
         }
+    	}catch(Exception err){
+    		Log.e("Error principal", err.toString());
+    	}
         	
     }
 }
