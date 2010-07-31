@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="fill_parent" 
-    android:layout_height="fill_parent">
+<FrameLayout xmlns:android=
+   "http://schemas.android.com/apk/res/android"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   >
 
-  
-  
    <com.google.android.maps.MapView
      android:id="@+id/mapView" 
      android:layout_width="fill_parent"
@@ -13,14 +13,57 @@
      android:clickable="true"
      android:apiKey="0S9Ikgk08HaP2XDmbdelKl6Uo5EXB6fChRO_eVg"
    />
-   
+
+	<LinearLayout
+	   android:orientation="horizontal"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	   android:background="#550000ff"
+	   android:padding="2px"
+	   >
+		<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:textColor="#ff000000"
+		android:text="Dirección: "
+		/>
+		
+		<EditText
+		android:id="@+id/etDireccionMapa"
+		android:layout_width="150px"
+		android:layout_height="wrap_content"
+		android:textColor="#ff000000"
+		android:textSize="16sp"
+		/>
+		
+		<Button
+		android:id="@+id/btnBuscarMapa"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Buscar"
+		/>
+
+   </LinearLayout>  
+  
+
+   <LinearLayout xmlns:android=
+   "http://schemas.android.com/apk/res/android"
+   android:orientation="horizontal"
+   android:layout_width="wrap_content"
+   android:layout_height="fill_parent"
+   android:background="#550000ff"
+   android:layout_alignParentBottom="true"
+   android:layout_gravity="bottom"
+   android:padding="2px"
+   >
    <LinearLayout android:id="@+id/zoom" 
      android:layout_width="wrap_content" 
      android:layout_height="wrap_content" 
-     android:layout_alignParentBottom="true" 
+     android:layout_gravity="bottom"
      android:layout_centerHorizontal="true" 
     /> 
    
+   </LinearLayout>
   
   
-</RelativeLayout>
+</FrameLayout>
