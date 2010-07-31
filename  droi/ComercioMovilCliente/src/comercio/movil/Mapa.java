@@ -20,6 +20,7 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
@@ -31,7 +32,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
@@ -48,6 +48,7 @@ public class Mapa extends MapActivity{
 	private Button btnBuscar;
 	private GeoPoint pOrigen;
 	private Geocoder gcUsuario;
+	private GeoPoint pDestino;
 	
 	private double latitudOr = 18.848661;
 	private double longitudOr = -97.091745;
@@ -288,7 +289,10 @@ public class Mapa extends MapActivity{
 						Address x = direccionUsuario.get(i);
 						latitudUsuario = x.getLatitude();
 						longitudUsuario = x.getLongitude();
-						//TODO hacer la llamada al método
+						pDestino = new GeoPoint((int) (latitudUsuario * 1E6),
+								(int) (longitudUsuario * 1E6));
+
+						drawPath(pOrigen, pDestino, Color.GREEN, mapView);
 					}
 			   }
 			   
