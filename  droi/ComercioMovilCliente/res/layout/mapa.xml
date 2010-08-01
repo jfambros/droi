@@ -21,6 +21,38 @@
 	   android:background="#550000ff"
 	   android:padding="2px"
 	   >
+	   
+		   	<Button
+			android:id="@+id/btnSateliteMapa"
+			android:layout_width="70px"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="40px"
+			android:text="Satélite"
+			/>
+			<Button
+			android:id="@+id/btnCallesMapa"
+			android:layout_width="70px"
+			android:layout_height="wrap_content"
+			android:text="Calles"
+			/>
+			<Button
+			android:id="@+id/btnGPSMapa"
+			android:layout_width="75px"
+			android:layout_height="wrap_content"
+			android:text="GPS On "
+			/>			
+	   
+	   </LinearLayout>
+
+<!-- Para la búsqueda de ruta -->
+<!-- 
+	<LinearLayout
+	   android:orientation="horizontal"
+	   android:layout_width="fill_parent"
+	   android:layout_height="wrap_content"
+	   android:background="#550000ff"
+	   android:padding="2px"
+	   >
 		<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -45,25 +77,15 @@
 
    </LinearLayout>  
   
+ -->
 
-   <LinearLayout xmlns:android=
-   "http://schemas.android.com/apk/res/android"
-   android:orientation="horizontal"
-   android:layout_width="wrap_content"
-   android:layout_height="fill_parent"
-   android:background="#550000ff"
-   android:layout_alignParentBottom="true"
-   android:layout_gravity="bottom"
-   android:padding="2px"
-   >
    <LinearLayout android:id="@+id/zoom" 
      android:layout_width="wrap_content" 
      android:layout_height="wrap_content" 
      android:layout_gravity="bottom"
      android:layout_centerHorizontal="true" 
     /> 
-   
-   </LinearLayout>
+
   
   
 </FrameLayout>

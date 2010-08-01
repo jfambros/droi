@@ -1,36 +1,26 @@
 package comercio.movil;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import utils.MyOverLay;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -45,24 +35,47 @@ import com.google.android.maps.MapView.LayoutParams;
 public class Mapa extends MapActivity{
 	private MapView mapView;
 	private MapController mc;
-	private Button btnBuscar;
+	private Button btnSatelite;
+	private Button btnCalles;
+	private Button btnGPS;
+	
+	
+	private LocationManager lm;
+    private LocationListener locationListener;
+	
+	//private Button btnBuscar;
 	private GeoPoint pOrigen;
 	private Geocoder gcUsuario;
 	private GeoPoint pDestino;
+	private char onOff = '0';
 	
 	private double latitudOr = 18.848661;
 	private double longitudOr = -97.091745;
+	//Para búsqueda
+	/*
 	private List<Address> direccionUsuario;
 	private double latitudUsuario;
 	private double longitudUsuario;
+	*/
 
 	public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mapa);
-        
+        //Para búsqueda
+        /*
         btnBuscar = (Button)findViewById(R.id.btnBuscarMapa);
         btnBuscar.setOnClickListener(btnBuscarPres);
+        */
+        
+        btnSatelite = (Button)findViewById(R.id.btnSateliteMapa);
+        btnSatelite.setOnClickListener(btnSatelitePres);
+        
+        btnCalles = (Button)findViewById(R.id.btnCallesMapa);
+        btnCalles.setOnClickListener(btnCallesPres);
+        
+        btnGPS = (Button) findViewById(R.id.btnGPSMapa);
+        btnGPS.setOnClickListener(btnGPSPres);
         
         mapView = (MapView) findViewById(R.id.mapView);
         LinearLayout zoomLayout = (LinearLayout)findViewById(R.id.zoom);  
@@ -87,7 +100,7 @@ public class Mapa extends MapActivity{
         gcUsuario = new Geocoder(this);
  
         mc.animateTo(pOrigen);
-        mc.setZoom(18); 
+        mc.setZoom(17); 
 
         //---Add a location marker---
         MapOverlay mapOverlay = new MapOverlay();
@@ -97,6 +110,44 @@ public class Mapa extends MapActivity{
  
         mapView.invalidate();
     
+    }
+	
+	private class MyLocationListener implements LocationListener 
+    {
+        public void onLocationChanged(Location loc) {
+        	if (loc != null) {                
+        		loc.getLatitude();
+        		loc.getLongitude();
+        		/*
+                Toast.makeText(getBaseContext(), 
+                    "Location changed : Lat: " + loc.getLatitude() + 
+                    " Lng: " + loc.getLongitude(), 
+                    Toast.LENGTH_SHORT).show();
+                */
+                GeoPoint p = new GeoPoint(
+                        (int) (loc.getLatitude() * 1E6), 
+                        (int) (loc.getLongitude() * 1E6));
+                mc.animateTo(p);
+                mc.setZoom(17);                
+                mapView.invalidate();
+            }
+        }
+
+
+        public void onProviderDisabled(String provider) {
+            // TODO Auto-generated method stub
+        }
+
+
+        public void onProviderEnabled(String provider) {
+            // TODO Auto-generated method stub
+        }
+
+
+        public void onStatusChanged(String provider, int status, 
+            Bundle extras) {
+            // TODO Auto-generated method stub
+        }
     }
  
     protected boolean isRouteDisplayed() {
@@ -198,6 +249,63 @@ public class Mapa extends MapActivity{
         
     }
     
+    
+    public void porSatelite(){
+    	mapView.setStreetView(false);
+    	mapView.setSatellite(true);
+    }
+    
+    public void porCalles(){
+    	mapView.setSatellite(false);
+    	mapView.setStreetView(true);
+    }
+    
+    private void activaGPS(){
+    	//---use the LocationManager class to obtain GPS locations---
+        lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);    
+        
+        locationListener = new MyLocationListener();
+        
+        lm.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER, 
+            0, 
+            0, 
+            locationListener);  
+    }
+    
+    private OnClickListener btnSatelitePres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			porSatelite();
+		}
+	}; 
+	
+	private OnClickListener btnCallesPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			porCalles();
+		}
+	};
+	
+	private OnClickListener btnGPSPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			if (onOff == '0'){
+				onOff = '1';
+				btnGPS.setText("GPS Off");
+				activaGPS();
+				
+			}
+			else{
+				onOff = '0';				
+				btnGPS.setText("GPS On");
+				lm.removeUpdates(locationListener);
+			}
+		}
+	};
+    
+    //Método para obtener la ruta, aún no disponible para México
+    /*
     private void drawPath(GeoPoint src,GeoPoint dest, int color, MapView mMapView01)
     {
     // connect to map web service
@@ -292,7 +400,7 @@ public class Mapa extends MapActivity{
 						pDestino = new GeoPoint((int) (latitudUsuario * 1E6),
 								(int) (longitudUsuario * 1E6));
 
-						drawPath(pOrigen, pDestino, Color.GREEN, mapView);
+						//drawPath(pOrigen, pDestino, Color.GREEN, mapView);
 					}
 			   }
 			   
@@ -302,6 +410,12 @@ public class Mapa extends MapActivity{
 
 			}
 		}
+	};
+	*/
+	
+	protected void onDestroy() {
+		super.onDestroy(); 
+		lm.removeUpdates(locationListener); 
 	};
 	
 	private void mensajeError(String titulo, String msj){
