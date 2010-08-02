@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import utils.MapaOverlayOptimizado;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,16 +13,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,6 +35,7 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
 import com.google.android.maps.MapView.LayoutParams;
 
 
@@ -36,7 +43,8 @@ public class Mapa extends MapActivity{
 	private MapView mapView;
 	private MapController mc;
 	private Button btnSatelite;
-	private Button btnCalles;
+	//private Button btnCalles;
+	private ImageView ivBuscar; 
 	private Button btnGPS;
 	
 	
@@ -48,15 +56,17 @@ public class Mapa extends MapActivity{
 	private Geocoder gcUsuario;
 	private GeoPoint pDestino;
 	private char onOff = '0';
+	private char satCall = 'c';
 	
 	private double latitudOr = 18.848661;
 	private double longitudOr = -97.091745;
 	//Para búsqueda
-	/*
+	
+	private List<Overlay> listaOverlays;
 	private List<Address> direccionUsuario;
 	private double latitudUsuario;
 	private double longitudUsuario;
-	*/
+	
 
 	public void onCreate(Bundle savedInstanceState)
     {
@@ -67,13 +77,16 @@ public class Mapa extends MapActivity{
         btnBuscar = (Button)findViewById(R.id.btnBuscarMapa);
         btnBuscar.setOnClickListener(btnBuscarPres);
         */
+        ivBuscar = (ImageView)findViewById(R.id.ivBuscarMapa);
+        ivBuscar.setOnClickListener(ivBuscarPres); 
         
         btnSatelite = (Button)findViewById(R.id.btnSateliteMapa);
         btnSatelite.setOnClickListener(btnSatelitePres);
         
+        /*
         btnCalles = (Button)findViewById(R.id.btnCallesMapa);
         btnCalles.setOnClickListener(btnCallesPres);
-        
+        */
         btnGPS = (Button) findViewById(R.id.btnGPSMapa);
         btnGPS.setOnClickListener(btnGPSPres);
         
@@ -103,11 +116,24 @@ public class Mapa extends MapActivity{
         mc.setZoom(17); 
 
         //---Add a location marker---
-        MapOverlay mapOverlay = new MapOverlay();
-        List<Overlay> listOfOverlays = mapView.getOverlays();
-        listOfOverlays.clear();
-        listOfOverlays.add(mapOverlay);        
+        
+        MapOverlay mapOverlay = new MapOverlay(pOrigen, R.drawable.marcador);
+        
+       // List<Overlay> listOfOverlays = mapView.getOverlays();
+        
+        listaOverlays = mapView.getOverlays();
+        listaOverlays.clear();
+        listaOverlays.add(mapOverlay);        
  
+        /*
+        List mapOverlays = mapView.getOverlays();
+        mapOverlays.clear();
+        Drawable drawableT = Mapa.this.getResources().getDrawable(R.drawable.marcador);
+		MapaOverlayOptimizado tienda = new MapaOverlayOptimizado(drawableT);
+		OverlayItem oTienda = new OverlayItem(pOrigen, "Ubicacion", "Tienda");
+		tienda.addOverlay(oTienda);
+		mapOverlays.add(tienda); 
+		*/
         mapView.invalidate();
     
     }
@@ -156,18 +182,21 @@ public class Mapa extends MapActivity{
     
     class MapOverlay extends com.google.android.maps.Overlay
     {
-        public boolean draw(Canvas canvas, MapView mapView, 
-        boolean shadow, long when) 
+    	private GeoPoint gp;
+    	private int marcador;
+    	public MapOverlay(GeoPoint gp, int marcador){
+    		super();
+    		this.gp = gp;
+    		this.marcador = marcador;
+    	}
+        public boolean draw(Canvas canvas, MapView mapView, boolean shadow, long when) 
         {
             super.draw(canvas, mapView, shadow);                   
- 
             //---translate the GeoPoint to screen pixels---
             Point screenPts = new Point();
-            mapView.getProjection().toPixels(pOrigen, screenPts);
- 
+            mapView.getProjection().toPixels(gp, screenPts);
             //---add the marker---
-            Bitmap bmp = BitmapFactory.decodeResource(
-                getResources(), R.drawable.marcador);            
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), marcador);
             canvas.drawBitmap(bmp, screenPts.x, screenPts.y-40, null);         
             return true;
         }
@@ -272,20 +301,30 @@ public class Mapa extends MapActivity{
             0, 
             locationListener);  
     }
-    
+      
     private OnClickListener btnSatelitePres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			porSatelite();
+			if (satCall == 's'){
+			   porSatelite();
+			   btnSatelite.setText("Calles");
+			   satCall = 'c';
+			}
+			else{
+				porCalles();
+				btnSatelite.setText("Satélite");
+				satCall = 's';
+			}
 		}
 	}; 
-	
+	/*
 	private OnClickListener btnCallesPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
 			porCalles();
 		}
 	};
+	*/
 	
 	private OnClickListener btnGPSPres = new OnClickListener() {
 		
@@ -300,6 +339,72 @@ public class Mapa extends MapActivity{
 				onOff = '0';				
 				btnGPS.setText("GPS On");
 				lm.removeUpdates(locationListener);
+			}
+		}
+	};
+	
+	private OnClickListener ivBuscarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			EditText tvDireccion = (EditText)findViewById(R.id.etDireccionMapa);
+			try{
+			   direccionUsuario =  gcUsuario.getFromLocationName(tvDireccion.getText().toString(), 1);
+			   if (direccionUsuario.size() == 0){
+			      mensajeError("Error", "No se encontró dirección");
+			   }
+			   else{
+				   for (int i = 0; i < direccionUsuario.size(); ++i) {
+						//Guardamos el resultado en formato latitud y longitud
+						Address x = direccionUsuario.get(i);
+						latitudUsuario = x.getLatitude();
+						longitudUsuario = x.getLongitude();
+						pDestino = new GeoPoint((int) (latitudUsuario * 1E6),
+								(int) (longitudUsuario * 1E6));
+						
+						/*
+						 * Poner  marcador
+						 */
+						
+						//limpiarCapas(pOrigen, pDestino);
+						//En caso de querer varios marcadores
+						/*
+						List mapOverlays = mapView.getOverlays();
+						mapOverlays.clear();
+						
+						Drawable drawableT = Mapa.this.getResources().getDrawable(R.drawable.marcador);
+						MapaOverlayOptimizado tienda = new MapaOverlayOptimizado(drawableT);
+						OverlayItem oTienda = new OverlayItem(pOrigen, "Ubicacion", "Tienda");
+						tienda.addOverlay(oTienda);
+						mapOverlays.add(tienda); 
+						
+						Drawable drawable = Mapa.this.getResources().getDrawable(R.drawable.marcadorusuario);
+						MapaOverlayOptimizado itemizedOverlay = new MapaOverlayOptimizado(drawable);
+						OverlayItem usuario = new OverlayItem(pDestino, "Ubicación", "Tu ubicación");
+						itemizedOverlay.addOverlay(usuario);
+						// add more overlayItems...
+						mapOverlays.add(itemizedOverlay);
+						*/
+						MapOverlay mapDestino = new MapOverlay(pDestino, R.drawable.marcadorusuario);
+				        listaOverlays = mapView.getOverlays();
+				        if (listaOverlays.size()==2){
+				        	listaOverlays.remove(1);
+				        }
+				        //listaOverlays.clear();
+				        listaOverlays.add(mapDestino); 
+
+						mc.animateTo(pDestino);
+		                mc.setZoom(17);                
+		                mapView.invalidate();
+						
+		                
+		                
+					}
+			   }
+			   
+			}
+			catch (Exception e) {
+				Log.e("error BotonBuscarDirec", e.toString());
+
 			}
 		}
 	};
@@ -413,6 +518,7 @@ public class Mapa extends MapActivity{
 	};
 	*/
 	
+
 	protected void onDestroy() {
 		super.onDestroy(); 
 		lm.removeUpdates(locationListener); 
