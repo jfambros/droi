@@ -24,22 +24,47 @@
 	   
 		   	<Button
 			android:id="@+id/btnSateliteMapa"
-			android:layout_width="70px"
+			android:layout_width="67px"
 			android:layout_height="wrap_content"
-			android:layout_marginLeft="40px"
+			android:textSize="12px"
+			android:textStyle="bold"			
 			android:text="Satélite"
 			/>
+			<!-- 
 			<Button
 			android:id="@+id/btnCallesMapa"
 			android:layout_width="70px"
 			android:layout_height="wrap_content"
 			android:text="Calles"
 			/>
+			 -->
 			<Button
 			android:id="@+id/btnGPSMapa"
-			android:layout_width="75px"
+			android:layout_width="70px"
 			android:layout_height="wrap_content"
+			android:textSize="12px"
+			android:textStyle="bold"						
 			android:text="GPS On "
+			/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="12px"
+				android:textStyle="bold"
+				android:textColor="#ffffffff"					
+				android:text="Ir a: "/>
+			<EditText
+			android:id="@+id/etDireccionMapa"
+			android:layout_width="100px"
+			android:layout_height="wrap_content"
+			android:textSize="14sp"
+			/>
+			
+			<ImageView
+				android:id="@+id/ivBuscarMapa"
+				android:layout_width="48px"
+				android:layout_height="48px"
+				android:src="@drawable/buscar48x48"
 			/>			
 	   
 	   </LinearLayout>
