@@ -96,7 +96,22 @@
     <activity android:name="Mapa"
        android:label="Ubicación de la tienda">
     </activity>
+
+    <activity android:name="VerificaDatosCliente"
+       android:label="Acceso">
+    </activity>
     
+    <activity android:name="DatosCuenta"
+       android:label="Cliente">
+    </activity>
+    
+    <activity android:name="RevisaPedidosCliente"
+       android:label="Listado de pedidos">
+    </activity>
+    
+    <activity android:name="DetallePedido"
+       android:label="Detalle del pedido">
+    </activity>
     
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

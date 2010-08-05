@@ -14,6 +14,7 @@ import android.widget.TextView;
 public class Portada extends Activity {
 
 	private ImageView categorias;
+	private ImageView ivDatosCuenta;
 	private TextView txtVerCategorias;
 	URL rutaUrl;
 
@@ -27,6 +28,9 @@ public class Portada extends Activity {
         
         txtVerCategorias = (TextView)findViewById(R.id.txtVerCategorias);
         txtVerCategorias.setOnClickListener(txtVerCatPres);
+        
+        ivDatosCuenta = (ImageView)findViewById(R.id.ivDatosCuenta);
+        ivDatosCuenta.setOnClickListener(ivDatosCuentaPres);
         /*
         try{
         HttpURLConnection conn= (HttpURLConnection)rutaUrl.openConnection();
@@ -62,6 +66,15 @@ public class Portada extends Activity {
 		public void onClick(View v) {
 		   verIntent();
 		   finish();
+		}
+	};
+	
+	private OnClickListener ivDatosCuentaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+	        Intent intent = new Intent();
+	        intent.setClass(Portada.this, VerificaDatosCliente.class);
+	        startActivity(intent);				
 		}
 	};
 	
