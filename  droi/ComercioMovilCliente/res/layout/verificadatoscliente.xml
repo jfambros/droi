@@ -31,8 +31,9 @@
 					android:orientation="horizontal"
 					android:layout_gravity="center_horizontal"
 					>
+					<!-- 
 					<ImageView
-					android:id="@+id/ivInicioVerificaCliente"
+					android:id="@+id/ivInicioVerificaDatosCliente"
 					android:layout_width="48px"
 					android:layout_height="48px"
 					android:src="@drawable/inicio48x48"
@@ -44,9 +45,9 @@
 					android:textSize="14sp"
 					android:text="    "
 					/>
-					
+					 -->
 					<ImageView
-					android:id="@+id/ivRegresarVerificaCliente"
+					android:id="@+id/ivRegresarVerificaDatosCliente"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:src="@drawable/regresar48x48"
@@ -58,12 +59,6 @@
 					android:textSize="14sp"
 					android:text="    "
 					/>
-					<ImageView
-					android:id="@+id/ivCestaVerificaCliente"
-					android:layout_width="48px"
-					android:layout_height="48px"
-					android:src="@drawable/cesta48x48" 
-					/>			
 					
 				</TableRow>
 			</TableLayout>	
@@ -104,7 +99,7 @@
 					android:layout_gravity="center_horizontal"
 					>
 						<TableRow
-						android:layout_width="fill_parent"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
 						android:layout_gravity="center_horizontal"
@@ -116,13 +111,16 @@
 							android:text="E-mail:"
 							/>
 							<EditText
-							   android:id="@+id/etEmailVerificaCte"
+							   android:id="@+id/etEmailVerificaDatosCliente"
 							   android:textColor="#ff000000" 
 								android:maxLines="1"
-								android:text="jferaa007@gmail.com" android:layout_height="40px" android:layout_width="180px" android:textSize="15sp"/>
+								android:text="jferaa007@gmail.com" 
+								android:layout_height="wrap_content" 
+								android:layout_width="200px" 
+								android:textSize="15sp"/>
 						</TableRow>
 						<TableRow
-						android:layout_width="fill_parent"
+						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:orientation="horizontal"
 						android:layout_gravity="center_horizontal"
@@ -134,21 +132,21 @@
 							android:text="Contraseña:  "
 							/>
 							<EditText
-							   android:id="@+id/etPasswdVerificaCte"
-							   android:layout_height="40px"
+							   android:id="@+id/etPasswdVerificaDatosCliente"
+							   android:layout_height="wrap_content"
 								android:textColor="#ff000000" 
 								android:maxLines="1"
 								android:password="true"
-								android:text="123456" android:layout_width="180px" android:textSize="15sp"/>
+								android:text="123456" 
+								android:layout_width="200px" 
+								android:textSize="15sp"/>
 						</TableRow>
 						
 					</TableLayout>    
-
+					
 
 			   </TableRow>
-			   
-			   <!-- imagen login -->
-	
+
 			   <TableRow>
 			<TableLayout
 		    android:layout_width="wrap_content"
@@ -170,7 +168,7 @@
 						android:layout_gravity="center_horizontal"
 						>
 						    <ImageView
-						    android:id="@+id/ivValidaClienteVerificaCte"
+						    android:id="@+id/ivValidaClienteVerificaDatosCliente"
 							android:layout_width="48px"
 							android:layout_height="48px"
 							android:src="@drawable/inicia_sesion48x48" 
@@ -198,9 +196,7 @@
 		    
             </TableLayout>					   
 			   
-			   </TableRow>	
-			   
-			   <!-- Fin imagen login -->
+			   </TableRow>
 		    
             </TableLayout>
             
@@ -240,7 +236,7 @@
 						/>
 	
 						<ImageView
-						android:id="@+id/ivClienteNuevo"
+						android:id="@+id/ivClienteNuevoVerificaDatosCliente"
 						android:layout_width="48px"
 						android:layout_height="48px"
 						android:src="@drawable/nuevousuario" 

@@ -23,6 +23,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +51,8 @@ public class NuevoCliente extends Activity{
 	
 	//botones
 	private RadioGroup rgSexo = null;
+	private ImageView ivInicio;
+	private ImageView ivCesta;
 	   
 	private char sexo;
 	private int pais;
@@ -69,6 +72,12 @@ public class NuevoCliente extends Activity{
 	        
 	        ivContinuarNvoCte = (ImageView)findViewById(R.id.ivContinuarNvoCte);
 	        ivContinuarNvoCte.setOnClickListener(ivContinuarNvoCtePres);
+	        
+	        ivInicio = (ImageView)findViewById(R.id.ivInicioNuevoCliente);
+	        ivInicio.setOnClickListener(ivInicioPres);
+	        
+	        ivCesta = (ImageView)findViewById(R.id.ivCestaNuevoCliente);
+	        ivCesta.setOnClickListener(ivCestaPres);
            
 	       rgSexo = (RadioGroup) findViewById(R.id.rgNuevoCliente);
 	 	   rgSexo.setOnCheckedChangeListener(rgSexoPres);
@@ -398,7 +407,27 @@ public class NuevoCliente extends Activity{
 		public void onClick(View arg0) {
 			altaCliente();
 		}
-	}; 
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.setClass(NuevoCliente.this, Principal.class);
+			startActivity(intent);
+			finish();
+		}
+	};
+	
+	private OnClickListener ivCestaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.setClass(NuevoCliente.this, Cesta.class);
+			startActivity(intent);
+			finish();			
+		}
+	};
 	
 	
 	protected Dialog onCreateDialog(int id) {

@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import utils.MapaOverlayOptimizado;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -35,7 +35,7 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
-import com.google.android.maps.OverlayItem;
+import com.google.android.maps.Projection;
 import com.google.android.maps.MapView.LayoutParams;
 
 
@@ -197,7 +197,34 @@ public class Mapa extends MapActivity{
             mapView.getProjection().toPixels(gp, screenPts);
             //---add the marker---
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), marcador);
-            canvas.drawBitmap(bmp, screenPts.x, screenPts.y-40, null);         
+            canvas.drawBitmap(bmp, screenPts.x-10, screenPts.y-40, null);   
+            
+            
+            if (pDestino != null){
+	            Paint mPaint = new Paint();
+	            mPaint.setDither(true);
+	            mPaint.setColor(Color.RED);
+	            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+	            mPaint.setStrokeJoin(Paint.Join.ROUND);
+	            mPaint.setStrokeCap(Paint.Cap.ROUND);
+	            mPaint.setStrokeWidth(2);
+	            
+	            Point p1 = new Point();
+	            Point p2 = new Point();
+	
+	            Path path = new Path(); 
+	            Projection projection = mapView.getProjection();
+	            
+	            projection.toPixels(pOrigen, p1);
+	            projection.toPixels(pDestino, p2);
+	
+	            path.moveTo(p2.x, p2.y);
+	            path.lineTo(p1.x,p1.y);
+	
+	            canvas.drawPath(path, mPaint);
+            }
+            
+            
             return true;
         }
         

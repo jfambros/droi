@@ -45,7 +45,7 @@ public class ProductosListCatLV extends ListActivity{
     private HttpTransportSE httpt;
     private JSONObject JSONObj;
     private Bundle bundleResult=new Bundle();
-    Bundle bundle = null;
+    private Bundle bundle = null;
     private String resultData;
     
     private SoapObject result;
@@ -118,6 +118,7 @@ public class ProductosListCatLV extends ListActivity{
 			i.putExtra("idCategoria", bundle.getString("idCategoria"));
 			i.setClass(ProductosListCatLV.this, DescripcionProdSelec.class);
 			startActivity(i);     
+			finish();
         }
     }
 	/*

@@ -32,11 +32,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:layout_gravity="center_horizontal"
 					>
 					<ImageView
-					android:id="@+id/ivInicioVerificaCliente"
+					android:id="@+id/ivInicioNuevoCliente"
 					android:layout_width="48px"
 					android:layout_height="48px"
 					android:src="@drawable/inicio48x48"
 					/>
+					<!-- 
 					<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -45,12 +46,15 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:text="    "
 					/>
 					
+					
 					<ImageView
 					android:id="@+id/ivRegresarVerificaCliente"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:src="@drawable/regresar48x48"
 					/>
+					 -->
+					 
 					<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -59,7 +63,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:text="    "
 					/>
 					<ImageView
-					android:id="@+id/ivCestaVerificaCliente"
+					android:id="@+id/ivCestaNuevoCliente"
 					android:layout_width="48px"
 					android:layout_height="48px"
 					android:src="@drawable/cesta48x48" 

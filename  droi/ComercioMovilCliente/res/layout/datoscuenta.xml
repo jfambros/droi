@@ -32,7 +32,7 @@
 					android:layout_gravity="center_horizontal"
 					>
 					<ImageView
-					android:id="@+id/ivInicioVerificaCliente"
+					android:id="@+id/ivInicioDatosCliente"
 					android:layout_width="48px"
 					android:layout_height="48px"
 					android:src="@drawable/inicio48x48"
@@ -44,9 +44,9 @@
 					android:textSize="14sp"
 					android:text="    "
 					/>
-					
+					<!-- 
 					<ImageView
-					android:id="@+id/ivRegresarVerificaCliente"
+					android:id="@+id/ivRegresarDatosCliente"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:src="@drawable/regresar48x48"
@@ -58,12 +58,7 @@
 					android:textSize="14sp"
 					android:text="    "
 					/>
-					<ImageView
-					android:id="@+id/ivCestaVerificaCliente"
-					android:layout_width="48px"
-					android:layout_height="48px"
-					android:src="@drawable/cesta48x48" 
-					/>			
+					 -->
 					
 				</TableRow>
 			</TableLayout>	
@@ -76,10 +71,18 @@
 		    android:layout_height="fill_parent" 
 			android:background="#ffffffff"    
 		>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="18sp"
+			android:text="Datos de mi cuenta"
+			android:layout_gravity="center_horizontal"
+			/>		
 			<ImageView
 			android:layout_width="64px"
 			android:layout_height="64px"
-			android:src="@drawable/usuarios" 
+			android:src="@drawable/iconocuenta64x64" 
 			android:layout_gravity="center_horizontal"
 			/>
 
@@ -88,7 +91,7 @@
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="14sp"
-			android:text="Iniciar sesión"
+			android:text="Modificar"
 			/>
 			<TableLayout
 		    android:layout_width="wrap_content"
@@ -109,71 +112,24 @@
 						android:orientation="horizontal"
 						android:layout_gravity="center_horizontal"
 						>
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="E-mail:"
-							/>
-							<EditText
-							   android:id="@+id/etEmailVerificaCte"
-							   android:textColor="#ff000000" 
-								android:maxLines="1"
-								android:text="jferaa007@gmail.com" android:layout_height="40px" android:layout_width="180px" android:textSize="15sp"/>
-						</TableRow>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:orientation="horizontal"
-						android:layout_gravity="center_horizontal"
-						>
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="Contraseña:  "
-							/>
-							<EditText
-							   android:id="@+id/etPasswdVerificaCte"
-							   android:layout_height="40px"
-								android:textColor="#ff000000" 
-								android:maxLines="1"
-								android:password="true"
-								android:text="123456" android:layout_width="180px" android:textSize="15sp"/>
-						</TableRow>
-						
-					</TableLayout>    
-
-
-			   </TableRow>
-			   
-			   <!-- imagen login -->
-	
-			   <TableRow>
-			<TableLayout
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:stretchColumns="*" 
-		    android:background="#000000">
-		       			
-		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" android:layout_gravity="center_horizontal">
-		            <TableLayout
-					android:layout_width="fill_parent"
-					android:layout_height="fill_parent"
-					android:orientation="vertical"
-					android:layout_gravity="center_horizontal"
-					>
-						<TableRow
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:orientation="horizontal"
-						android:layout_gravity="center_horizontal"
-						>
-						    <ImageView
-						    android:id="@+id/ivValidaClienteVerificaCte"
+							<ImageView
+						    android:id="@+id/ivModificaDatosCliente"
 							android:layout_width="48px"
 							android:layout_height="48px"
-							android:src="@drawable/inicia_sesion48x48" 
+							android:src="@drawable/modificadatos48x48" 
+							android:layout_gravity="center_horizontal"
+							/>
+							<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="     "
+							/>
+							<ImageView
+						    android:id="@+id/ivModificaPasswordCliente"
+							android:layout_width="48px"
+							android:layout_height="48px"
+							android:src="@drawable/modificapass48x48" 
 							android:layout_gravity="center_horizontal"
 							/>
 						</TableRow>
@@ -188,19 +144,27 @@
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
 							android:layout_gravity="center_horizontal"							
-							android:text="Iniciar sesión"
+							android:text="Mis datos"
 							/>
+							<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="     "
+							/>
+						    <TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:layout_gravity="center_horizontal"							
+							android:text="Contraseña"
+							/>
+						
 						</TableRow>
 						
 					</TableLayout>    
 			        
 			   </TableRow>
-		    
-            </TableLayout>					   
-			   
-			   </TableRow>	
-			   
-			   <!-- Fin imagen login -->
 		    
             </TableLayout>
             
@@ -216,9 +180,10 @@
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="14sp"
-			android:text="¿Nuevo usuario?"
+			android:text="Mis pedidos"
 			/>
 			
+			<!-- Mis pedidos -->
 			<TableLayout
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
@@ -226,30 +191,52 @@
 		    android:background="#000000">
 		       			
 		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" android:layout_gravity="center_horizontal">
-		       		<LinearLayout 
-					    android:orientation="vertical"
-					    android:layout_width="wrap_content"
-					    android:layout_height="wrap_content" 
+		            <TableLayout
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:orientation="vertical"
+					android:layout_gravity="center_horizontal"
 					>
-					    <TextView
-						android:layout_width="wrap_content"
+						<TableRow
+						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
-						android:textColor="#ff000000"
-						android:textSize="14sp"
-						android:text="¡Únete!, al crear una cuenta en Tienda virtual podrás realizar tus compras rápidamente"
-						/>
-	
-						<ImageView
-						android:id="@+id/ivClienteNuevo"
-						android:layout_width="48px"
-						android:layout_height="48px"
-						android:src="@drawable/nuevousuario" 
+						android:orientation="horizontal"
 						android:layout_gravity="center_horizontal"
-						/>
-					</LinearLayout>
+						>
+							<ImageView
+						    android:id="@+id/ivVerPedidosCliente"
+							android:layout_width="48px"
+							android:layout_height="48px"
+							android:src="@drawable/pedidos48x48" 
+							android:layout_gravity="center_horizontal"
+							/>
+						</TableRow>
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_gravity="center_horizontal"
+						>
+						    <TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:layout_gravity="center_horizontal"							
+							android:text="Ver mis pedidos"
+							/>
+						</TableRow>
+						
+					</TableLayout>    
+			        
 			   </TableRow>
 		    
-         </TableLayout>
+            </TableLayout>			
+			
+			<!-- Fin mis pedidos -->
+			
+			
+			
+			
 		</LinearLayout>
 
         <!-- Contenido -->
@@ -258,3 +245,4 @@
 	</TableLayout>
   
 </LinearLayout>
+
