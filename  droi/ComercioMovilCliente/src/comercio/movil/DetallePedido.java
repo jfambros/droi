@@ -1,5 +1,7 @@
 package comercio.movil;
 
+import java.nio.IntBuffer;
+
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -10,10 +12,14 @@ import utils.DatosCesta;
 import utils.Valores;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,10 +33,25 @@ public class DetallePedido extends Activity{
 	private double tarifa;
 	
 	private String HOST = Valores.HOST;
+	
+	private ImageView ivInicio;
+	private ImageView ivRegresar;
+	private ImageView ivInicioDatosCte;
+	
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detallepedido);
+		
+		ivInicio = (ImageView)findViewById(R.id.ivInicioDetallePedido);
+		ivInicio.setOnClickListener(ivInicioPres);
+		
+		ivRegresar = (ImageView)findViewById(R.id.ivRegresarDetallePedido);
+		ivRegresar.setOnClickListener(ivRegresarPres);
+		
+		ivInicioDatosCte = (ImageView)findViewById(R.id.ivInicioDatosCteDetallePedido);
+		ivInicioDatosCte.setOnClickListener(ivInicioDatosCtePres);
+		
 		
 		bundle = getIntent().getExtras();
 		idPedido = bundle.getInt("idPedido");
@@ -312,9 +333,38 @@ public class DetallePedido extends Activity{
 		}
 	}
 	
-	private void llenaTipoPagoEnvio(){
+	private OnClickListener ivInicioPres = new OnClickListener() {
 		
-	}
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(DetallePedido.this, Principal.class);
+            startActivity(intent);
+            finish();
+			
+		}
+	};
+	
+private OnClickListener ivRegresarPres = new OnClickListener() {
+		
+		public void onClick(View v) {
+           Intent intent = new Intent();
+           intent.putExtra("emailCliente", emailCliente);
+           intent.setClass(DetallePedido.this, RevisaPedidosCliente.class);
+           startActivity(intent);
+           finish();           
+		}
+	};
+	
+private OnClickListener ivInicioDatosCtePres = new OnClickListener() {
+		
+		public void onClick(View v) {
+           Intent intent = new Intent();
+           intent.putExtra("emailCliente", emailCliente);
+           intent.setClass(DetallePedido.this, DatosCuenta.class);
+           startActivity(intent);
+           finish();           
+		}
+	};
 	
 }
 	
