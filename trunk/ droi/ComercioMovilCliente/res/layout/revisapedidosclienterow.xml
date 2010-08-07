@@ -8,17 +8,24 @@ android:background="#ffffffff"
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
 
+
 	<TableRow
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="fill_parent"
 	android:orientation="horizontal"
 	>
+		<ImageView
+		android:id="@+id/ivLogoPedidoListadoPedidos"
+		android:layout_width="32px"
+		android:layout_height="32px"
+		android:src="@drawable/imgchica"
+		/>
 			<TextView
 			android:id="@+id/tvNoPedidoListadoPedidos"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Pedido No.: "
-			android:layout_gravity="center_horizontal"
+			android:text="No tienes pedidos"
+			android:layout_gravity="left"
 			android:textColor="#ff000000"
 			/>
 
@@ -26,32 +33,50 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 				android:id="@+id/tvFechaListadoPedidos"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Fecha: "
-				android:layout_gravity="center_horizontal"
+				android:text=""
+				android:layout_gravity="left"
 			    android:textColor="#ff000000"
 			/>
 	</TableRow>		
 
 	<TableRow
 	android:layout_width="fill_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="fill_parent"
 	android:orientation="horizontal"
 	>
-		
+			<ImageView
+			android:id="@+id/ivVerMasListadoPedidos"
+			android:layout_width="32px"
+			android:layout_height="32px"
+			android:src="@drawable/imgchica"
+			/>
 			<TextView
 			android:id="@+id/tvCantidadProdListadoPedidos"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Productos: "
-			android:layout_gravity="center_horizontal"
+			android:text=""
+			android:layout_gravity="left"
 			android:textColor="#ff000000"
 			/>
 			<TextView
 			android:id="@+id/tvTotalListadoPedidos"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Total: "
-			android:layout_gravity="center_horizontal"
+			android:text=""
+			android:layout_gravity="left"
+			android:textColor="#ff000000"
+			/>
+	</TableRow>
+	<TableRow
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="horizontal"
+	>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text=" "
+			android:layout_gravity="left"
 			android:textColor="#ff000000"
 			/>
 	</TableRow>

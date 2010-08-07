@@ -261,6 +261,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:text=" "
 			/> 
 
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:layout_gravity="center_vertical"
+			android:text="Forma de envío"
+			/>
     
 									<TableRow
 						android:layout_width="wrap_content"
@@ -268,14 +276,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 						android:orientation="vertical"
 						android:layout_gravity="left"
 						>       
-            <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textStyle="bold"
-			android:layout_gravity="center_vertical"
-			android:text="¿Enviar productos a domicilio?"
-			/>
+
 									<!-- Inicio si o no -->
 
                     
@@ -286,14 +287,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
  				            android:id="@+id/rgSiNoEnvioRevisaPed1">
 
  						            <RadioButton android:checked="true"
- 						            android:text="No"
+ 						            android:text="Recoger en tienda"
  						            android:textColor="#ff000000"
- 						            android:textSize="12sp"
  						            android:id="@+id/rgNoEnvioRevisaPed1"/>
    						            <RadioButton android:checked="false"
- 						            android:text="Si"
+ 						            android:text="A domicilio"
  						            android:textColor="#ff000000"
- 						            android:textSize="12sp" 
  						            android:id="@+id/rgSiEnvioRevisaPed1"/>
  				            
  				            </RadioGroup>
