@@ -113,29 +113,34 @@ public class RevisaPedidosCliente extends ListActivity{
             }
 		   }
 		   else{
-           	TableLayout tlRevisaPed = (TableLayout)findViewById(R.id.tlRevisaPedidos);
-           	tlRevisaPed.removeAllViewsInLayout();
-        	
-        	TableRow row = new TableRow(RevisaPedidosCliente.this);
-        	row.setLayoutParams(new LayoutParams(
-        	LayoutParams.FILL_PARENT,
-        	LayoutParams.WRAP_CONTENT));
-        	
-        	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
-        			   R.drawable.sinpedidos100x100);
-            Bitmap bMapScala = Bitmap.createScaledBitmap(mBitmap, 100, 100, true);
-            BitmapDrawable bmd = new BitmapDrawable(bMapScala);
-        	
-        	ImageView imagenSinPed = new ImageView(RevisaPedidosCliente.this);
-	            imagenSinPed.setLayoutParams(new LayoutParams(
-	            LayoutParams.FILL_PARENT,
-	            LayoutParams.FILL_PARENT));
-	            imagenSinPed.setImageDrawable(bmd);
-	            
-	            row.addView(imagenSinPed);
-	            row.setBackgroundColor(Color.WHITE);
+          	 //ListadoPedidos lp = new ListadoPedidos();
+          	 listadoPedidos.add(null);
 
-	            tlRevisaPed.addView(row);
+			   /*
+            	TableLayout tlRevisaPed = (TableLayout)findViewById(R.id.tlRevisaPedidos);
+               	tlRevisaPed.removeAllViewsInLayout();
+            	
+            	TableRow row = new TableRow(RevisaPedidosCliente.this);
+            	row.setLayoutParams(new LayoutParams(
+            	LayoutParams.FILL_PARENT,
+            	LayoutParams.WRAP_CONTENT));
+            	
+            	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
+            			   R.drawable.sinpedidos100x100);
+                Bitmap bMapScala = Bitmap.createScaledBitmap(mBitmap, 100, 100, true);
+                BitmapDrawable bmd = new BitmapDrawable(bMapScala);
+            	
+            	ImageView imagenSinPed = new ImageView(RevisaPedidosCliente.this);
+    	            imagenSinPed.setLayoutParams(new LayoutParams(
+    	            LayoutParams.FILL_PARENT,
+    	            LayoutParams.FILL_PARENT));
+    	            imagenSinPed.setImageDrawable(bmd);
+    	            
+    	            row.addView(imagenSinPed);
+    	            row.setBackgroundColor(Color.WHITE);
+
+    	            tlRevisaPed.addView(row);     
+    	            */     	
 		   }
 	    }
 	    catch (Exception err) {
@@ -199,7 +204,9 @@ public class RevisaPedidosCliente extends ListActivity{
                 	TextView tvFechaPedido = (TextView)v.findViewById(R.id.tvFechaListadoPedidos);
                 	TextView tvCantProd = (TextView)v.findViewById(R.id.tvCantidadProdListadoPedidos);
                 	TextView tvTotalPedido = (TextView)v.findViewById(R.id.tvTotalListadoPedidos);
-
+                	ImageView ivPedido = (ImageView)v.findViewById(R.id.ivLogoPedidoListadoPedidos);
+                	ImageView ivVerMas = (ImageView)v.findViewById(R.id.ivVerMasListadoPedidos);
+                	
                 	if (tvNoPedido != null){	
                 		tvNoPedido.setText("No. pedido: "+Integer.toString(lp.getIdPedido())+"  ");
                 	}
@@ -215,9 +222,31 @@ public class RevisaPedidosCliente extends ListActivity{
                 	if (tvTotalPedido != null){
                 		tvTotalPedido.setText("Total: "+Double.toString(lp.getPrecioTot())+"  ");
                 	}
+                	
+                	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pedido32x32);
+             			   Bitmap bMapScala = Bitmap.createScaledBitmap(mBitmap, 32, 32, true);
+             			   BitmapDrawable bmd = new BitmapDrawable(bMapScala);
+             			   
+             		ivPedido.setImageDrawable(bmd);
+             		
+             		mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.vermas32x32);
+             		bMapScala = Bitmap.createScaledBitmap(mBitmap, 32, 32, true);
+             		bmd = new BitmapDrawable(bMapScala);
+             		
+             		ivVerMas.setImageDrawable(bmd);
+             			   
+                	
+                	
                 }
                 else{
-
+                	/*
+     			   ImageView ivMensaje = (ImageView)v.findViewById(R.id.ivLogoPedidoListadoPedidos);
+     			   Bitmap mBitmap = BitmapFactory.decodeResource(getResources(),
+           			R.drawable.sinpedidos100x100);
+     			   Bitmap bMapScala = Bitmap.createScaledBitmap(mBitmap, 100, 100, true);
+     			   BitmapDrawable bmd = new BitmapDrawable(bMapScala);
+     			   ivMensaje.setImageDrawable(bmd);
+     			   */
                 }
             
                 return v;

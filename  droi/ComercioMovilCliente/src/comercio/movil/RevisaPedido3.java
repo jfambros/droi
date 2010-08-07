@@ -66,19 +66,18 @@ public class RevisaPedido3 extends Activity{
         ivFinalizar = (ImageView)findViewById(R.id.ivFinalizarRevisaPed3);
         ivFinalizar.setOnClickListener(ivFinalizarPres);
         
-        //ontener el tipo de pago
-        tipoPago = bundle.getString("tipoPago");
-        obtieneTipoPago(tipoPago);
-        
+        envioProd = bundle.getDouble("envioProd");
         direccionCliente = bundle.getStringArrayList("direccionCliente");
         direccionFactura = bundle.getStringArrayList("direccionFactura");
-        
-        envioProd = bundle.getDouble("envioProd");
-        
         comentario = bundle.getString("comentario");
-        
         idClienteA =  bundle.getInt("idCliente");
+
+        //obtener el tipo de pago
+        tipoPago = bundle.getString("tipoPago");
         
+        obtieneTipoPago(tipoPago);
+        
+                
         llenaDireccion(email);
         llenaProductos();
 		}
@@ -181,7 +180,7 @@ public class RevisaPedido3 extends Activity{
 		        LayoutParams.FILL_PARENT,
 		        LayoutParams.FILL_PARENT));
 		        tvNombre.setGravity(Gravity.CENTER_VERTICAL);
-		        //tvNombre.setWidth(50);
+		        tvNombre.setWidth(50);
 		        
 		        double subTot = ((DatosCesta) me.getValue()).getCantidadProd() * ((DatosCesta) me.getValue()).getPrecioProd();
 		        
@@ -286,7 +285,7 @@ public class RevisaPedido3 extends Activity{
     	        tvNumCta.setLayoutParams(new LayoutParams(
     	        LayoutParams.FILL_PARENT,
     	        LayoutParams.FILL_PARENT));
-    	        tvNumCta.setGravity(Gravity.CENTER_VERTICAL);
+    	        tvNumCta.setGravity(Gravity.LEFT);
     	        
     	        filaNumCta.setBackgroundColor(Color.WHITE);
     	        filaNumCta.addView(tvNumCta);
@@ -303,7 +302,7 @@ public class RevisaPedido3 extends Activity{
             	tvNombreBanco.setLayoutParams(new LayoutParams(
     	        LayoutParams.FILL_PARENT,
     	        LayoutParams.FILL_PARENT));
-            	tvNombreBanco.setGravity(Gravity.CENTER_VERTICAL);
+            	tvNombreBanco.setGravity(Gravity.LEFT);
             	//tvNombreBanco.setWidth(50);
 
             	filaNombreBanco.setBackgroundColor(Color.WHITE);
@@ -320,7 +319,7 @@ public class RevisaPedido3 extends Activity{
             	tvTitular.setLayoutParams(new LayoutParams(
     	        LayoutParams.FILL_PARENT,
     	        LayoutParams.FILL_PARENT));
-            	tvTitular.setGravity(Gravity.CENTER_VERTICAL);
+            	tvTitular.setGravity(Gravity.LEFT);
             	//tvNombreBanco.setWidth(50);
             	
             	filaTitular.setBackgroundColor(Color.WHITE);
@@ -341,6 +340,79 @@ public class RevisaPedido3 extends Activity{
         	}
         	
         	
+        }
+        
+        if (envioProd == 0.0){
+        	TextView tvFormaEnvio = (TextView)findViewById(R.id.tvFormaEnvioRevisaPed3);
+        	tvFormaEnvio.setText("Forma de envío: Recoger en tienda");
+        	/*
+    		TableRow row = new TableRow(this);
+        	row.setLayoutParams(new LayoutParams(
+        	LayoutParams.FILL_PARENT,
+        	LayoutParams.WRAP_CONTENT));
+        	
+        	TextView tvFilaVacia = new TextView(this);
+        	tvFilaVacia.setText(" ");
+        	tvFilaVacia.setTextColor(Color.BLACK);
+        	tvFilaVacia.setLayoutParams(new LayoutParams(
+	        LayoutParams.FILL_PARENT,
+	        LayoutParams.FILL_PARENT));
+        	tvFilaVacia.setTextSize(16);
+        	tvFilaVacia.setGravity(Gravity.CENTER_VERTICAL);
+        	
+        	TextView tvTituloEnvio = new TextView(this);
+        	tvTituloEnvio.setText("Forma de envío: ");
+        	tvTituloEnvio.setTextColor(Color.BLACK);
+        	tvTituloEnvio.setLayoutParams(new LayoutParams(
+	        LayoutParams.FILL_PARENT,
+	        LayoutParams.FILL_PARENT));
+        	tvTituloEnvio.setGravity(Gravity.LEFT);
+        	
+        	TextView tvTipoEnvio = new TextView(this);
+        	tvTipoEnvio.setText("Forma de envío: Recoger en tienda");
+        	tvTipoEnvio.setTextColor(Color.BLACK);
+        	tvTipoEnvio.setLayoutParams(new LayoutParams(
+	        LayoutParams.FILL_PARENT,
+	        LayoutParams.FILL_PARENT));
+        	tvTipoEnvio.setGravity(Gravity.LEFT);
+        	
+        	row.addView(tvFilaVacia);
+        	//row.addView(tvTituloEnvio);
+        	row.addView(tvTipoEnvio);
+        	row.setBackgroundColor(Color.WHITE);
+        	tlTipoPago.addView(row);
+        	*/
+        }
+        else{
+        	TextView tvFormaEnvio = (TextView)findViewById(R.id.tvFormaEnvioRevisaPed3);
+        	tvFormaEnvio.setText("Forma de envío: Tarifa única "+envioProd);
+        	/*
+        	TableRow row = new TableRow(this);
+        	row.setLayoutParams(new LayoutParams(
+        	LayoutParams.FILL_PARENT,
+        	LayoutParams.WRAP_CONTENT));
+        	
+        	TextView tvTituloEnvio = new TextView(this);
+        	tvTituloEnvio.setText("Forma de Envío:");
+        	tvTituloEnvio.setTextColor(Color.BLACK);
+        	tvTituloEnvio.setLayoutParams(new LayoutParams(
+	        LayoutParams.FILL_PARENT,
+	        LayoutParams.FILL_PARENT));
+        	tvTituloEnvio.setGravity(Gravity.CENTER_VERTICAL);
+        	
+        	TextView tvTipoEnvio = new TextView(this);
+        	tvTipoEnvio.setText("Forma de envío: Tarifa única: $"+envioProd);
+        	tvTipoEnvio.setTextColor(Color.BLACK);
+        	tvTipoEnvio.setLayoutParams(new LayoutParams(
+	        LayoutParams.FILL_PARENT,
+	        LayoutParams.FILL_PARENT));
+        	tvTipoEnvio.setGravity(Gravity.LEFT);
+        	
+        	//row.addView(tvTituloEnvio);
+        	row.addView(tvTipoEnvio);
+        	row.setBackgroundColor(Color.WHITE);
+        	tlTipoPago.addView(row);
+        	*/        	
         }
 
 	}

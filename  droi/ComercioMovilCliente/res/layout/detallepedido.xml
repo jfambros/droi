@@ -1,13 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:background="#ffffff" >
+<ScrollView
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+	android:background="#ffffffff"    
+>
   
   
+	<TableLayout
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:background="#ffffffff"
+	>
+		<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:background="#ff0099cc"
+		>
+			<TableLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:orientation="vertical"
+			android:layout_gravity="left"
+			>
+				<TableRow
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:layout_gravity="center_horizontal"
+					>
+					<ImageView
+					android:id="@+id/ivInicioDetallePedido"
+					android:layout_width="48px"
+					android:layout_height="48px"
+					android:src="@drawable/inicio48x48"
+					/>
+					<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#ff000000"
+					android:textSize="14sp"
+					android:text="    "
+					/>
+					
+					<ImageView
+					android:id="@+id/ivRegresarDetallePedido"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/regresar48x48"
+					/>
+					<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#ff000000"
+					android:textSize="14sp"
+					android:text="    "
+					/>
+				</TableRow>
+			</TableLayout>	
+
+		</LinearLayout>	
+		
+		<LinearLayout 
+		    android:orientation="vertical"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent" 
+			android:background="#ffffffff"    
+		>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="16sp"
+			android:layout_gravity="center_horizontal"
+			android:text="Detalle del pedido"
+			/>		
+			<ImageView
+			android:layout_width="64px"
+			android:layout_height="64px"
+			android:src="@drawable/detallepedido64x64" 
+			android:layout_gravity="center_horizontal"
+			/>
+
+			<TextView
+			android:id="@+id/tvNoPedidoDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:text="Pedido No.: "
+			/>
+			<TextView
+			android:id="@+id/tvFechaDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:text="Fecha del pedido: "
+			/>	
+			<!-- Inicio direcc entrega -->		
+			<TableLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:stretchColumns="*" 
+		    android:background="#000000">
+		       			
+		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" android:layout_gravity="center_horizontal">
+		            <TableLayout
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:orientation="vertical"
+					android:layout_gravity="left"
+					>
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Dirección de entrega: "
+							/>
+						</TableRow>
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:id="@+id/tvEmpresaDetallePedido"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Empresa "
+							/>
+						</TableRow>
+						
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:id="@+id/tvNombreDetallePedido"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="nombre"
+							/>
+						</TableRow>
+						
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:id="@+id/tvDireccionDetallePedido"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="Dirección"
+							/>
+						</TableRow>
+						
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:id="@+id/tvColoniaDetallePedido"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:text="colonia"
+							/>
+						</TableRow>
+						
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:textSize="14sp"
+							android:id="@+id/tvCiudadYCPDetallePedido" android:text="Ciudad y CP"/>
+						</TableRow>
+						
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:id="@+id/tvEstadoYPaisDetallePedido"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:textSize="14sp"
+							android:text="Estado y país"
+							/>
+						</TableRow>
+						
+					</TableLayout>
+			   </TableRow>
+			   
+			   <!--Fin Direcc entrega -->
+	
+		    
+            </TableLayout>
+
+<!-- Tabla de productos -->
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="12sp"
+			android:text=" "
+			/> 
+
+    
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:layout_gravity="center_vertical"
+			android:text="Productos"
+			/>
+
+	         
+			<TableLayout
+				android:id="@+id/tlProductosDetallePedido" 
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:stretchColumns="*" 
+			    android:background="#000000">
+			 
+			    <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="center_horizontal">
+			        <TextView android:text="Cantidad"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="3px"/>
+			        <TextView android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:text="Nombre"/>
+			        <TextView android:text="Total" android:background="#CCCCCC" android:textColor="#000000" android:layout_width="1px" android:layout_margin="1dip"/>
+			    </TableRow>
+			
+			  
+			</TableLayout>    
+            <!-- fin Tabla de productos -->                   
+
+<!-- Costo total -->
+
+<TextView
+            android:id="@+id/tvSubtotalEnvioDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:layout_gravity="right"
+			android:text="Subtotal: $"
+			/>
+			
+            <TextView
+            android:id="@+id/tvCostoEnvioDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:layout_gravity="right"
+			android:text="Costo envío: $"
+			/>
+            
+            <TextView
+            android:id="@+id/tvTotalDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:layout_gravity="right"
+			android:text="Total: $"
+			/>
+
+
+<!-- Fin costo total -->
+
+<!-- tipo de pago -->
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text=" "
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"			
+			android:text="Forma de pago:"
+			/> 
+            <TextView
+            android:id="@+id/tvFormaPagoDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:text=" "
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text=" "
+			/>      
+
+<!-- Fin tipo de pago -->
+
+<!-- Envío -->
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:text="Forma de envío:"
+			/>   
+            <TextView
+            android:id="@+id/tvFormaEnvioDetallePedido"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:text=" "
+			/>   
+<!-- Fin envío -->
+
+<!-- Comentario -->
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="12sp"
+			android:text=" "
+			/>   
+			
+            <TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:text="Comentario"
+			android:textStyle="bold"
+			/>  			             
+   			<TableLayout
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:stretchColumns="*" 
+		    android:background="#000000">
+	
+		       <TableRow  android:background="#F6F6F6" 
+		       android:layout_margin="1dip" 
+		       android:layout_gravity="left"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:orientation="horizontal"
+		       >					
+		            <TextView
+		            android:id="@+id/tvComentarioDetallePedido"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#ff000000"
+					android:textStyle="bold"					
+					android:layout_gravity="left"
+					android:text="Información comentario"
+					/>									
+				</TableRow>
+			</TableLayout>
+            <!-- fin comentarios -->
+
+            
+		</LinearLayout>
+
+        <!-- Contenido -->
+	
+	
+	</TableLayout>
   
-	<TextView android:text="Detalle pedido" 
-	android:layout_width="wrap_content" 
-	android:layout_height="wrap_content"/>
 </LinearLayout>
+
+</ScrollView>
