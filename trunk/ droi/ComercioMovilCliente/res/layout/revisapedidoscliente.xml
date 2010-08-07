@@ -38,7 +38,7 @@ android:layout_gravity="left"
 		android:id="@+id/ivInicioRevisaPedidosCte"
 		android:layout_width="48px"
 		android:layout_height="48px"
-		android:src="@drawable/inicio48x48"
+		android:src="@drawable/finalizasesion48x48"
 		/>
 		<TextView
 		android:layout_width="wrap_content"
