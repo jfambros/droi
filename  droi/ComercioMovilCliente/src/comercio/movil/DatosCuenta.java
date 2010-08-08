@@ -10,6 +10,7 @@ import android.widget.ImageView;
 public class DatosCuenta extends Activity{
 	private ImageView ivInicio;
 	private ImageView ivVerPedidos;
+	private ImageView ivModificaDatos;
 	
 	private Bundle bundle;
 	
@@ -24,6 +25,9 @@ public class DatosCuenta extends Activity{
 		
 		ivVerPedidos = (ImageView)findViewById(R.id.ivVerPedidosCliente);
 		ivVerPedidos.setOnClickListener(ivVerPedidosPres);
+
+		ivModificaDatos = (ImageView)findViewById(R.id.ivModificaDatosCliente);
+		ivModificaDatos.setOnClickListener(ivModificaDatosPres);
 
 		
 		bundle = getIntent().getExtras();
@@ -53,4 +57,15 @@ public class DatosCuenta extends Activity{
 		}
 	};
 	
+	private OnClickListener ivModificaDatosPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+            Intent intent = new Intent();
+            intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+            intent.setClass(DatosCuenta.this, ModificaDatosCliente.class);
+            startActivity(intent);
+            finish();				
+		}
+	};
+
 }

@@ -113,6 +113,11 @@
        android:label="Detalle del pedido">
     </activity>
     
+    <activity android:name="ModificaDatosCliente"
+       android:label="Datos">
+    </activity>    
+    
+    
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> 
