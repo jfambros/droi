@@ -322,7 +322,10 @@ public class NuevoCliente extends Activity{
 			 
 		 }
 		 else{
-			 String fechaFin = anio+"/"+mes+"/"+dia;
+			 String fechaTemp = etFecha.getText().toString();
+        	 String dia = fechaTemp.substring(0,2);
+        	 String mes = fechaTemp.substring(3,5);
+        	 String anio = fechaTemp.substring(6, 10);
 
 			 dcks.setApellidoCliente(etApellidos.getText().toString());
 			 dcks.setCiudadCliente(etCiudad.getText().toString());
@@ -333,7 +336,7 @@ public class NuevoCliente extends Activity{
 			 dcks.setEmpresaCliente(etEmpresa.getText().toString());
 			 dcks.setEstadoCliente(etEstado.getText().toString());
 			 dcks.setFaxCliente(etFax.getText().toString());
-			 dcks.setFechaNacCliente(fechaFin);
+			 dcks.setFechaNacCliente(anio+"/"+mes+"/"+dia);
 			 dcks.setNombreCliente(etNombre.getText().toString());
 			 dcks.setNoticiasCliente("0");
 			 dcks.setPaisCliente(String.valueOf(pais));
@@ -471,25 +474,7 @@ public class NuevoCliente extends Activity{
 		  }
 		  
 	}
-	
 
-/*	
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		SimpleDateFormat formatF = new SimpleDateFormat("dd/MM/yyyy");
-		final Calendar c = Calendar.getInstance();
-		switch(id){
-		   case ID_DATEPICKER:
-			   DatePickerDialog dlg = (DatePickerDialog) dialog;
-			   dlg.setTitle(formatF.format(c.getTime()));		// New -- update dialog title
-			   dlg.updateDate(
-						c.get(Calendar.YEAR),
-						c.get(Calendar.MONTH),
-						c.get(Calendar.DAY_OF_MONTH)
-				);
-			   
-		}
-	}
-	*/
 	private DatePickerDialog.OnDateSetListener myDateSetListener
 	  = new DatePickerDialog.OnDateSetListener(){
 	   public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

@@ -126,12 +126,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
  						            android:text="Masculino"
  						            android:textColor="#ff000000"
  						            android:textSize="13sp"
- 						            android:id="@+id/rgMasculinoModifcaDatos"/>
+ 						            android:id="@+id/rbMasculinoModifcaDatos"/>
    						            <RadioButton android:checked="false"
  						            android:text="Femenino"
  						            android:textColor="#ff000000"
  						            android:textSize="13sp" 
- 						            android:id="@+id/rgFemeninoModificaDatos"/>
+ 						            android:id="@+id/rbFemeninoModificaDatos"/>
  				            
  				            </RadioGroup>
 						</TableRow>
@@ -190,7 +190,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Fecha nacimiento: "
 							/>
 							<EditText
-							android:id="@+id/etFechaNacNvoCte"
+							android:id="@+id/etFechaNacModificaDatos"
 							android:layout_width="120px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -199,7 +199,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							
 							/>
 							<ImageView
-							android:id="@+id/ivCalendarioNvoCte"
+							android:id="@+id/ivCalendarioModificaDatos"
 							android:layout_width="48px"
 							android:layout_height="48px"
 							android:src="@drawable/calendario48x48" 
@@ -218,7 +218,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="E-mail: "
 							/>
 							<EditText
-							android:id="@+id/etEMailNvoCte"
+							android:id="@+id/etEMailModificaDatos"
 							android:layout_width="120px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -272,7 +272,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Empresa:      "
 							/>
 							<EditText
-							android:id="@+id/etEmpresaNvoCte"
+							android:id="@+id/etEmpresaModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -324,7 +324,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Dirección: "
 							/>
 							<EditText
-							android:id="@+id/etDireccionNvoCte"
+							android:id="@+id/etDireccionModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -343,7 +343,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Colonia: "
 							/>
 							<EditText
-							android:id="@+id/etColoniaNvoCte"
+							android:id="@+id/etColoniaModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -362,7 +362,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Código postal: "
 							/>
 							<EditText
-							android:id="@+id/etCodPostalNvoCte"
+							android:id="@+id/etCodPostalModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -381,7 +381,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Ciudad: "
 							/>
 							<EditText
-							android:id="@+id/etCiudadNvoCte"
+							android:id="@+id/etCiudadModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -400,7 +400,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Estado: "
 							/>
 							<EditText
-							android:id="@+id/etEstadoNvoCte"
+							android:id="@+id/etEstadoModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -418,7 +418,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:textColor="#ff000000"
 							android:text="País: "
 							/>
-							<Spinner android:id="@+id/spinnerNvoCte"
+							<Spinner android:id="@+id/spinnerPaisModificaDatos"
         					android:layout_width="fill_parent"
         					android:layout_height="wrap_content"
         					android:drawSelectorOnTop="true"
@@ -436,7 +436,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Teléfono: "
 							/>
 							<EditText
-							android:id="@+id/etTelefonoNvoCte"
+							android:id="@+id/etTelefonoModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -455,7 +455,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Fax: "
 							/>
 							<EditText
-							android:id="@+id/etFaxNvoCte"
+							android:id="@+id/etFaxModificaDatos"
 							android:layout_width="150px"
 							android:layout_height="40px"
 							android:textSize="16sp"
@@ -518,7 +518,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							android:text="Continuar"
 							/>
 							<ImageView
-							android:id="@+id/ivContinuarNvoCte"
+							android:id="@+id/ivContinuarModificaDatos"
 							android:layout_width="48px"
 							android:layout_height="48px"
 							android:src="@drawable/continuar48x48" 
