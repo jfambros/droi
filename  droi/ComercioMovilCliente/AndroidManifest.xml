@@ -116,7 +116,10 @@
     <activity android:name="ModificaDatosCliente"
        android:label="Datos">
     </activity>    
-    
+
+    <activity android:name="ActualizaContra"
+       android:label="Cliente">
+    </activity>     
     
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

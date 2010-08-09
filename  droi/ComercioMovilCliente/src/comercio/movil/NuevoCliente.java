@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class NuevoCliente extends Activity{
@@ -57,6 +58,9 @@ public class NuevoCliente extends Activity{
 	private char sexo;
 	private int pais;
     private String anio, mes, dia;
+    private String emailCliente;
+    private String contra;
+    
 	private DatosClienteKS dcks = new DatosClienteKS();
 
 
@@ -168,7 +172,7 @@ public class NuevoCliente extends Activity{
         
 	 }
 	 
-	 private void altaCliente(){
+	 private boolean altaCliente(){
 		 if (validaDatos() == true){
 			 try{
 			 //Definición para servicio Web
@@ -216,9 +220,13 @@ public class NuevoCliente extends Activity{
 			 }
 			 catch(Exception err){
 				 Log.e("error inserta cliente", err.toString());
+				 return false;
 			 }
+		    return true;
 		    
-		    
+		 }
+		 else{
+			 return false;
 		 }
 	 }
 	 
@@ -344,6 +352,9 @@ public class NuevoCliente extends Activity{
 			 dcks.setSexoCliente(String.valueOf(sexo));
 			 dcks.setTelefonoCliente(etTelefono.getText().toString());
 			 
+			 emailCliente = etEmail.getText().toString();
+			 contra = etContra.getText().toString();
+			 
 			 
 			 return true;
 		 }
@@ -408,7 +419,15 @@ public class NuevoCliente extends Activity{
 	private OnClickListener ivContinuarNvoCtePres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			altaCliente();
+			if (altaCliente() == true){
+				Toast.makeText(NuevoCliente.this, "Cliente registrado", Toast.LENGTH_LONG).show();
+				Intent intent = new Intent();
+				intent.putExtra("emailCliente", emailCliente);
+				intent.putExtra("contra", contra);
+				intent.setClass(NuevoCliente.this, DatosCuenta.class);
+				startActivity(intent);
+				finish();				
+			}
 		}
 	};
 	
