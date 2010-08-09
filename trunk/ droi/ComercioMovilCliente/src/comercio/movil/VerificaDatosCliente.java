@@ -6,6 +6,8 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.Valores;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -22,8 +24,9 @@ public class VerificaDatosCliente extends Activity{
 	private ImageView ivVerificaCliente;
 	private ImageView ivRegresar;
 	
-	private String HOST = "10.0.2.2"; //esto es para el equipo local
+	private String HOST = Valores.HOST; //esto es para el equipo local
 	private String emailCorrecto = null;
+	private String contra;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class VerificaDatosCliente extends Activity{
 				if (validaCliente() == true){
 		            Intent intent = new Intent();
 		            intent.putExtra("emailCliente", emailCorrecto);
+		            intent.putExtra("contra", contra);
 		            intent.setClass(VerificaDatosCliente.this, DatosCuenta.class);
 		            startActivity(intent);
 		            finish();			
@@ -104,6 +108,7 @@ public class VerificaDatosCliente extends Activity{
 		            }else{
 		            	SoapPrimitive email = (SoapPrimitive) result.getProperty("email");
 		            	emailCorrecto = email.toString();
+		            	contra = etPasswdCliente.getText().toString();
 		            	return true;
 		            }
 			    }

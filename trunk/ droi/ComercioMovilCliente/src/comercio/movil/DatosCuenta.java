@@ -11,6 +11,7 @@ public class DatosCuenta extends Activity{
 	private ImageView ivInicio;
 	private ImageView ivVerPedidos;
 	private ImageView ivModificaDatos;
+	private ImageView ivCambiaContra;
 	
 	private Bundle bundle;
 	
@@ -28,6 +29,10 @@ public class DatosCuenta extends Activity{
 
 		ivModificaDatos = (ImageView)findViewById(R.id.ivModificaDatosCliente);
 		ivModificaDatos.setOnClickListener(ivModificaDatosPres);
+		
+		ivCambiaContra = (ImageView)findViewById(R.id.ivModificaPasswordCliente);
+		ivCambiaContra.setOnClickListener(ivCambiaContraPres);
+
 
 		
 		bundle = getIntent().getExtras();
@@ -63,6 +68,18 @@ public class DatosCuenta extends Activity{
             Intent intent = new Intent();
             intent.putExtra("emailCliente", bundle.getString("emailCliente"));
             intent.setClass(DatosCuenta.this, ModificaDatosCliente.class);
+            startActivity(intent);
+            finish();				
+		}
+	};
+	
+	private OnClickListener ivCambiaContraPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+            Intent intent = new Intent();
+            intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+            intent.putExtra("contra", bundle.getString("contra"));
+            intent.setClass(DatosCuenta.this, ActualizaContra.class);
             startActivity(intent);
             finish();				
 		}

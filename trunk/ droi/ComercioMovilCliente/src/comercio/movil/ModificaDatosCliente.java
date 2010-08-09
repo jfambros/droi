@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class ModificaDatosCliente extends Activity{
@@ -40,6 +42,7 @@ public class ModificaDatosCliente extends Activity{
 	private Bundle bundle;
 	private String HOST = Valores.HOST;
 	private String emailCliente;
+	private String nuevoEmail;
 	private String idClienteA;
 	private ArrayList<Pais> arregloPaises;
 	private ArrayList<String> nombPais;
@@ -95,7 +98,6 @@ public class ModificaDatosCliente extends Activity{
 	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
-	    SoapObject result;
 	 //Fin definición
 	    //objetos a visualizar
 	    
@@ -121,7 +123,6 @@ public class ModificaDatosCliente extends Activity{
             request.addProperty ("emailCliente", emailCliente);	        
 	        envelope.setOutputSoapObject(request);
 	        httpt.call(SOAP_ACTION, envelope);
-            result = (SoapObject)envelope.bodyIn;
             SoapObject resultado =  (SoapObject) envelope.getResponse();
             
             SoapPrimitive idCliente = (SoapPrimitive) resultado.getProperty("idCliente");
@@ -290,50 +291,50 @@ public class ModificaDatosCliente extends Activity{
 		     ){
 
 			 if(etApellidos.length() == 0){
-		        	mensajeError("Faltan datos","Capture su(s) apellido(s)");
+		        	mensaje("Faltan datos","Capture su(s) apellido(s)");
 		     }
 			 if(etCiudad.length() == 0){
-		        	mensajeError("Faltan datos","Capture su ciudad");
+		        	mensaje("Faltan datos","Capture su ciudad");
 		     }
 			 if(etColonia.length() == 0){
-		        	mensajeError("Faltan datos","Capture su colonia");
+		        	mensaje("Faltan datos","Capture su colonia");
 		     }
 			 if(etCP.length() == 0){
-		        	mensajeError("Faltan datos","Capture su código postal");
+		        	mensaje("Faltan datos","Capture su código postal");
 		     }			 
 			 if(etDireccion.length() == 0){
-		        	mensajeError("Faltan datos","Capture su dirección");
+		        	mensaje("Faltan datos","Capture su dirección");
 		     }
 			 if(etEmail.length() == 0){
-		        	mensajeError("Faltan datos","Capture su e-mail");
+		        	mensaje("Faltan datos","Capture su e-mail");
 		     }
 			 if (!Validaciones.esEmail(etEmail.getText().toString())){
-				 mensajeError("Faltan datos","No es un e-mail válido");
+				 mensaje("Faltan datos","No es un e-mail válido");
 			 }
 			 
 			 if(etEstado.length() == 0){
-		        	mensajeError("Faltan datos","Capture su estado");
+		        	mensaje("Faltan datos","Capture su estado");
 		     }
 			 if(etFecha.length() == 0){
-		        	mensajeError("Faltan datos","Capture su fecha de nacimiento");
+		        	mensaje("Faltan datos","Capture su fecha de nacimiento");
 		     }			
 			 if(etNombre.length() == 0){
-		        	mensajeError("Faltan datos","Capture su nombre");
+		        	mensaje("Faltan datos","Capture su nombre");
 		     }
 			 if(etTelefono.length() == 0){
-		        	mensajeError("Faltan datos","Capture su teléfono");
+		        	mensaje("Faltan datos","Capture su teléfono");
 		     }
 			 if (!Validaciones.esNumero(etTelefono.getText().toString())){
-				 mensajeError("Error","Teléfono no válido");
+				 mensaje("Error","Teléfono no válido");
 			 }
 			 if (!Validaciones.esNumero(etFax.getText().toString())){
-				 mensajeError("Error","Fax no válido");
+				 mensaje("Error","Fax no válido");
 			 }
 			 if (!Validaciones.esNumero(etCP.getText().toString())){
-				 mensajeError("Error","Código postal no válido");
+				 mensaje("Error","Código postal no válido");
 			 }
 			 if (!Validaciones.validaFecha(etFecha.getText().toString(), true, "dd/MM/yyyy")){
-				 mensajeError("Error","Fecha inválida, escriba con formato dd/mm/aaaa");
+				 mensaje("Error","Fecha inválida, escriba con formato dd/mm/aaaa");
 			 }
 			 return false;
 			 
@@ -359,6 +360,7 @@ public class ModificaDatosCliente extends Activity{
 			 dacks.setPaisCliente(String.valueOf(pais));
 			 dacks.setSexoCliente(String.valueOf(sexo));
 			 dacks.setTelefonoCliente(etTelefono.getText().toString());
+			 nuevoEmail = etEmail.getText().toString();
 			 
 			 return true;
 		 }
@@ -366,7 +368,7 @@ public class ModificaDatosCliente extends Activity{
 	 }
 	 
 	 
-	 private void actualizaCliente(){
+	 private boolean actualizaCliente(){
 		 if (validaDatos() == true){
 			 try{
 			 //Definición para servicio Web
@@ -408,6 +410,7 @@ public class ModificaDatosCliente extends Activity{
 	            SoapObject result =  (SoapObject) envelope.bodyIn;
 	            SoapPrimitive id = (SoapPrimitive) result.getProperty("result");
 	            Log.i("Cliente actualizado", id.toString());
+	            return true;
 	            
 	            
 	            
@@ -415,8 +418,11 @@ public class ModificaDatosCliente extends Activity{
 			 catch(Exception err){
 				 Log.e("error inserta cliente", err.toString());
 			 }
+		    return true;
 		    
-		    
+		 }
+		 else{
+			 return false;
 		 }
 	 } 
 	 
@@ -488,11 +494,25 @@ public class ModificaDatosCliente extends Activity{
 	private OnClickListener ivContinuarPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			actualizaCliente();
+			if (actualizaCliente() == true){
+	            Toast.makeText(ModificaDatosCliente.this, "Datos actualizados", Toast.LENGTH_LONG).show();
+				Intent intent = new Intent();
+				intent.putExtra("emailCliente", nuevoEmail);
+				intent.setClass(ModificaDatosCliente.this, DatosCuenta.class);
+				startActivity(intent);
+				finish();				
+			}
+			/*
+			Intent intent = new Intent();
+			intent.putExtra("emailCliente", nuevoEmail);
+			intent.setClass(ModificaDatosCliente.this, DatosCuenta.class);
+			startActivity(intent);
+			finish();
+			*/
 		}
 	};
 	
-	 private void mensajeError(String titulo, String msj){
+	 private void mensaje(String titulo, String msj){
 		 new AlertDialog.Builder(ModificaDatosCliente.this)
 
      	.setTitle(titulo)
