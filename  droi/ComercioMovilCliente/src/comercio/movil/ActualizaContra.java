@@ -38,7 +38,11 @@ public class ActualizaContra extends Activity{
 		ivContinuar = (ImageView)findViewById(R.id.ivContinuarActualizaContra);
 		ivContinuar.setOnClickListener(ivContinuarPres);
 		
-
+		ivRegresar = (ImageView)findViewById(R.id.ivRegresarActualizaContra);
+		ivRegresar.setOnClickListener(ivRegresarPres);
+		
+		ivInicio= (ImageView)findViewById(R.id.ivInicioActualizaContra);
+		ivInicio.setOnClickListener(ivInicioPres);
 		
 	}
 	
@@ -129,6 +133,28 @@ public class ActualizaContra extends Activity{
 				startActivity(intent);
 				finish();			
 			}
+		}
+	};
+	
+	private OnClickListener ivRegresarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+			intent.putExtra("contra", bundle.getString("contra"));
+			intent.setClass(ActualizaContra.this, DatosCuenta.class);
+			startActivity(intent);
+			finish();			
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			Intent intent = new Intent();
+			intent.setClass(ActualizaContra.this, Principal.class);
+			startActivity(intent);
+			finish();			
 		}
 	};
 	

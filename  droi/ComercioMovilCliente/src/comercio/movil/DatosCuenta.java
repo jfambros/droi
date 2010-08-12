@@ -56,6 +56,7 @@ public class DatosCuenta extends Activity{
 		public void onClick(View arg0) {
             Intent intent = new Intent();
             intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+            intent.putExtra("contra", bundle.getString("contra"));  
             intent.setClass(DatosCuenta.this, RevisaPedidosCliente.class);
             startActivity(intent);
             finish();				
@@ -67,6 +68,7 @@ public class DatosCuenta extends Activity{
 		public void onClick(View arg0) {
             Intent intent = new Intent();
             intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+            intent.putExtra("contra", bundle.getString("contra"));            
             intent.setClass(DatosCuenta.this, ModificaDatosCliente.class);
             startActivity(intent);
             finish();				

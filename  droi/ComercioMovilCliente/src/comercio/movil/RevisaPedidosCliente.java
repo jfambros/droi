@@ -258,12 +258,13 @@ public class RevisaPedidosCliente extends ListActivity{
         Log.i("id", Integer.toString(pedido.getIdPedido()) );
         //Toast.makeText(this, producto.getNombreProd(), Toast.LENGTH_LONG).show();
         if (pedido.getIdPedido() != 0){
-			Intent i = new Intent(); 
-			i.putExtra("idPedido",pedido.getIdPedido());
-			i.putExtra("emailCliente", bundle.getString("emailCliente"));
-			i.putExtra("idCliente", idClienteActual);
-			i.setClass(RevisaPedidosCliente.this, DetallePedido.class);
-			startActivity(i);  
+			Intent intent = new Intent(); 
+			intent.putExtra("idPedido",pedido.getIdPedido());
+			intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+			intent.putExtra("idCliente", idClienteActual);
+			intent.putExtra("contra", bundle.getString("contra"));  
+			intent.setClass(RevisaPedidosCliente.this, DetallePedido.class);
+			startActivity(intent);  
 			finish();
         }
     }	
@@ -283,6 +284,7 @@ public class RevisaPedidosCliente extends ListActivity{
 		public void onClick(View arg0) {
             Intent intent = new Intent();
             intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+            intent.putExtra("contra", bundle.getString("contra"));  
             intent.setClass(RevisaPedidosCliente.this, DatosCuenta.class);
             startActivity(intent);
             finish();				

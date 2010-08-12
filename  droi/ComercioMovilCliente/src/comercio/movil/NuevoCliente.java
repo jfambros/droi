@@ -142,12 +142,11 @@ public class NuevoCliente extends Activity{
 		                this,
 		                android.R.layout.simple_spinner_item,
 		                nombPais );
-		
 		        adapterPais.setDropDownViewResource(
 		                android.R.layout.simple_spinner_dropdown_item);
 		        
 		            spinnPais.setAdapter(adapterPais);
-		            
+			        spinnPais.setSelection(137);
 		            spinnPais.setOnItemSelectedListener(
 		                new AdapterView.OnItemSelectedListener() {
 		                    public void onItemSelected(
@@ -344,7 +343,7 @@ public class NuevoCliente extends Activity{
 			 dcks.setEmpresaCliente(etEmpresa.getText().toString());
 			 dcks.setEstadoCliente(etEstado.getText().toString());
 			 dcks.setFaxCliente(etFax.getText().toString());
-			 dcks.setFechaNacCliente(anio+"/"+mes+"/"+dia);
+			 dcks.setFechaNacCliente(anio+"-"+mes+"-"+dia);
 			 dcks.setNombreCliente(etNombre.getText().toString());
 			 dcks.setNoticiasCliente("0");
 			 dcks.setPaisCliente(String.valueOf(pais));
@@ -420,11 +419,13 @@ public class NuevoCliente extends Activity{
 		
 		public void onClick(View arg0) {
 			if (altaCliente() == true){
-				Toast.makeText(NuevoCliente.this, "Cliente registrado", Toast.LENGTH_LONG).show();
+				Toast.makeText(NuevoCliente.this, "Muchas gracias por registrarte", Toast.LENGTH_LONG).show();
 				Intent intent = new Intent();
+				/*
 				intent.putExtra("emailCliente", emailCliente);
 				intent.putExtra("contra", contra);
-				intent.setClass(NuevoCliente.this, DatosCuenta.class);
+				*/
+				intent.setClass(NuevoCliente.this, Principal.class);
 				startActivity(intent);
 				finish();				
 			}

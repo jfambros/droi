@@ -37,7 +37,13 @@ android:text="Bienvenido, lo invitamos a ver nuestro catálogo, encontrará una 
 android:textColor="#ff000000"
 android:layout_gravity="center_horizontal"
 />
-
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Utilice por favor los botones de navegación de la aplicación en lugar de los botones de su dispositivo"
+android:textColor="#ff000000"
+android:layout_gravity="center_horizontal"
+/>
 <TextView
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
