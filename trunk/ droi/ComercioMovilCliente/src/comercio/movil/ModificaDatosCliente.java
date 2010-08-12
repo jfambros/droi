@@ -56,11 +56,16 @@ public class ModificaDatosCliente extends Activity{
 	
 	private ImageView ivCalendario;
 	private ImageView ivContinuar;
+	private ImageView ivRegresar;
 	private RadioGroup rgSexo = null;
+	private ImageView ivInicio;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.modificadatoscliente);
+		bundle = getIntent().getExtras();
+		
+		emailCliente = bundle.getString("emailCliente");
 		
 		spinnPais = (Spinner) findViewById(R.id.spinnerPaisModificaDatos);
 		ivCalendario = (ImageView) findViewById(R.id.ivCalendarioModificaDatos);
@@ -72,6 +77,12 @@ public class ModificaDatosCliente extends Activity{
         rgSexo = (RadioGroup) findViewById(R.id.rgModificaDatos);
  	    rgSexo.setOnCheckedChangeListener(rgSexoPres);
  	    
+		ivInicio = (ImageView)findViewById(R.id.ivInicioModificaDatos);
+		ivInicio.setOnClickListener(ivInicioPres);
+		
+		ivRegresar = (ImageView)findViewById(R.id.ivRegresarModificaDatos);
+		ivRegresar.setOnClickListener(ivRegresarPres);
+ 	    /*
  	    RadioButton rbFem = (RadioButton)findViewById(R.id.rbFemeninoModificaDatos);
  	    RadioButton rbMas = (RadioButton)findViewById(R.id.rbMasculinoModifcaDatos);
  	    
@@ -81,10 +92,8 @@ public class ModificaDatosCliente extends Activity{
  	    if (rbMas.isChecked()){
  	    	sexo = 'm';
  	    }
-		
-		bundle = getIntent().getExtras();
-		
-		emailCliente = bundle.getString("emailCliente");
+		*/
+
 		
 		obtenerDatosCliente();
 		llenaPais();
@@ -169,10 +178,12 @@ public class ModificaDatosCliente extends Activity{
             if (sexoCliente.toString().equals("m")==true){
             	RadioButton rbMasculino = (RadioButton)findViewById(R.id.rbMasculinoModifcaDatos);
             	rbMasculino.setChecked(true);
+            	sexo = 'm';
             }
             else{
             	RadioButton rbFemenino = (RadioButton)findViewById(R.id.rbFemeninoModificaDatos);
             	rbFemenino.setChecked(true);
+            	sexo = 'f';
             }
             
             String fechaTemp = fechaNacCliente.toString().substring(0, 10);
@@ -356,7 +367,7 @@ public class ModificaDatosCliente extends Activity{
 			 dacks.setEmpresaCliente(etEmpresa.getText().toString());
 			 dacks.setEstadoCliente(etEstado.getText().toString());
 			 dacks.setFaxCliente(etFax.getText().toString());
-			 dacks.setFechaNacCliente(anio+"/"+mes+"/"+dia);
+			 dacks.setFechaNacCliente(anio+"-"+mes+"-"+dia);
 			 dacks.setPaisCliente(String.valueOf(pais));
 			 dacks.setSexoCliente(String.valueOf(sexo));
 			 dacks.setTelefonoCliente(etTelefono.getText().toString());
@@ -429,12 +440,10 @@ public class ModificaDatosCliente extends Activity{
 	 private OnCheckedChangeListener rgSexoPres = new OnCheckedChangeListener() {
 			
 			public void onCheckedChanged(RadioGroup arg0, int check) {
-				if(check == R.id.rgFemenino){
-					Log.i("Sexo","Femenino f");
+				if(check == R.id.rbFemeninoModificaDatos){
 					sexo='f';
 				}
-				else{
-					Log.i("Sexo","Masculino m");
+				if(check == R.id.rbMasculinoModifcaDatos){
 					sexo='m';
 				}
 				//Log.i("seleccionado","Masculino m");
@@ -498,6 +507,7 @@ public class ModificaDatosCliente extends Activity{
 	            Toast.makeText(ModificaDatosCliente.this, "Datos actualizados", Toast.LENGTH_LONG).show();
 				Intent intent = new Intent();
 				intent.putExtra("emailCliente", nuevoEmail);
+	            intent.putExtra("contra", bundle.getString("contra"));
 				intent.setClass(ModificaDatosCliente.this, DatosCuenta.class);
 				startActivity(intent);
 				finish();				
@@ -509,6 +519,16 @@ public class ModificaDatosCliente extends Activity{
 			startActivity(intent);
 			finish();
 			*/
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+            Intent intent = new Intent();
+            intent.setClass(ModificaDatosCliente.this, Principal.class);
+            startActivity(intent);
+            finish();				
 		}
 	};
 	
@@ -529,7 +549,17 @@ public class ModificaDatosCliente extends Activity{
      	.show();   
 	 }
 
-	
+		private OnClickListener ivRegresarPres = new OnClickListener() {
+			
+			public void onClick(View arg0) {
+				Intent intent = new Intent();
+				intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+				intent.putExtra("contra", bundle.getString("contra"));
+				intent.setClass(ModificaDatosCliente.this, DatosCuenta.class);
+				startActivity(intent);
+				finish();			
+			}
+		};
 	
 	
 }

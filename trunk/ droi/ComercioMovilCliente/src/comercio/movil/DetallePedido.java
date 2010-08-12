@@ -349,6 +349,7 @@ private OnClickListener ivRegresarPres = new OnClickListener() {
 		public void onClick(View v) {
            Intent intent = new Intent();
            intent.putExtra("emailCliente", emailCliente);
+           intent.putExtra("contra", bundle.getString("contra"));  
            intent.setClass(DetallePedido.this, RevisaPedidosCliente.class);
            startActivity(intent);
            finish();           
@@ -360,6 +361,7 @@ private OnClickListener ivInicioDatosCtePres = new OnClickListener() {
 		public void onClick(View v) {
            Intent intent = new Intent();
            intent.putExtra("emailCliente", emailCliente);
+           intent.putExtra("contra", bundle.getString("contra"));  
            intent.setClass(DetallePedido.this, DatosCuenta.class);
            startActivity(intent);
            finish();           
