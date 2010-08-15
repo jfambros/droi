@@ -54,6 +54,35 @@ public class ActualizaContra extends Activity{
 		if (etNuevaContra.length() == 0 || 
 		    etConfContra.length() == 0 ||
 		    etContra.length() == 0 ||
+		    !etNuevaContra.getText().toString().equals(etConfContra.getText().toString())
+			){
+			
+			if (etNuevaContra.length() == 0 || 
+				    etConfContra.length() == 0 ||
+				    etContra.getText().length() == 0){
+				mensaje("Error", "Escriba la contraseña");
+			}
+			
+			if (!etNuevaContra.getText().toString().equals(etConfContra.getText().toString())){
+				mensaje("Error", "No coincide la nueva contraseña");
+			}
+			
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	
+	/*
+	private boolean validaContra(){
+		EditText etContra = (EditText)findViewById(R.id.etContraActualActualizaContra);
+		EditText etNuevaContra = (EditText)findViewById(R.id.etNuevaContraActualizaContra);
+		EditText etConfContra = (EditText)findViewById(R.id.etConfirmaContraActualizaContra);
+		
+		if (etNuevaContra.length() == 0 || 
+		    etConfContra.length() == 0 ||
+		    etContra.length() == 0 ||
 		    !etContra.getText().toString().equals(bundle.getString("contra")) ||
 		    !etNuevaContra.getText().toString().equals(etConfContra.getText().toString())
 			){
@@ -78,7 +107,58 @@ public class ActualizaContra extends Activity{
 			return true;
 		}
 	}
+	*/
 	
+	private boolean actualizaContra(){
+		//Definición para servicio Web
+		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#actualizaContrasenia";
+	    String METHOD_NAME = "actualizaContrasenia";
+	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    SoapSerializationEnvelope envelope;
+	    HttpTransportSE httpt;
+	    SoapObject result=null;
+	 //Fin definición
+		
+		if (validaContra() == true){
+			EditText etNuevaContra = (EditText)findViewById(R.id.etNuevaContraActualizaContra);
+			EditText etContraActual = (EditText)findViewById(R.id.etContraActualActualizaContra);
+
+			try{
+				SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+		        httpt = new HttpTransportSE(URL);
+		        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+		        envelope.dotNet = false;
+		        request.addProperty ("emailCliente", bundle.getString("emailCliente"));
+		        request.addProperty ("contraActual",etContraActual.getText().toString());		        
+		        request.addProperty ("nuevaContra",etNuevaContra.getText().toString());
+		        envelope.setOutputSoapObject(request);
+		        httpt.call(SOAP_ACTION, envelope);
+	            result =  (SoapObject) envelope.bodyIn;
+	            SoapPrimitive id = (SoapPrimitive) result.getProperty("result");
+	            if (Integer.parseInt(id.toString()) == 1){
+		            //Log.i("Contraseña actualizada", id.toString());
+		            contraAc = etNuevaContra.getText().toString();
+		            return true;
+	            }
+	            else{
+	            	mensaje("Error", "No coincide la contraseña actual");
+	            	return false;
+	            }
+	            
+			}
+			catch (Exception e) {
+				Log.e("error actualizaContra", e.toString());
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+		
+	}
+	
+	/*
 	private boolean actualizaContra(){
 		//Definición para servicio Web
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#actualizaContra";
@@ -120,7 +200,7 @@ public class ActualizaContra extends Activity{
 		
 	}
 		
-	
+	*/
 	private OnClickListener ivContinuarPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {

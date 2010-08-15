@@ -25,6 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -80,6 +81,13 @@ public class Cesta extends Activity {
 		
         llenaCesta();
 	}
+	
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
 	
 	public void llenaCesta(){
 		double precioCant = 0.0;
@@ -276,6 +284,10 @@ public class Cesta extends Activity {
 	
 	private boolean validaCesta(){
 		boolean encontrado = false;
+		if (ListaCesta.arregloCesta.isEmpty() == true){
+			return true;
+		}
+		
 		if (!cantidadCesta.isEmpty()){
         	Set set = cantidadCesta.entrySet();
 

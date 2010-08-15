@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class RevisaPedido3 extends Activity{
 	private TextView tvComentario = null;
 	private ImageView ivRegresar = null;
 	private ImageView ivFinalizar = null;
+	private ImageView ivInicio = null;
 	
 	private String HOST = "10.0.2.2";
 	private String email = null;
@@ -66,6 +68,9 @@ public class RevisaPedido3 extends Activity{
         ivFinalizar = (ImageView)findViewById(R.id.ivFinalizarRevisaPed3);
         ivFinalizar.setOnClickListener(ivFinalizarPres);
         
+		ivInicio = (ImageView)findViewById(R.id.ivInicioDetallePedido);
+		ivInicio.setOnClickListener(ivInicioPres);
+        
         envioProd = bundle.getDouble("envioProd");
         direccionCliente = bundle.getStringArrayList("direccionCliente");
         direccionFactura = bundle.getStringArrayList("direccionFactura");
@@ -86,6 +91,13 @@ public class RevisaPedido3 extends Activity{
 	    	
 	    }
      }
+	
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
 	
 	
 	private void llenaDireccion(String email){
@@ -641,6 +653,17 @@ public class RevisaPedido3 extends Activity{
            catch(Exception err){
         	   Log.e("Error en finalizar",err.toString());
            }
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(RevisaPedido3.this, Principal.class);
+            startActivity(intent);
+            finish();
+			
 		}
 	};
 

@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class RevisaPedido1 extends Activity{
 	private ImageView ivContinuar = null;
 	private RadioGroup rgSiNoEnvio = null;
 	private ImageView ivCambiaDirecc = null;
+	private ImageView ivInicio = null;
 	private ArrayList<String> direccionCliente = new ArrayList<String>();
 	
 	private String HOST = "10.0.2.2";
@@ -52,6 +54,9 @@ public class RevisaPedido1 extends Activity{
         ivCambiaDirecc = (ImageView) findViewById(R.id.ivCambiaDireccRevisaPed1);
         ivCambiaDirecc.setOnClickListener(ivCambiaDireccPres);
         
+		ivInicio = (ImageView)findViewById(R.id.ivInicioDetallePedido);
+		ivInicio.setOnClickListener(ivInicioPres);
+        
         bundle = getIntent().getExtras();
         //Log.i("email",bundle.getString("emailCliente"));
         if (bundle.getString("emailCliente") != null){
@@ -76,6 +81,13 @@ public class RevisaPedido1 extends Activity{
         }
 
 	}
+	
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
 	
 	private void llenaDireccion(String email){
 		//Definición para servicio Web
@@ -254,6 +266,17 @@ public class RevisaPedido1 extends Activity{
 	        startActivity(intent);
 	        finish();
 
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(RevisaPedido1.this, Principal.class);
+            startActivity(intent);
+            finish();
+			
 		}
 	};
 
