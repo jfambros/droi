@@ -23,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,6 +109,13 @@ public class ProductosListCatLV extends ListActivity{
 	    }
         
     }
+	
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
 
     protected void onListItemClick(ListView l, View v, int position, long id) {
         ProductosCat producto = (ProductosCat) l.getItemAtPosition(position);        
@@ -172,13 +180,14 @@ public class ProductosListCatLV extends ListActivity{
 	          	 SoapPrimitive imagen = (SoapPrimitive) resultados.getProperty("imagenProd");
 	          	 SoapPrimitive precio = (SoapPrimitive) resultados.getProperty("precioProd");
 	          	 SoapPrimitive fabricante = (SoapPrimitive) resultados.getProperty("fabricanteProd");
-		    	   
+		    	 
+	          	 double precioF = Double.parseDouble(precio.toString());
 		      	 
 		      	 ProductosCat productosCat = new ProductosCat();
 		      	 productosCat.setIdProd(id.toString());
 		      	 productosCat.setNombreProd(nombre.toString());
 		      	 productosCat.setImagenProd(imagen.toString());
-		      	 productosCat.setPrecioProd(precio.toString());
+		      	 productosCat.setPrecioProd(Double.toString(precioF));
 		      	 productosCat.setNombreFabricante(fabricante.toString());
 		      	 listaProductos.add(productosCat);
 		       }
@@ -250,12 +259,13 @@ public class ProductosListCatLV extends ListActivity{
 	            	            Bitmap bm = BitmapFactory.decodeStream(bis); 
 	            	            bis.close(); 
 	            	            is.close();  
-	            	            i.setImageBitmap(bm);
-	            	            i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
-	            	            i.setLayoutParams(new GridView.LayoutParams(50, 50));
+	            	            Bitmap bMapScala = Bitmap.createScaledBitmap(bm, 80, 80, true);
+	            	            i.setImageBitmap(bMapScala);
+	            	            //i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
+	            	            i.setLayoutParams(new GridView.LayoutParams(80, 80));
 	            	            
 		            			if (imagenProd != null){
-			            			   imagenProd.setImageBitmap(bm);
+			            			   imagenProd.setImageBitmap(bMapScala);
 			            		}
 
 	            			}

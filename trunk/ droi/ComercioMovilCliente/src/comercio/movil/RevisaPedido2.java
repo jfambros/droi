@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class RevisaPedido2 extends Activity{
 	private RadioGroup rgFormaPago = null;
 	private ImageView ivRegresar = null;
 	private ImageView ivCambiaDir = null;
+	private ImageView ivInicio = null;
 	
 	
 	private String email = null;
@@ -56,6 +58,9 @@ public class RevisaPedido2 extends Activity{
         ivCambiaDir = (ImageView)findViewById(R.id.ivCambiaDireccRevisaPed2);
         ivCambiaDir.setOnClickListener(ivCambiaDirPres);
         
+		ivInicio = (ImageView)findViewById(R.id.ivInicioDetallePedido);
+		ivInicio.setOnClickListener(ivInicioPres);
+        
         bundle = getIntent().getExtras();
         email = bundle.getString("emailCliente");
         
@@ -77,6 +82,13 @@ public class RevisaPedido2 extends Activity{
         	llenaDirNueva();
         }
 	}
+	
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
 	
 	private void llenaDireccion(String email){
 		//Definición para servicio Web
@@ -219,6 +231,17 @@ public class RevisaPedido2 extends Activity{
 	        intent.setClass(RevisaPedido2.this, NuevaDireccionFactura.class);
 	        startActivity(intent);
 	        finish();			
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View v) {
+			Intent intent = new Intent();
+			intent.setClass(RevisaPedido2.this, Principal.class);
+            startActivity(intent);
+            finish();
+			
 		}
 	};
 	

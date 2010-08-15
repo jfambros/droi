@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,6 +108,12 @@ public class MuestraCategorias extends Activity {
 		
      }
     
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
     
 	private OnItemClickListener clickList = new OnItemClickListener() {
 
@@ -267,7 +274,7 @@ public class ImageAdapter extends BaseAdapter {
             is.close();  
             i.setImageBitmap(bm);
             i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
-            i.setLayoutParams(new GridView.LayoutParams(48, 48)); 
+            i.setLayoutParams(new GridView.LayoutParams(50, 50)); 
             
 			holder.getImagen().setImageBitmap(bm);
 			
