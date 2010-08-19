@@ -429,7 +429,7 @@ public class Mapa extends MapActivity{
 
 						mc.animateTo(pDestino);
 		                mc.setZoom(17);                
-		                mapView.invalidate();
+		                mapView.invalidate(); 
 						
 		                
 		                

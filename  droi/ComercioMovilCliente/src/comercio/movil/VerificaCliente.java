@@ -25,6 +25,7 @@ public class VerificaCliente extends Activity{
 	
 	private String HOST = "10.0.2.2"; //esto es para el equipo local
 	private String emailCorrecto = null;
+	private String contra = null;
 	
 	public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -62,7 +63,8 @@ public class VerificaCliente extends Activity{
 			if (validaCliente() == true){
 	            Intent intent = new Intent();
 	            intent.putExtra("emailCliente", emailCorrecto);
-	            intent.setClass(VerificaCliente.this, RevisaPedido1.class);
+	            intent.putExtra("contra", contra);
+	            intent.setClass(VerificaCliente.this, DatosCuenta.class);
 	            startActivity(intent);
 	            finish();			
 			}
@@ -100,6 +102,7 @@ public class VerificaCliente extends Activity{
 	            }else{
 	            	SoapPrimitive email = (SoapPrimitive) result.getProperty("email");
 	            	emailCorrecto = email.toString();
+	            	contra = etPasswdCliente.getText().toString();
 	            	return true;
 	            }
 		    }
