@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+    name="servicios"
+    targetNamespace="http://www.your-company.com/servicios.wsdl"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://www.your-company.com/servicios.wsdl"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd1="http://www.your-company.com/servicios.xsd1">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Created using Cape Clear Studio SOA Editor - http://www.capeclear.com</wsdl:documentation>
+    <wsdl:types>
+        <xsd:schema
+            targetNamespace="http://www.your-company.com/servicios.xsd1"
+            xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd1="http://www.your-company.com/servicios.xsd1">
+            <xsd:complexType name="Categorias">
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="categorias"
+                        type="xsd1:categoria"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="listaProductosCat">
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="productos"
+                        type="xsd1:ProductoCat"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="categoria">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idCat" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreCat" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="imagenCat" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductoCat">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="imagenProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="precioProd" type="xsd:double"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="fabricanteProd"
+                        type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Producto">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idProd" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="descripProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="modeloProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cantidadProd" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="imagenProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="precioProd" type="xsd:double"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="fabricanteProd"
+                        type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Cliente">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="sexoCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="apellidoCliente"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="fechaNacCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="emailCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="empresaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="telefonoCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="faxCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="noticiasCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="passwdCliente" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Pais">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idPais" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombrePais" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ListaPaises">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="1" name="paises" type="xsd1:Pais"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DatosConsultaCliente">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="apellidoCliente"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="fechaNacCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="emailCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="telefonoCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="faxCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="sexoCliente" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DatosBanco">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="numeroCuenta" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreBanco" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="titularCuenta" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Orden">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="telefonoCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="emailCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="idDireccFormatCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreEntrega" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaEntrega"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccEntrega" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaEntrega"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadEntrega" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpEntrega" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoEntrega" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisEntrega" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="idDireccFormatEntrega"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreFactura" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaFactura"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccFactura" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaFactura"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadFactura" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpFactura" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoFactura" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisFactura" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="idDireccFormatFactura"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="formaPago" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="tipoTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="propietarioTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="numeroTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="expiraTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="ultimaModificacion"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoOrden" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="fechaOrdenTerminada"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="moneda" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="valorMoneda" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="comentario" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="subTotal" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="tarifa" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="tipoEnvio" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="LibretaDirecciones">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idLibretaDir" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idCliente" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="sexoCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="apellidoCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombrePais" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="idZona" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ListaLibretaDirecciones">
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="libretaDirecciones"
+                        type="xsd1:LibretaDirecciones"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Pedido">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idOrden" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="fechaOrden" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cantidadProd" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="totalOrden" type="xsd:double"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="listaPedidos">
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="pedidos"
+                        type="xsd1:Pedido"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DetallePedido">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoCliente" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="telefonoCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="emailCliente" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="idDireccFormatCliente"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreEntrega" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaEntrega"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccEntrega" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaEntrega"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadEntrega" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpEntrega" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoEntrega" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisEntrega" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="idDireccFormatEntrega"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreFactura" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="empresaFactura"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="direccFactura" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="coloniaFactura"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="ciudadFactura" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cpFactura" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoFactura" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="paisFactura" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="idDireccFormatFactura"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="formaPago" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="tipoTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="propietarioTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="numeroTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="expiraTarjetaCred"
+                        type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="ultimaModificacion"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="fechaOrden" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="estadoOrden" type="xsd:string"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="0"
+                        name="fechaOrdenTerminada"
+                        type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="comentario" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="subTotal" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="tarifa" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="tipoEnvio" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ProductoOrden">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idProd" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="modeloProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreProd" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="precioProd" type="xsd:double"/>
+                    <xsd:element
+                        maxOccurs="1"
+                        minOccurs="1"
+                        name="precioFinalProd"
+                        type="xsd:double"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="cantidadProd" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="listaProductosOrden">
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="productos"
+                        type="xsd1:ProductoOrden"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Status">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="idStatus" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="nombreStat" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="fechaStat" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="notificacion" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="comentario" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="listaHistorial">
+                <xsd:sequence>
+                    <xsd:element
+                        maxOccurs="unbounded"
+                        minOccurs="1"
+                        name="historial"
+                        type="xsd1:Status"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="actualizaContraRequest">
+        <wsdl:part name="emailCliente" type="xsd:string"/>
+        <wsdl:part name="nuevaContra" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="validaClienteResponse">
+        <wsdl:part name="email" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerHistorialStatusRequest">
+        <wsdl:part name="idPedido" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="insertaOrdenResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="nuevoClienteRequest">
+        <wsdl:part name="cliente" type="xsd1:Cliente"/>
+    </wsdl:message>
+    <wsdl:message name="actualizaDatosClienteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerCategoriasRequest">   </wsdl:message>
+    <wsdl:message name="obtenerProductoRequest">
+        <wsdl:part name="idProd" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerDetallePedidoRequest">
+        <wsdl:part name="idPedido" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="insertaProductoOrdenResponse">
+        <wsdl:part name="result" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="validaEmailClienteRequest">
+        <wsdl:part name="emailCliente" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerPaisesResponse">
+        <wsdl:part name="result" type="xsd1:ListaPaises"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerCostoEnvioResponse">
+        <wsdl:part name="costo" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="insertaOrdenRequest">
+        <wsdl:part name="orden" type="xsd1:Orden"/>
+    </wsdl:message>
+    <wsdl:message name="nuevoClienteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerLibretaDireccionesResponse">
+        <wsdl:part name="direcciones" type="xsd1:ListaLibretaDirecciones"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerDatosClienteResponse">
+        <wsdl:part name="cliente" type="xsd1:DatosConsultaCliente"/>
+    </wsdl:message>
+    <wsdl:message name="actualizaContraseniaRequest">
+        <wsdl:part name="emailCliente" type="xsd:string"/>
+        <wsdl:part name="contraActual" type="xsd:string"/>
+        <wsdl:part name="nuevaContra" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="productosPorCatResponse">
+        <wsdl:part name="listadoProductos" type="xsd1:listaProductosCat"/>
+    </wsdl:message>
+    <wsdl:message name="actualizaContraseniaResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerDetallePedidoResponse">
+        <wsdl:part name="result" type="xsd1:DetallePedido"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerProductosOrdenRequest">
+        <wsdl:part name="idPedido" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerDatosClienteRequest">
+        <wsdl:part name="emailCliente" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="productosPorCatRequest">
+        <wsdl:part name="idCategoria" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerCostoEnvioRequest">   </wsdl:message>
+    <wsdl:message name="actualizaDatosClienteRequest">
+        <wsdl:part name="cliente" type="xsd1:DatosConsultaCliente"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerPedidosResponse">
+        <wsdl:part name="result" type="xsd1:listaPedidos"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerCategoriasResponse">
+        <wsdl:part name="arreglocategorias" type="xsd1:Categorias"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerLibretaDireccionesRequest">
+        <wsdl:part name="idCliente" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerDatosBancoResponse">
+        <wsdl:part name="result" type="xsd1:DatosBanco"/>
+    </wsdl:message>
+    <wsdl:message name="insertaLibretaDireccionResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="buscaProductosRequest">
+        <wsdl:part name="palabra" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="insertaLibretaDireccionRequest">
+        <wsdl:part name="direccion" type="xsd1:LibretaDirecciones"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerProductosOrdenResponse">
+        <wsdl:part name="result" type="xsd1:listaProductosOrden"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerHistorialStatusResponse">
+        <wsdl:part name="result" type="xsd1:listaHistorial"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerPedidosRequest">
+        <wsdl:part name="idCliente" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="validaEmailClienteResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerProductoResponse">
+        <wsdl:part name="result" type="xsd1:Producto"/>
+    </wsdl:message>
+    <wsdl:message name="validaClienteRequest">
+        <wsdl:part name="emailCliente" type="xsd:string"/>
+        <wsdl:part name="passwdCliente" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="buscaProductosResponse">
+        <wsdl:part name="productos" type="xsd1:listaProductosCat"/>
+    </wsdl:message>
+    <wsdl:message name="actualizaContraResponse">
+        <wsdl:part name="result" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="insertaProductoOrdenRequest">
+        <wsdl:part name="ordenId" type="xsd:int"/>
+        <wsdl:part name="idProd" type="xsd:int"/>
+        <wsdl:part name="cantidadProd" type="xsd:int"/>
+    </wsdl:message>
+    <wsdl:message name="obtenerDatosBancoRequest">   </wsdl:message>
+    <wsdl:message name="obtenerPaisesRequest">   </wsdl:message>
+    <wsdl:portType name="serviciosPortType">
+        <wsdl:operation name="obtenerCategorias">
+            <wsdl:input message="tns:obtenerCategoriasRequest"/>
+            <wsdl:output message="tns:obtenerCategoriasResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerProductosPorCategoria">
+            <wsdl:input message="tns:productosPorCatRequest"/>
+            <wsdl:output message="tns:productosPorCatResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerProducto">
+            <wsdl:input message="tns:obtenerProductoRequest"/>
+            <wsdl:output message="tns:obtenerProductoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="nuevoCliente">
+            <wsdl:input message="tns:nuevoClienteRequest"/>
+            <wsdl:output message="tns:nuevoClienteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerPaises">
+            <wsdl:input message="tns:obtenerPaisesRequest"/>
+            <wsdl:output message="tns:obtenerPaisesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerDatosCliente">
+            <wsdl:input message="tns:obtenerDatosClienteRequest"/>
+            <wsdl:output message="tns:obtenerDatosClienteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="validaEmailCliente">
+            <wsdl:input message="tns:validaEmailClienteRequest"/>
+            <wsdl:output message="tns:validaEmailClienteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="validaCliente">
+            <wsdl:input message="tns:validaClienteRequest"/>
+            <wsdl:output message="tns:validaClienteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerCostoEnvio">
+            <wsdl:input message="tns:obtenerCostoEnvioRequest"/>
+            <wsdl:output message="tns:obtenerCostoEnvioResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerDatosBanco">
+            <wsdl:input message="tns:obtenerDatosBancoRequest"/>
+            <wsdl:output message="tns:obtenerDatosBancoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="insertaOrden">
+            <wsdl:input message="tns:insertaOrdenRequest"/>
+            <wsdl:output message="tns:insertaOrdenResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="insertaProductoOrden">
+            <wsdl:input message="tns:insertaProductoOrdenRequest"/>
+            <wsdl:output message="tns:insertaProductoOrdenResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerLibretaDirecciones">
+            <wsdl:input message="tns:obtenerLibretaDireccionesRequest"/>
+            <wsdl:output message="tns:obtenerLibretaDireccionesResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="insertaLibretaDireccion">
+            <wsdl:input message="tns:insertaLibretaDireccionRequest"/>
+            <wsdl:output message="tns:insertaLibretaDireccionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="buscaProductos">
+            <wsdl:input message="tns:buscaProductosRequest"/>
+            <wsdl:output message="tns:buscaProductosResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerPedidos">
+            <wsdl:input message="tns:obtenerPedidosRequest"/>
+            <wsdl:output message="tns:obtenerPedidosResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerDetallePedido">
+            <wsdl:input message="tns:obtenerDetallePedidoRequest"/>
+            <wsdl:output message="tns:obtenerDetallePedidoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerProductosOrden">
+            <wsdl:input message="tns:obtenerProductosOrdenRequest"/>
+            <wsdl:output message="tns:obtenerProductosOrdenResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerHistorialStatus">
+            <wsdl:input message="tns:obtenerHistorialStatusRequest"/>
+            <wsdl:output message="tns:obtenerHistorialStatusResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="actualizaDatosCliente">
+            <wsdl:input message="tns:actualizaDatosClienteRequest"/>
+            <wsdl:output message="tns:actualizaDatosClienteResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="actualizaContrasenia">
+            <wsdl:input message="tns:actualizaContraseniaRequest"/>
+            <wsdl:output message="tns:actualizaContraseniaResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="serviciosBinding" type="tns:serviciosPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="obtenerCategorias">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerCategorias"/>
+            <wsdl:input>
+                <soap:body parts="" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="arreglocategorias" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerProductosPorCategoria">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerProductosPorCategoria"/>
+            <wsdl:input>
+                <soap:body parts="idCategoria" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="listadoProductos" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="nuevoCliente">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#nuevoCliente"/>
+            <wsdl:input>
+                <soap:body parts="cliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerPaises">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerPaises"/>
+            <wsdl:input>
+                <soap:body parts="" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerDatosCliente">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerDatosCliente"/>
+            <wsdl:input>
+                <soap:body parts="emailCliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="cliente" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="validaEmailCliente">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#validaEmailCliente"/>
+            <wsdl:input>
+                <soap:body parts="emailCliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="validaCliente">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#validaCliente"/>
+            <wsdl:input>
+                <soap:body parts="emailCliente passwdCliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="email" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerCostoEnvio">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerCostoEnvio"/>
+            <wsdl:input>
+                <soap:body parts="" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="costo" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerDatosBanco">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerDatosBanco"/>
+            <wsdl:input>
+                <soap:body parts="" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="insertaOrden">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#insertaOrden"/>
+            <wsdl:input>
+                <soap:body parts="orden" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="insertaProductoOrden">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#insertaProductoOrden"/>
+            <wsdl:input>
+                <soap:body parts="ordenId idProd cantidadProd" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerLibretaDirecciones">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerLibretaDirecciones"/>
+            <wsdl:input>
+                <soap:body parts="idCliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="direcciones" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="insertaLibretaDireccion">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#insertaLibretaDireccion"/>
+            <wsdl:input>
+                <soap:body parts="direccion" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="buscaProductos">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#buscaProductos"/>
+            <wsdl:input>
+                <soap:body parts="palabra" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="productos" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerPedidos">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerPedidos"/>
+            <wsdl:input>
+                <soap:body parts="idCliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerDetallePedido">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerDetallePedido"/>
+            <wsdl:input>
+                <soap:body parts="idPedido" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerProducto">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerProducto"/>
+            <wsdl:input>
+                <soap:body parts="idProd" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerProductosOrden">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerProductosOrden"/>
+            <wsdl:input>
+                <soap:body parts="idPedido" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="obtenerHistorialStatus">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#obtenerHistorialStatus"/>
+            <wsdl:input>
+                <soap:body parts="idPedido" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="actualizaDatosCliente">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#actualizaDatosCliente"/>
+            <wsdl:input>
+                <soap:body parts="cliente" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body parts="result" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="actualizaContrasenia">
+            <soap:operation
+                soapAction="capeconnect:servicios:serviciosPortType#actualizaContrasenia"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="servicios">
+        <wsdl:port binding="tns:serviciosBinding" name="serviciosPort">
+            <soap:address location="http://localhost/tienda/servicios/servicios.php"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
