@@ -210,7 +210,7 @@ android:layout_gravity="left"
         <TextView android:text="Borrar"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="0px"/>
         <TextView android:text="      "  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="0px"/>
         <TextView android:text="Descripción"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip"/>
-        <TextView android:text="Cant." android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="15px"/>
+        <TextView android:text="Cant." android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="13px"/>
         <TextView android:text="Total" android:background="#CCCCCC" android:textColor="#000000" android:layout_width="1px" android:layout_margin="1dip"/>
     </TableRow>
   

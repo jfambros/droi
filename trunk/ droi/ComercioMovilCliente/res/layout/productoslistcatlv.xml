@@ -83,49 +83,7 @@ android:layout_gravity="left"
     
     <!-- Fin encabezado -->
     
-    <!-- 
-    <TextView
-		android:id="@+id/tvCatNombCategoria"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="categoria"
-		android:textColor="#ff000000"
-		android:layout_gravity="center_horizontal"
-		/>
-    
-    <LinearLayout
-    	android:orientation="horizontal"
-    	android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:gravity="center" >
-    <ImageView
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:src="@drawable/regresar" />
-     <TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="   "
-		android:textColor="#ff000000"
-		android:layout_gravity="center_horizontal"
-		/>
-    <ImageView
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:src="@drawable/inicio" />
-    	
-
-    	
-    </LinearLayout>
- -->
- <!-- 
- 	<TableRow
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:layout_gravity="center_horizontal"
-		>
-  -->
-  
+      
 		  <TableLayout
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"

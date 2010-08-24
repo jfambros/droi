@@ -51,6 +51,7 @@ public class NuevaDireccionFactura extends Activity{
 	private ImageView ivContinuar = null;
 	private ImageView ivContinuarArr = null;
 	private ImageView ivGuardarDir = null;
+	private ImageView ivInicio = null;
 	
 	
 
@@ -69,6 +70,10 @@ public class NuevaDireccionFactura extends Activity{
 	        
 	        ivGuardarDir = (ImageView)findViewById(R.id.ivGuardarDireccFactura);
 	        ivGuardarDir.setOnClickListener(ivGuardarDirPres);
+	        
+	        ivInicio = (ImageView)findViewById(R.id.ivInicioDireccFactura);
+	        ivInicio.setOnClickListener(ivInicioPres);
+
 	        
 	        bundle = getIntent().getExtras();
 	        idCliente = bundle.getInt("idCliente");
@@ -492,5 +497,17 @@ public class NuevaDireccionFactura extends Activity{
 				guardaDireccion();
 			}
 		};
+		
+		private OnClickListener ivInicioPres = new OnClickListener() {
+			
+			public void onClick(View arg0) {
+		        Intent intent = new Intent();
+		        intent.setClass(NuevaDireccionFactura.this, Principal.class);
+		        startActivity(intent);
+		        finish();
+			
+			}
+		};
+
 	 
 }

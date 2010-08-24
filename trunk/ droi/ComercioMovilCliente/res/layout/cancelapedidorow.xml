@@ -15,13 +15,13 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal"
 	>
 		<ImageView
-		android:id="@+id/ivLogoPedidoListadoPedidos"
+		android:id="@+id/ivLogoPedidoCancelaPedido"
 		android:layout_width="32px"
 		android:layout_height="32px"
 		android:src="@drawable/imgchica"
 		/>
 			<TextView
-			android:id="@+id/tvNoPedidoListadoPedidos"
+			android:id="@+id/tvNoPedidoCancelaPedido"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="No tienes pedidos"
@@ -30,7 +30,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			/>
 
 			<TextView
-				android:id="@+id/tvFechaListadoPedidos"
+				android:id="@+id/tvFechaCancelaPedido"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text=""
@@ -45,13 +45,13 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="horizontal"
 	>
 			<ImageView
-			android:id="@+id/ivVerMasListadoPedidos"
+			android:id="@+id/ivVerMasCancelaPedido"
 			android:layout_width="32px"
 			android:layout_height="32px"
 			android:src="@drawable/imgchica"
 			/>
 			<TextView
-			android:id="@+id/tvCantidadProdListadoPedidos"
+			android:id="@+id/tvCantidadProdCancelaPedido"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text=""
@@ -59,7 +59,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:textColor="#ff000000"
 			/>
 			<TextView
-			android:id="@+id/tvTotalListadoPedidos"
+			android:id="@+id/tvTotalCancelaPedido"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text=""
@@ -72,11 +72,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="fill_parent"
 	android:orientation="horizontal"
 	>
-			<ImageView
-			android:layout_width="32px"
-			android:layout_height="32px"
-			android:src="@drawable/imgchica"
-			/>
 		
 			<TextView
 			android:layout_width="wrap_content"
@@ -85,13 +80,5 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_gravity="left"
 			android:textColor="#ff000000"
 			/>
-			<TextView
-			android:id="@+id/tvEstadoListadoPedidos"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text=""
-			android:layout_gravity="left"
-			android:textColor="#ff000000"
-			/>			
 	</TableRow>
 </TableLayout>

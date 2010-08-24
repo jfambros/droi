@@ -10,6 +10,8 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import utils.ListadoPedidos;
 import utils.Valores;
+
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,43 +29,35 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.TableRow.LayoutParams;
 
-public class RevisaPedidosCliente extends ListActivity{
+public class CancelaPedidos extends ListActivity{
 	private ImageView ivInicio;
 	private ImageView ivRegresar;
-	
+	private IconListViewAdapter adaptador;
 	private ArrayList<ListadoPedidos> listadoPedidos = null;
+	private String HOST = Valores.HOST; 
+	
 	private Bundle bundle;
 	private int idClienteActual;
-    private IconListViewAdapter adaptador;
-    
-	private String HOST = Valores.HOST; //esto es para el equipo local
-	
+
 	protected void onCreate(Bundle savedInstanceState) {
-		try{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.revisapedidoscliente);
+		setContentView(R.layout.cancelapedidos);
 		
-		ivInicio = (ImageView)findViewById(R.id.ivInicioRevisaPedidosCte);
+		bundle = getIntent().getExtras(); 
+			
+		ivInicio = (ImageView)findViewById(R.id.ivInicioCancelaPedidos);
 		ivInicio.setOnClickListener(ivInicioPres);
 		
-		ivRegresar = (ImageView)findViewById(R.id.ivRegresarRevisaPedidosCte);
+		ivRegresar = (ImageView)findViewById(R.id.ivRegresarCancelaPedidos);
 		ivRegresar.setOnClickListener(ivRegresarPres);
 		
-		bundle = getIntent().getExtras();
 		obtieneIdCliente();
 		inicializaPedidos();
-		this.adaptador = new IconListViewAdapter(this, R.layout.revisapedidosclienterow, listadoPedidos);
-        setListAdapter(this.adaptador);
-		}catch (Exception e) {
-			Log.e("onCreate",e.toString());
-
-		}
 		
+		this.adaptador = new IconListViewAdapter(this, R.layout.cancelapedidorow, listadoPedidos);
+		setListAdapter(this.adaptador);
 	}
 	
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -72,13 +66,13 @@ public class RevisaPedidosCliente extends ListActivity{
         }
     	return super.onKeyDown(keyCode, event);
     }
-	
-	private void inicializaPedidos(){
+    
+    private void inicializaPedidos(){
 		listadoPedidos = new ArrayList<ListadoPedidos>();
 		
 		 //Definición para servicio Web
-		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerPedidos";
-	    String METHOD_NAME = "obtenerPedidos";
+		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerEstadoPedidos";
+	    String METHOD_NAME = "obtenerEstadoPedidos";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
 	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
@@ -92,6 +86,7 @@ public class RevisaPedidosCliente extends ListActivity{
 	        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
 	        envelope.dotNet = false;
 	        request.addProperty ("idCliente", idClienteActual);
+	        request.addProperty ("estado", "Pendiente");
 	        envelope.setOutputSoapObject(request);
 	        httpt.call(SOAP_ACTION, envelope);
             result = (SoapObject)envelope.bodyIn;
@@ -160,7 +155,7 @@ public class RevisaPedidosCliente extends ListActivity{
 		
 	}
 	
-	private void obtieneIdCliente(){
+    private void obtieneIdCliente(){
 		//Definición para servicio Web
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosCliente";
 	    String METHOD_NAME = "obtenerDatosCliente";
@@ -206,17 +201,16 @@ public class RevisaPedidosCliente extends ListActivity{
                 View v = convertView;
                 if (v == null) {
                     LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    v = vi.inflate(R.layout.revisapedidosclienterow, null);
+                    v = vi.inflate(R.layout.cancelapedidorow, null);
                 }
                 ListadoPedidos lp = items.get(position);
                 if (lp != null) {
-                	TextView tvNoPedido = (TextView)v.findViewById(R.id.tvNoPedidoListadoPedidos);
-                	TextView tvFechaPedido = (TextView)v.findViewById(R.id.tvFechaListadoPedidos);
-                	TextView tvCantProd = (TextView)v.findViewById(R.id.tvCantidadProdListadoPedidos);
-                	TextView tvTotalPedido = (TextView)v.findViewById(R.id.tvTotalListadoPedidos);
-                	TextView tvEstadoPedido = (TextView)v.findViewById(R.id.tvEstadoListadoPedidos);
-                	ImageView ivPedido = (ImageView)v.findViewById(R.id.ivLogoPedidoListadoPedidos);
-                	ImageView ivVerMas = (ImageView)v.findViewById(R.id.ivVerMasListadoPedidos);
+                	TextView tvNoPedido = (TextView)v.findViewById(R.id.tvNoPedidoCancelaPedido);
+                	TextView tvFechaPedido = (TextView)v.findViewById(R.id.tvFechaCancelaPedido);
+                	TextView tvCantProd = (TextView)v.findViewById(R.id.tvCantidadProdCancelaPedido);
+                	TextView tvTotalPedido = (TextView)v.findViewById(R.id.tvTotalCancelaPedido);
+                	ImageView ivPedido = (ImageView)v.findViewById(R.id.ivLogoPedidoCancelaPedido);
+                	ImageView ivVerMas = (ImageView)v.findViewById(R.id.ivVerMasCancelaPedido);
                 	
                 	if (tvNoPedido != null){	
                 		tvNoPedido.setText("No. pedido: "+Integer.toString(lp.getIdPedido())+"  ");
@@ -233,14 +227,6 @@ public class RevisaPedidosCliente extends ListActivity{
                 	if (tvTotalPedido != null){
                 		tvTotalPedido.setText("Total: "+Double.toString(lp.getPrecioTot())+" ");
                 	}
-                	if (tvEstadoPedido != null){
-                		tvEstadoPedido.setTextColor(Color.BLACK);
-                		tvEstadoPedido.setText("Estado del pedido: ");
-                		tvEstadoPedido.setTextColor(Color.BLUE);
-                		tvEstadoPedido.append(lp.getEstado());
-                	
-                	}
-                	
                 	
                 	Bitmap mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pedido32x32);
              			   Bitmap bMapScala = Bitmap.createScaledBitmap(mBitmap, 32, 32, true);
@@ -272,28 +258,30 @@ public class RevisaPedidosCliente extends ListActivity{
         }
 	}
 	
+	
     protected void onListItemClick(ListView l, View v, int position, long id) {
         ListadoPedidos pedido = (ListadoPedidos) l.getItemAtPosition(position);    
         Log.i("id", Integer.toString(pedido.getIdPedido()) );
         //Toast.makeText(this, producto.getNombreProd(), Toast.LENGTH_LONG).show();
         if (pedido.getIdPedido() != 0){
+        	
 			Intent intent = new Intent(); 
 			intent.putExtra("idPedido",pedido.getIdPedido());
 			intent.putExtra("emailCliente", bundle.getString("emailCliente"));
 			intent.putExtra("idCliente", idClienteActual);
 			intent.putExtra("contra", bundle.getString("contra"));  
-			intent.setClass(RevisaPedidosCliente.this, DetallePedido.class);
+			intent.setClass(CancelaPedidos.this, DetalleCancelaPedido.class);
 			startActivity(intent);  
 			finish();
+			
         }
     }	
-	
 	
 	
 	private OnClickListener ivInicioPres = new OnClickListener() {
 		public void onClick(View arg0) {
             Intent intent = new Intent();
-            intent.setClass(RevisaPedidosCliente.this, Principal.class);
+            intent.setClass(CancelaPedidos.this, Principal.class);
             startActivity(intent);
             finish();				
 		}
@@ -304,10 +292,9 @@ public class RevisaPedidosCliente extends ListActivity{
             Intent intent = new Intent();
             intent.putExtra("emailCliente", bundle.getString("emailCliente"));
             intent.putExtra("contra", bundle.getString("contra"));  
-            intent.setClass(RevisaPedidosCliente.this, DatosCuenta.class);
+            intent.setClass(CancelaPedidos.this, DatosCuenta.class);
             startActivity(intent);
             finish();				
 		}
 	};
-
 }

@@ -13,6 +13,7 @@ public class DatosCuenta extends Activity{
 	private ImageView ivVerPedidos;
 	private ImageView ivModificaDatos;
 	private ImageView ivCambiaContra;
+	private ImageView ivCancelaPedidos;
 	
 	private Bundle bundle;
 	
@@ -34,6 +35,8 @@ public class DatosCuenta extends Activity{
 		ivCambiaContra = (ImageView)findViewById(R.id.ivModificaPasswordCliente);
 		ivCambiaContra.setOnClickListener(ivCambiaContraPres);
 
+		ivCancelaPedidos = (ImageView)findViewById(R.id.ivCancelaPedidosCliente);
+		ivCancelaPedidos.setOnClickListener(ivCancelaPedidosPres);
 
 		
 		bundle = getIntent().getExtras();
@@ -94,5 +97,17 @@ public class DatosCuenta extends Activity{
             finish();				
 		}
 	};
+	
+	private OnClickListener ivCancelaPedidosPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+            Intent intent = new Intent();
+            intent.putExtra("emailCliente", bundle.getString("emailCliente"));
+            intent.putExtra("contra", bundle.getString("contra"));
+            intent.setClass(DatosCuenta.this, CancelaPedidos.class);
+            startActivity(intent);
+            finish();				
+		}
+	};	
 
 }

@@ -64,7 +64,7 @@ public class VerificaCliente extends Activity{
 	            Intent intent = new Intent();
 	            intent.putExtra("emailCliente", emailCorrecto);
 	            intent.putExtra("contra", contra);
-	            intent.setClass(VerificaCliente.this, DatosCuenta.class);
+	            intent.setClass(VerificaCliente.this, RevisaPedido1.class);
 	            startActivity(intent);
 	            finish();			
 			}

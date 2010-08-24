@@ -54,7 +54,7 @@ public class RevisaPedido1 extends Activity{
         ivCambiaDirecc = (ImageView) findViewById(R.id.ivCambiaDireccRevisaPed1);
         ivCambiaDirecc.setOnClickListener(ivCambiaDireccPres);
         
-		ivInicio = (ImageView)findViewById(R.id.ivInicioDetallePedido);
+		ivInicio = (ImageView)findViewById(R.id.ivInicioRevisaPed1);
 		ivInicio.setOnClickListener(ivInicioPres);
         
         bundle = getIntent().getExtras();

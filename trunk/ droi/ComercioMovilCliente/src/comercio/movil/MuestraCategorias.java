@@ -274,7 +274,7 @@ public class ImageAdapter extends BaseAdapter {
             is.close();  
             i.setImageBitmap(bm);
             i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
-            i.setLayoutParams(new GridView.LayoutParams(50, 50)); 
+            i.setLayoutParams(new GridView.LayoutParams(80, 80)); 
             
 			holder.getImagen().setImageBitmap(bm);
 			

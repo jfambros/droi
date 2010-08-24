@@ -183,12 +183,12 @@ public class ProductosListCatLVBuscar extends ListActivity{
 	          	 SoapPrimitive precio = (SoapPrimitive) resultados.getProperty("precioProd");
 	          	 SoapPrimitive fabricante = (SoapPrimitive) resultados.getProperty("fabricanteProd");
 		    	   
-		      	 
+		      	 double precioProd = Double.parseDouble(precio.toString());
 		      	 ProductosCat productosCat = new ProductosCat();
 		      	 productosCat.setIdProd(id.toString());
 		      	 productosCat.setNombreProd(nombre.toString());
 		      	 productosCat.setImagenProd(imagen.toString());
-		      	 productosCat.setPrecioProd(precio.toString());
+		      	 productosCat.setPrecioProd(Double.toString(precioProd));
 		      	 productosCat.setNombreFabricante(fabricante.toString());
 		      	 listaProductos.add(productosCat);
 		       }
@@ -261,11 +261,13 @@ public class ProductosListCatLVBuscar extends ListActivity{
 	            	            bis.close(); 
 	            	            is.close();  
 	            	            i.setImageBitmap(bm);
-	            	            i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
-	            	            i.setLayoutParams(new GridView.LayoutParams(50, 50));
+	            	            Bitmap bMapScala = Bitmap.createScaledBitmap(bm, 80, 80, true);
+	            	            i.setImageBitmap(bMapScala);
+	            	            //i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
+	            	            i.setLayoutParams(new GridView.LayoutParams(80, 80));
 	            	            
 		            			if (imagenProd != null){
-			            			   imagenProd.setImageBitmap(bm);
+			            			   imagenProd.setImageBitmap(bMapScala);
 			            		}
 
 	            			}
