@@ -5,7 +5,14 @@ public class ListadoPedidos {
 	private String fecha;
 	private int cantProd;
 	private double precioTot;
+	private String estado;
 	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public int getIdPedido() {
 		return idPedido;
 	}

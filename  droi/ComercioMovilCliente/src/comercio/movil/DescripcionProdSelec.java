@@ -117,13 +117,14 @@ public class DescripcionProdSelec extends Activity{
              SoapPrimitive precio = (SoapPrimitive) resultSoap.getProperty("precioProd");
              SoapPrimitive fabricante = (SoapPrimitive) resultSoap.getProperty("fabricanteProd");
      	
+             double precioProd = Double.parseDouble(precio.toString());
             	 producto.setIdProd(id.toString());
             	 producto.setNombreProd(nombre.toString());
             	 producto.setDescripProd(descripcion.toString());
             	 producto.setModeloProd(modelo.toString());
             	 producto.setCantidadProd(cantidad.toString());
             	 producto.setImagenProd(imagen.toString());
-            	 producto.setPrecioProd(precio.toString());
+            	 producto.setPrecioProd(Double.toString(precioProd));
             	 producto.setFabricanteProd(fabricante.toString());
             	 
             	 

@@ -144,7 +144,7 @@ public class Cesta extends Activity {
 		            
 		            borrar = new CheckBox(this);
 		            borrar.setLayoutParams(new LayoutParams(
-				            LayoutParams.FILL_PARENT,
+				            30,
 				            LayoutParams.FILL_PARENT));
 		            
 		            

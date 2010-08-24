@@ -51,6 +51,7 @@ public class NuevaDireccionEntrega extends Activity{
 	private ImageView ivContinuar = null;
 	private ImageView ivContinuarArr = null;
 	private ImageView ivGuardarDir = null;
+	private ImageView ivInicio = null;
 	
 	
 	
@@ -70,6 +71,10 @@ public class NuevaDireccionEntrega extends Activity{
 	        
 	        ivGuardarDir = (ImageView)findViewById(R.id.ivGuardarNuevaDirecc1);
 	        ivGuardarDir.setOnClickListener(ivGuardarDirPres);
+	        
+	        ivInicio = (ImageView)findViewById(R.id.ivInicioNuevaDireccEntre);
+	        ivInicio.setOnClickListener(ivInicioPres);
+	        
 	        
 	        bundle = getIntent().getExtras();
 	        idCliente = bundle.getInt("idCliente");
@@ -502,6 +507,17 @@ public class NuevaDireccionEntrega extends Activity{
 		
 		public void onClick(View arg0) {
 			guardaDireccion();
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+	        Intent intent = new Intent();
+	        intent.setClass(NuevaDireccionEntrega.this, Principal.class);
+	        startActivity(intent);
+	        finish();
+		
 		}
 	};
 	 

@@ -5,7 +5,13 @@ android:layout_height="fill_parent"
 xmlns:android="http://schemas.android.com/apk/res/android"
 >
 
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+	android:background="#ffffffff"    
+>
+  
   
 	<TableLayout
 	android:layout_width="fill_parent"
@@ -32,10 +38,24 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:layout_gravity="center_horizontal"
 					>
 					<ImageView
-					android:id="@+id/ivInicioRevisaPed3"
+					android:id="@+id/ivInicioDetalleCancelaP"
 					android:layout_width="48px"
 					android:layout_height="48px"
-					android:src="@drawable/inicio48x48"
+					android:src="@drawable/finalizasesion48x48"
+					/>
+					<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#ff000000"
+					android:textSize="14sp"
+					android:text="    "
+					/>
+					
+					<ImageView
+					android:id="@+id/ivRegresarDetalleCancelaP"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/regresar48x48"
 					/>
 					<TextView
 					android:layout_width="wrap_content"
@@ -45,10 +65,23 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 					android:text="    "
 					/>
 					<ImageView
-					android:id="@+id/ivRegresaRevisaPed3"
-					android:layout_width="48px"
-					android:layout_height="48px"
-					android:src="@drawable/regresar48x48"
+					android:id="@+id/ivInicioCancelaDetalleP"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/iniciodatoscte48x48"
+					/>
+					<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="#ff000000"
+					android:textSize="14sp"
+					android:text="    "
+					/>
+					<ImageView
+					android:id="@+id/ivCancelaPedidoDetalleP"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/cancelapedido248x48"
 					/>
 				</TableRow>
 			</TableLayout>	
@@ -61,129 +94,155 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		    android:layout_height="fill_parent" 
 			android:background="#ffffffff"    
 		>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="16sp"
+			android:layout_gravity="center_horizontal"
+			android:text="Detalle del pedido"
+			/>		
+			<ImageView
+			android:layout_width="64px"
+			android:layout_height="64px"
+			android:src="@drawable/detallepedido64x64" 
+			android:layout_gravity="center_horizontal"
+			/>
 
 			<TextView
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
+			android:id="@+id/tvNoPedidoCancelaDetalleP"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
-			android:textSize="14sp"
 			android:textStyle="bold"
-			android:text="Dirección de entrega"
+			android:text="Pedido No.: "
 			/>
-			<!-- Dirección de entrega -->
+			<TextView
+			android:id="@+id/tvFechaCancelaDetalleP"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:text="Fecha del pedido: "
+			/>	
+			<!-- Inicio direcc entrega -->		
 			<TableLayout
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:stretchColumns="*" 
 		    android:background="#000000">
-			   
-		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" 
-		       android:layout_gravity="center_horizontal">
-		       		<TableLayout
+		       			
+		       <TableRow  android:background="#F6F6F6" android:layout_margin="1dip" android:layout_gravity="center_horizontal">
+		            <TableLayout
 					android:layout_width="fill_parent"
 					android:layout_height="fill_parent"
 					android:orientation="vertical"
-					android:layout_gravity="left">
-					   <!-- Inicio dirección -->
-
-						<!-- Datos de entrega -->
-						<!-- Empresa -->
+					android:layout_gravity="left"
+					>
 						<TableRow
 						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
 							<TextView
-							android:id="@+id/tvEmpresaRevisaPed3"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Empresa"
+							android:text="Dirección de entrega: "
 							/>
 						</TableRow>
-						<!-- Nombre -->
 						<TableRow
 						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
 							<TextView
-							android:id="@+id/tvNombCteRevisaPed3"
+							android:id="@+id/tvEmpresaCancelaDetalleP"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Nombre"
+							android:text="Empresa "
 							/>
 						</TableRow>
-						<!-- Dirección -->
+						
 						<TableRow
 						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
 							<TextView
-							android:id="@+id/tvDireccionRevisaPed3"
+							android:id="@+id/tvNombreCancelaDetalleP"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:textColor="#ff000000" 
-							android:text="Dirección"/>
+							android:textColor="#ff000000"
+							android:text="nombre"
+							/>
 						</TableRow>
-						<!-- Colonia -->
+						
 						<TableRow
 						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
 							<TextView
-							android:id="@+id/tvColoniaRevisaPed3"
+							android:id="@+id/tvDireccionCancelaDetalleP"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Colonia"
+							android:text="Dirección"
 							/>
-						</TableRow>						
-						<!-- Ciudad y CP -->
+						</TableRow>
+						
 						<TableRow
 						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
 							<TextView
-							android:id="@+id/tvCiudadYCPRevisaPed3"
+							android:id="@+id/tvColoniaCancelaDetalleP"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
-							android:text="Ciudad y código postal"
+							android:text="colonia"
 							/>
-						</TableRow>						
-						<!-- Estado y país -->
+						</TableRow>
+						
 						<TableRow
 						android:layout_width="fill_parent"
-						android:layout_height="fill_parent"
-						android:layout_gravity="left"
-						android:orientation="horizontal">
-						
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
 							<TextView
-							android:id="@+id/tvEstadoYPaisRevisaPed3"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:textColor="#ff000000"
+							android:textSize="14sp"
+							android:id="@+id/tvCiudadYCPCancelaDetalleP" android:text="Ciudad y CP"/>
+						</TableRow>
+						
+						<TableRow
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						>
+							<TextView
+							android:id="@+id/tvEstadoYPaisCancelaDetalleP"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:textColor="#ff000000"
+							android:textSize="14sp"
 							android:text="Estado y país"
 							/>
 						</TableRow>
-						<!-- Fin datos entrega -->
 						
 					</TableLayout>
 			   </TableRow>
+			   
+			   <!--Fin Direcc entrega -->
+	
+		    
             </TableLayout>
-            <!-- fin info personal -->
-  
-            <!-- Tabla de productos -->
+
+<!-- Tabla de productos -->
             <TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -204,14 +263,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
 	         
 			<TableLayout
-				android:id="@+id/tlProductosRevisaPed3" 
+				android:id="@+id/tlProductosCancelaDetalleP" 
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:stretchColumns="*" 
 			    android:background="#000000">
 			 
 			    <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="center_horizontal">
-			        <TextView android:text="Cantidad"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="0px"/>
+			        <TextView android:text="Cantidad"  android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:layout_width="3px"/>
 			        <TextView android:background="#CCCCCC" android:textColor="#000000" android:layout_margin="1dip" android:text="Nombre"/>
 			        <TextView android:text="Total" android:background="#CCCCCC" android:textColor="#000000" android:layout_width="1px" android:layout_margin="1dip"/>
 			    </TableRow>
@@ -220,8 +279,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			</TableLayout>    
             <!-- fin Tabla de productos -->                   
 
-            <TextView
-            android:id="@+id/tvSubtotalEnvioRevisaPed3"
+<!-- Costo total -->
+
+<TextView
+            android:id="@+id/tvSubtotalEnvioCancelaDetalleP"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
@@ -231,7 +292,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			/>
 			
             <TextView
-            android:id="@+id/tvCostoEnvioRevisaPed3"
+            android:id="@+id/tvCostoEnvioCancelaDetalleP"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
@@ -241,7 +302,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			/>
             
             <TextView
-            android:id="@+id/tvTotalRevisaPed3"
+            android:id="@+id/tvTotalCancelaDetalleP"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
@@ -251,59 +312,64 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			/>
 
 
+<!-- Fin costo total -->
 
 <!-- tipo de pago -->
             <TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
-			android:textSize="12sp"
+			android:textSize="14sp"
 			android:text=" "
-			/>   
-			
-			<TableLayout
-				android:id="@+id/tlTipoPagoRevisaPed3" 
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:stretchColumns="*" 
-			    android:background="#000000">
-			 
-			    <TableRow  android:background="#ffffff" android:layout_margin="2dip" android:layout_gravity="left">
-			        <TextView
-			           android:id="@+id/tvTituloTipoPagoRevisaPed3" 
-			           android:text="Tipo de pago"  
-			           android:textColor="#000000" 
-			           android:layout_margin="1dip" 
-			           android:textStyle="bold"
-			           android:layout_gravity="left"/>
-			    </TableRow>
-			
-			  
-			</TableLayout>    
-
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"			
+			android:text="Forma de pago:"
+			/> 
+            <TextView
+            android:id="@+id/tvFormaPagoCancelaDetalleP"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:text=" "
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textSize="14sp"
+			android:text=" "
+			/>      
 
 <!-- Fin tipo de pago -->
-		
-<!-- Envío -->
 
+<!-- Envío -->
             <TextView
-            android:id="@+id/tvFormaEnvioRevisaPed3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="#ff000000"
+			android:textStyle="bold"
+			android:text="Forma de envío:"
+			/>   
+            <TextView
+            android:id="@+id/tvFormaEnvioCancelaDetalleP"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:text=" "
 			/>   
-
-
 <!-- Fin envío -->
-            
+
 <!-- Comentario -->
             <TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
-			android:textSize="16sp"
-			android:text="  "
+			android:textSize="12sp"
+			android:text=" "
 			/>   
 			
             <TextView
@@ -327,7 +393,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 		       android:orientation="horizontal"
 		       >					
 		            <TextView
-		            android:id="@+id/tvComentarioRevisaPed3"
+		            android:id="@+id/tvComentarioCancelaDetalleP"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:textColor="#ff000000"
@@ -339,50 +405,14 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 			</TableLayout>
             <!-- fin comentarios -->
 
-		    
+            
 		</LinearLayout>
 
         <!-- Contenido -->
-           <TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textColor="#ff000000"
-			android:textSize="12sp"
-			android:text=" "
-			/>  
-<!-- boton continuar -->
-			<TableLayout
-		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent"
-		    android:stretchColumns="*" 
-		    android:background="#000000"
-		    android:layout_gravity="right">
-		       			
-		       <TableRow  android:background="#ff0099cc" android:layout_margin="1dip" 
-		       android:layout_gravity="right">
-
-							<ImageView
-							android:id="@+id/ivFinalizarRevisaPed3"
-							android:layout_width="48px"
-							android:layout_height="48px"
-							android:layout_gravity="right"
-							android:src="@drawable/finalizar48x48" 
-							/>
-							<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:textColor="#ff000000"
-							android:text="  "
-							android:layout_gravity="right"							
-							/>
-						</TableRow>
-	    
-         </TableLayout>
-
-            <!-- boton continuar -->   	
 	
 	
 	</TableLayout>
   
+</LinearLayout>
 
 </ScrollView>

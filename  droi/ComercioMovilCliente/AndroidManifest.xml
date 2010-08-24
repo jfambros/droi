@@ -120,6 +120,14 @@
     <activity android:name="ActualizaContra"
        android:label="Cliente">
     </activity>     
+
+    <activity android:name="CancelaPedidos"
+       android:label="Cancelación de pedidos">
+    </activity>     
+
+    <activity android:name="DetalleCancelaPedido"
+       android:label="Detalle del pedido">
+    </activity> 
     
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

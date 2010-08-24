@@ -68,7 +68,7 @@ public class RevisaPedido3 extends Activity{
         ivFinalizar = (ImageView)findViewById(R.id.ivFinalizarRevisaPed3);
         ivFinalizar.setOnClickListener(ivFinalizarPres);
         
-		ivInicio = (ImageView)findViewById(R.id.ivInicioDetallePedido);
+		ivInicio = (ImageView)findViewById(R.id.ivInicioRevisaPed3);
 		ivInicio.setOnClickListener(ivInicioPres);
         
         envioProd = bundle.getDouble("envioProd");
@@ -183,7 +183,7 @@ public class RevisaPedido3 extends Activity{
 		        LayoutParams.FILL_PARENT,
 		        LayoutParams.FILL_PARENT));
 		        tvCantidad.setGravity(Gravity.CENTER_VERTICAL);
-		        tvCantidad.setWidth(50);
+		        tvCantidad.setWidth(20);
 	            
 		        TextView tvNombre = new TextView(this);
 	        	tvNombre.setText(((DatosCesta) me.getValue()).getNombreProducto());
