@@ -149,7 +149,15 @@ public class DetallePedido extends Activity{
 	        SoapPrimitive paisFactura = (SoapPrimitive) resultSoap.getProperty("paisFactura");
 	        
 	        SoapPrimitive estadoOrden = (SoapPrimitive) resultSoap.getProperty("estadoOrden");
-	        SoapPrimitive comentario = (SoapPrimitive) resultSoap.getProperty("comentario");
+	        //SoapPrimitive comentario = (SoapPrimitive) resultSoap.getProperty("comentario");
+	        
+	        String comentarios;
+	        if (((SoapPrimitive) resultSoap.getProperty("comentario")).toString().equals("anyType={}")){
+	        	comentarios = "_";
+	        }
+	        else{
+	        	comentarios = ((SoapPrimitive) resultSoap.getProperty("comentario")).toString();	
+	        }
 	        
 	        tarifa = Double.parseDouble(((SoapPrimitive) resultSoap.getProperty("tarifa")).toString());
 	        
@@ -178,7 +186,7 @@ public class DetallePedido extends Activity{
 	        	tvFormaEnvio.setText("Tarifa única $"+tarifa);
 	        }
 	        
-	        tvComentario.setText(comentario.toString());
+	        tvComentario.setText(comentarios);
 	        
 	        /*
 	         * <idCliente xmlns="">2</idCliente>
