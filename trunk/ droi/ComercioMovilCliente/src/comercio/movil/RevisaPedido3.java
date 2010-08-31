@@ -16,6 +16,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import utils.DatosCesta;
 import utils.DatosOrdenKS;
 import utils.ListaCesta;
+import utils.Valores;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -37,7 +38,7 @@ public class RevisaPedido3 extends Activity{
 	private ImageView ivFinalizar = null;
 	private ImageView ivInicio = null;
 	
-	private String HOST = "10.0.2.2";
+	private String HOST = Valores.HOST;
 	private String email = null;
 	private int idClienteA = 0;
 	private String tipoPago = null;
@@ -45,6 +46,7 @@ public class RevisaPedido3 extends Activity{
 	private double envioProd = 0.0;
 	private double subTotal = 0.0;
 	private double total = 0.0;
+	private String idPedidoC = null;
 	private ArrayList<String> direccionCliente = new ArrayList<String>();
 	private ArrayList<String> direccionFactura = new ArrayList<String>();
 	private Bundle bundle = null;
@@ -432,8 +434,10 @@ public class RevisaPedido3 extends Activity{
 	//insertar los productos comprados
 	private void insertaProductos(String ordenId){
         try{
+        	
 			Set set = ListaCesta.arregloCesta.entrySet();
 			Iterator i = set.iterator();
+			idPedidoC = ordenId;
 	    
 	        while(i.hasNext()){
 	            Map.Entry<String,DatosCesta> me = (Map.Entry<String, DatosCesta>)i.next();
@@ -462,6 +466,7 @@ public class RevisaPedido3 extends Activity{
 	        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
 	        envelope.dotNet = false;
 
+	        
 	        request.addProperty ("ordenId", ordenId);
 	        request.addProperty ("idProd", idProd);
 	        request.addProperty ("cantidadProd", cant);
@@ -646,6 +651,7 @@ public class RevisaPedido3 extends Activity{
 	            ListaCesta.arregloCesta.clear();
 	            
 	            Intent intent = new Intent();
+	            intent.putExtra("idPedido", idPedidoC);
 	            intent.setClass(RevisaPedido3.this, CompraFinalizada.class);
 		        startActivity(intent);
 	             finish();
