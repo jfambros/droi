@@ -52,7 +52,7 @@ public class CompraFinalizada extends Activity{
 	        request.addProperty ("idPedido", idPedido);
 	        envelope.setOutputSoapObject(request);
 	        httpt.call(SOAP_ACTION, envelope);
-	        result =  (SoapObject) envelope.bodyIn;
+	        //result =  (SoapObject) envelope.bodyIn;
 	        //SoapObject resultSoap =  (SoapObject) envelope.getResponse();
 	    }catch (Exception e) {
 	    	Log.e("error enviaCorreo", e.toString());

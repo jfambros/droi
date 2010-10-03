@@ -305,6 +305,7 @@ public class DetalleCancelaPedido extends Activity{
 			        tvNombre.setGravity(Gravity.CENTER_VERTICAL);
 			        tvNombre.setWidth(50);
 			        
+			        
 			        subTot = Integer.parseInt(cantidadProd.toString()) * Double.parseDouble(precioProd.toString());
 			        
 			        TextView tvSubTotalProd = new TextView(this);
