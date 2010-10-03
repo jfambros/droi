@@ -299,7 +299,7 @@ public class DetallePedido extends Activity{
 			        LayoutParams.FILL_PARENT,
 			        LayoutParams.FILL_PARENT));
 			        tvCantidad.setGravity(Gravity.CENTER_VERTICAL);
-			        tvCantidad.setWidth(50);
+			        tvCantidad.setWidth(20);
 			        
 			        TextView tvNombre = new TextView(this);
 		        	tvNombre.setText(nombreProd.toString());
@@ -308,6 +308,7 @@ public class DetallePedido extends Activity{
 			        LayoutParams.FILL_PARENT,
 			        LayoutParams.FILL_PARENT));
 			        tvNombre.setGravity(Gravity.CENTER_VERTICAL);
+			        tvNombre.setWidth(50);
 			        
 			        subTot = Integer.parseInt(cantidadProd.toString()) * Double.parseDouble(precioProd.toString());
 			        
