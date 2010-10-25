@@ -14,6 +14,8 @@ import org.ksoap2.transport.HttpTransportSE;
 import utils.DatosCesta;
 import utils.ListaCesta;
 import utils.Producto;
+import utils.Validaciones;
+import utils.Valores;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -32,7 +34,7 @@ import android.widget.TextView;
 
 public class DescripcionProdSelec extends Activity{
 
-	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
+	private static final String HOST = Valores.HOST; //esto es para el equipo local
 	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerProducto";
     private static final String METHOD_NAME = "obtenerProducto";
     private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
@@ -172,31 +174,42 @@ public class DescripcionProdSelec extends Activity{
 		
 		public void onClick(View arg0) {
 			EditText cantidad = (EditText) findViewById(R.id.etxtCantidadDescripProd);
-          
-			DatosCesta dc = new DatosCesta();
-			dc.setIdProducto(producto.getIdProd());
-			dc.setImagenProducto(producto.getImagenProd());
-			dc.setNombreProducto(producto.getNombreProd());
-			dc.setCantidadProd(Integer.parseInt(cantidad.getText().toString()));
-			dc.setPrecioProd(Double.parseDouble(producto.getPrecioProd()));
 			
-			DatosCesta sumaCant =   ListaCesta.arregloCesta.get(producto.getIdProd());
-			if (sumaCant != null){
-				int cantidadDatos = sumaCant.getCantidadProd();
-				sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
-				ListaCesta.arregloCesta.put(producto.getIdProd(), sumaCant);
+			if (!Validaciones.esNumero(cantidad.getText().toString())){
+				   mensajeError("Error", "Capture la cantidad");
+				   /*
+				if (Validaciones.esNumero(cantidad.getText().toString())){
+				   if (Integer.parseInt(cantidad.getText().toString()) <= 0 )
+					   mensajeError("Error", "La cantidad debe ser mayor o igual a 1");
+				}
+				*/
 			}
 			else{
-				ListaCesta.arregloCesta.put(dc.getIdProducto(), dc);	
-			}
-			
-			 
-           Intent intent = new Intent();
-           intent.putExtra("idProducto", producto.getIdProd());
-		   intent.putExtra("cantidad", cantidad.getText().toString());
-           intent.setClass(DescripcionProdSelec.this, Cesta.class);
-           startActivity(intent);
+				DatosCesta dc = new DatosCesta();
+				dc.setIdProducto(producto.getIdProd());
+				dc.setImagenProducto(producto.getImagenProd());
+				dc.setNombreProducto(producto.getNombreProd());
+				dc.setCantidadProd(Integer.parseInt(cantidad.getText().toString()));
+				dc.setPrecioProd(Double.parseDouble(producto.getPrecioProd()));
+				
+				DatosCesta sumaCant =   ListaCesta.arregloCesta.get(producto.getIdProd());
+				if (sumaCant != null){
+					int cantidadDatos = sumaCant.getCantidadProd();
+					sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
+					ListaCesta.arregloCesta.put(producto.getIdProd(), sumaCant);
+				}
+				else{
+					ListaCesta.arregloCesta.put(dc.getIdProducto(), dc);	
+				}
+				
+				 
+	           Intent intent = new Intent();
+	           intent.putExtra("idProducto", producto.getIdProd());
+			   intent.putExtra("cantidad", cantidad.getText().toString());
+	           intent.setClass(DescripcionProdSelec.this, Cesta.class);
+	           startActivity(intent);
            finish();
+			}
 		}
 	};
 	
@@ -229,5 +242,22 @@ public class DescripcionProdSelec extends Activity{
            finish();		
 		}
 	};
+	
+	 private void mensajeError(String titulo, String msj){
+		 new AlertDialog.Builder(DescripcionProdSelec.this)
+
+     	.setTitle(titulo)
+
+     	.setMessage(msj)
+
+     	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+     	public void onClick(DialogInterface dialog, int whichButton) {
+
+     	setResult(RESULT_OK);
+     	  }
+     	})
+     	.show();   
+	 }
     
 }
