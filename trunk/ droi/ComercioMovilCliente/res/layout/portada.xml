@@ -46,7 +46,7 @@ android:textColor="#ff000000"
 
 <ImageView
 android:layout_gravity="center_horizontal"
-android:src="@drawable/logotipo1"
+android:src="@drawable/store_logo"
 android:layout_width="245px"
 android:layout_height="92px"
 />
