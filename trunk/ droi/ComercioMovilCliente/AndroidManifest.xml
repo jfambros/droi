@@ -21,10 +21,6 @@
        android:label="Categorías disponibles">
     </activity>
 
-    <activity android:name="MuestraProductosCat"
-       android:label="Productos por categoría">
-    </activity>
-
     <activity android:name="DescripcionProducto"
        android:label="Descripción del producto">
     </activity>
@@ -37,10 +33,6 @@
        android:label="Categorías">
     </activity>
     
-    <activity android:name="MuestraProductosPorCat"
-       android:label="Productos por categoría">
-    </activity>
-
     <activity android:name="ProductosListCatLV"
        android:label="Listado de productos">
     </activity>

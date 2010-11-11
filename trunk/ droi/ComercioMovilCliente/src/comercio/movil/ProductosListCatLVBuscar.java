@@ -6,7 +6,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -14,6 +13,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import utils.ProductosCat;
+import utils.Valores;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,14 +36,13 @@ import android.widget.TextView;
 public class ProductosListCatLVBuscar extends ListActivity{
 
 	private ArrayList<ProductosCat> listaProductos = null;
-	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
+	private static final String HOST = Valores.HOST; //esto es para el equipo local
 	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#buscaProductos";
     private static final String METHOD_NAME = "buscaProductos";
     private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
     private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
     private SoapSerializationEnvelope envelope; 
     private HttpTransportSE httpt;
-    private Bundle bundleResult=new Bundle();
     Bundle bundle = null;
     private String resultData;
     

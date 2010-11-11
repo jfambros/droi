@@ -8,9 +8,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 import utils.DatosCesta;
 import utils.ListaCesta;
 import utils.Validaciones;
+import utils.Valores;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -42,7 +49,7 @@ public class Cesta extends Activity {
     private EditText cantidadProd = null;
     private TextView precioProd = null;
     
-    private static final String HOST = "10.0.2.2";
+    private static final String HOST = Valores.HOST;
     private String ruta = "http://"+HOST+"/tienda/catalog/images/";
     private Bundle bundle = null;
     private TableRow row=null;
@@ -229,7 +236,12 @@ public class Cesta extends Activity {
        if (validaCesta() == false){
         while(i.hasNext()){
             Map.Entry<String, TableRow> me = (Map.Entry<String, TableRow>)i.next();
-            
+/*            
+            if (validaCantidad(Integer.parseInt(me.getKey()), Integer.parseInt(((EditText) me.getValue().getChildAt(3)).getText().toString())) == false){
+            	mensajeError("Error", "La cantidad capturada es mayor que la existente en inventario del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
+            	break;
+            }
+  */          
             if (((EditText) me.getValue().getChildAt(3)).getText().toString().length() == 0 || !Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString()) ){
             	mensajeError("Error", "Verifique la cantidad del producto "+ ((TextView) me.getValue().getChildAt(2)).getText().toString());
             	break;
@@ -293,6 +305,7 @@ public class Cesta extends Activity {
             while(i.hasNext()){
 	            Map.Entry<String,TableRow> me = (Map.Entry<String, TableRow>)i.next();
 	            Log.i("Cesta confirmada: ",me.getKey() + " Producto: "+((TextView) me.getValue().getChildAt(2)).getText().toString() +" Cantidad:"+((EditText) me.getValue().getChildAt(3)).getText().toString() );
+	            
 	            if (((EditText) me.getValue().getChildAt(3)).getText().toString().length()>0 && Validaciones.esNumero(((EditText) me.getValue().getChildAt(3)).getText().toString())){
 	            	int num = Integer.parseInt(((EditText) me.getValue().getChildAt(3)).getText().toString());
 	            	if (num < 0){
@@ -312,6 +325,40 @@ public class Cesta extends Activity {
 		}
 		return encontrado;
 	}
+	
+	private boolean validaCantidad(int idProd, int cantidad){
+   	 //Definición para servicio Web
+		String SOAP_ACTIONV = "capeconnect:servicios:serviciosPortType#validaCantidad";
+	    String METHOD_NAMEV = "validaCantidad";
+	    String NAMESPACEV = "http://www.your-company.com/servicios.wsdl";
+	    String URLV = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    SoapSerializationEnvelope envelopeValida;
+	    HttpTransportSE httptValida;
+	    SoapObject resultValida;
+	    
+	    SoapObject requestValida = new SoapObject(NAMESPACEV, METHOD_NAMEV);
+		try{
+	        httptValida = new HttpTransportSE(URLV);
+	        envelopeValida = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+	        envelopeValida.dotNet = false;
+	        requestValida.addProperty ("idProd", idProd );
+	        requestValida.addProperty ("cantidad", cantidad);
+	        envelopeValida.setOutputSoapObject(requestValida);
+	        httptValida.call(SOAP_ACTIONV, envelopeValida);
+	        resultValida = (SoapObject)envelopeValida.bodyIn;
+	        SoapPrimitive result = (SoapPrimitive) resultValida.getProperty("result");
+	        //Log.e("resultado valida cant", result.toString());
+	        if (Integer.parseInt(result.toString()) == 1){
+	        	return true;
+	        }
+	        else{
+	        	return false;
+	        }
+	    	
+	    }catch (Exception e) {
+	    	return false;
+		}
+   }
 	
 	private OnClickListener ivInicioPres = new OnClickListener() {
 		

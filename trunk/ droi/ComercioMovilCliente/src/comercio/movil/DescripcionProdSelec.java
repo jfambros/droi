@@ -78,10 +78,6 @@ public class DescripcionProdSelec extends Activity{
         envelope.setOutputSoapObject(request);
         producto = new Producto();
         inicializaCat();
-        
-
-        
-
      }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -91,7 +87,7 @@ public class DescripcionProdSelec extends Activity{
     	return super.onKeyDown(keyCode, event);
     }
     
-    public void inicializaCat(){
+    private void inicializaCat(){
     	//ObtenerValoresJSon obtenerValores = new ObtenerValoresJSon();
     	//Bundle prodObtenidos = new Bundle();
         final String url = "http://"+HOST+"/tienda/catalog/images/";
@@ -170,6 +166,40 @@ public class DescripcionProdSelec extends Activity{
 	
     }
     
+    private boolean validaCantidad(int idProd, int cantidad){
+    	 //Definición para servicio Web
+		String SOAP_ACTIONV = "capeconnect:servicios:serviciosPortType#validaCantidad";
+	    String METHOD_NAMEV = "validaCantidad";
+	    String NAMESPACEV = "http://www.your-company.com/servicios.wsdl";
+	    String URLV = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    SoapSerializationEnvelope envelopeValida;
+	    HttpTransportSE httptValida;
+	    SoapObject resultValida;
+	    
+	    SoapObject requestValida = new SoapObject(NAMESPACEV, METHOD_NAMEV);
+		try{
+	        httptValida = new HttpTransportSE(URLV);
+	        envelopeValida = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+	        envelopeValida.dotNet = false;
+	        requestValida.addProperty ("idProd", idProd );
+	        requestValida.addProperty ("cantidad", cantidad);
+	        envelopeValida.setOutputSoapObject(requestValida);
+	        httptValida.call(SOAP_ACTIONV, envelopeValida);
+	        resultValida = (SoapObject)envelopeValida.bodyIn;
+	        SoapPrimitive result = (SoapPrimitive) resultValida.getProperty("result");
+	        //Log.e("resultado valida cant", result.toString());
+	        if (Integer.parseInt(result.toString()) == 1){
+	        	return true;
+	        }
+	        else{
+	        	return false;
+	        }
+	    	
+	    }catch (Exception e) {
+	    	return false;
+		}
+    }
+    
     private OnClickListener ivCestaPress = new OnClickListener() {
 		
 		public void onClick(View arg0) {
@@ -185,31 +215,41 @@ public class DescripcionProdSelec extends Activity{
 				*/
 			}
 			else{
-				DatosCesta dc = new DatosCesta();
-				dc.setIdProducto(producto.getIdProd());
-				dc.setImagenProducto(producto.getImagenProd());
-				dc.setNombreProducto(producto.getNombreProd());
-				dc.setCantidadProd(Integer.parseInt(cantidad.getText().toString()));
-				dc.setPrecioProd(Double.parseDouble(producto.getPrecioProd()));
-				
-				DatosCesta sumaCant =   ListaCesta.arregloCesta.get(producto.getIdProd());
-				if (sumaCant != null){
-					int cantidadDatos = sumaCant.getCantidadProd();
-					sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
-					ListaCesta.arregloCesta.put(producto.getIdProd(), sumaCant);
-				}
-				else{
-					ListaCesta.arregloCesta.put(dc.getIdProducto(), dc);	
-				}
-				
-				 
-	           Intent intent = new Intent();
-	           intent.putExtra("idProducto", producto.getIdProd());
-			   intent.putExtra("cantidad", cantidad.getText().toString());
-	           intent.setClass(DescripcionProdSelec.this, Cesta.class);
-	           startActivity(intent);
-           finish();
+				if (Integer.parseInt(cantidad.getText().toString())!= 0 ){
+					if (validaCantidad(Integer.parseInt(producto.getIdProd()), Integer.parseInt(cantidad.getText().toString())) == true){
+						DatosCesta dc = new DatosCesta();
+						dc.setIdProducto(producto.getIdProd());
+						dc.setImagenProducto(producto.getImagenProd());
+						dc.setNombreProducto(producto.getNombreProd());
+						dc.setCantidadProd(Integer.parseInt(cantidad.getText().toString()));
+						dc.setPrecioProd(Double.parseDouble(producto.getPrecioProd()));
+						
+						DatosCesta sumaCant =   ListaCesta.arregloCesta.get(producto.getIdProd());
+						if (sumaCant != null){
+							int cantidadDatos = sumaCant.getCantidadProd();
+							sumaCant.setCantidadProd(cantidadDatos+Integer.parseInt(cantidad.getText().toString()));
+							ListaCesta.arregloCesta.put(producto.getIdProd(), sumaCant);
+						}
+						else{
+							ListaCesta.arregloCesta.put(dc.getIdProducto(), dc);	
+						}
+						
+						 
+			           Intent intent = new Intent();
+			           intent.putExtra("idProducto", producto.getIdProd());
+					   intent.putExtra("cantidad", cantidad.getText().toString());
+			           intent.setClass(DescripcionProdSelec.this, Cesta.class);
+			           startActivity(intent);
+			           finish();
+					}
+					else{
+						mensajeError("Error", "La cantidad capturada es mayor que la existente en inventario");
+					}
 			}
+			else{
+			   mensajeError("Error", "Capture cantidad");	
+			}
+		  }
 		}
 	};
 	

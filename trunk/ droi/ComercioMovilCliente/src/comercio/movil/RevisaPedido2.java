@@ -8,6 +8,8 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.Valores;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,7 +37,7 @@ public class RevisaPedido2 extends Activity{
 	private String tipoPago = null;
 	private ArrayList<String> direccionCliente = new ArrayList<String>();
 	private ArrayList<String> direccionFactura = new ArrayList<String>();
-	private String HOST = "10.0.2.2";
+	private String HOST = Valores.HOST;
 	private double envioProd = 0.0;
 	private int idClienteA = 0;
 

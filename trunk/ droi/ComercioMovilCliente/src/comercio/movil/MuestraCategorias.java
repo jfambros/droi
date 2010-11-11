@@ -16,6 +16,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import utils.Categorias;
 import utils.DatosCategorias;
+import utils.Valores;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -40,7 +41,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MuestraCategorias extends Activity {
-	private static final String HOST = "10.0.2.2"; //esto es para el equipo local
+	private static final String HOST = Valores.HOST; //esto es para el equipo local
 	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerCategorias";
     private static final String METHOD_NAME = "obtenerCategorias";
     private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";

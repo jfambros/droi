@@ -18,6 +18,7 @@ import utils.DatosCliente;
 import utils.DatosClienteKS;
 import utils.Pais;
 import utils.Validaciones;
+import utils.Valores;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -65,7 +66,7 @@ public class NuevoCliente extends Activity{
 	private DatosClienteKS dcks = new DatosClienteKS();
 
 
-	private String HOST = "10.0.2.2"; //esto es para el equipo local
+	private String HOST = Valores.HOST; //esto es para el equipo local
 	 public void onCreate(Bundle savedInstanceState) {
 		 try{
 	        super.onCreate(savedInstanceState);
