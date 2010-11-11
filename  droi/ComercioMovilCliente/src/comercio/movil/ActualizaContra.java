@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -45,6 +46,13 @@ public class ActualizaContra extends Activity{
 		ivInicio.setOnClickListener(ivInicioPres);
 		
 	}
+	
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+    	return super.onKeyDown(keyCode, event);
+    }
 	
 	private boolean validaContra(){
 		EditText etContra = (EditText)findViewById(R.id.etContraActualActualizaContra);

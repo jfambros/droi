@@ -12,6 +12,7 @@ import utils.DatosDireccion;
 import utils.DatosDireccionKS;
 import utils.Pais;
 import utils.Validaciones;
+import utils.Valores;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -33,7 +34,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class NuevaDireccionFactura extends Activity{
 	private Bundle bundle = null;
-	private String HOST = "10.0.2.2";
+	private String HOST = Valores.HOST;
 	private ArrayList<DatosDireccion> arrayDireccCliente = new ArrayList<DatosDireccion>();
 	private ArrayList<String> direccionFactura;
 	private ArrayList<String> direccActualCliente = new ArrayList<String>();

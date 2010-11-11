@@ -6,6 +6,7 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.Valores;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,13 +18,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class VerificaCliente extends Activity{
 	private ImageView ivClienteNuevo;
 	private ImageView ivVerificaCliente;
+	private ImageView ivInicio;
+	private ImageView ivCesta;
 	
-	private String HOST = "10.0.2.2"; //esto es para el equipo local
+	private String HOST = Valores.HOST; //esto es para el equipo local
 	private String emailCorrecto = null;
 	private String contra = null;
 	
@@ -38,10 +40,15 @@ public class VerificaCliente extends Activity{
 	        ivVerificaCliente = (ImageView) findViewById(R.id.ivValidaClienteVerificaCte);
 	        ivVerificaCliente.setOnClickListener(ivVerificaClientePres);
 	        
+	        ivInicio = (ImageView)findViewById(R.id.ivInicioVerificaCliente);
+	        ivInicio.setOnClickListener(ivInicioPres);
+	        
+	        ivCesta = (ImageView)findViewById(R.id.ivCestaVerificaCliente);
+	        ivCesta.setOnClickListener(ivCestaPres);
+	        
 	     }
 	 
 	 private OnClickListener ivClienteNuevoPres = new OnClickListener() {
-		
 		public void onClick(View arg0) {
             Intent intent = new Intent();
             intent.setClass(VerificaCliente.this, NuevoCliente.class);
@@ -68,6 +75,26 @@ public class VerificaCliente extends Activity{
 	            startActivity(intent);
 	            finish();			
 			}
+		}
+	};
+	
+	private OnClickListener ivInicioPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+           Intent intent = new Intent();
+           intent.setClass(VerificaCliente.this, Principal.class);
+           startActivity(intent);
+           finish();			
+		}
+	};
+	
+	private OnClickListener ivCestaPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+           Intent intent = new Intent();
+           intent.setClass(VerificaCliente.this, Cesta.class);
+           startActivity(intent);
+           finish();			
 		}
 	};
 	
@@ -144,4 +171,6 @@ public class VerificaCliente extends Activity{
      	})
      	.show();   
 	 }
+	 
+	 
 }
