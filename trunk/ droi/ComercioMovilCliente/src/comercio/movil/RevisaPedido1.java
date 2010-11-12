@@ -96,7 +96,7 @@ public class RevisaPedido1 extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosCliente";
 	    String METHOD_NAME = "obtenerDatosCliente";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -188,7 +188,7 @@ public class RevisaPedido1 extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerCostoEnvio";
 	    String METHOD_NAME = "obtenerCostoEnvio";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;

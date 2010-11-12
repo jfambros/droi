@@ -107,7 +107,7 @@ public class RevisaPedido3 extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosCliente";
 	    String METHOD_NAME = "obtenerDatosCliente";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -239,7 +239,7 @@ public class RevisaPedido3 extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosBanco";
 	    String METHOD_NAME = "obtenerDatosBanco";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -457,7 +457,7 @@ public class RevisaPedido3 extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#insertaProductoOrden";
 	    String METHOD_NAME = "insertaProductoOrden";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    try{
@@ -488,7 +488,7 @@ public class RevisaPedido3 extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosCliente";
 	    String METHOD_NAME = "obtenerDatosCliente";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -629,7 +629,7 @@ public class RevisaPedido3 extends Activity{
 				String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#insertaOrden";
 			    String METHOD_NAME = "insertaOrden";
 			    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-			    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+			    String URL = "http://"+HOST+"/servicios/servicios.php";
 			    SoapSerializationEnvelope envelope;
 			    HttpTransportSE httpt;
 			 //Fin definición

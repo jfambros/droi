@@ -45,7 +45,8 @@ public class MuestraCategorias extends Activity {
 	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerCategorias";
     private static final String METHOD_NAME = "obtenerCategorias";
     private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-    private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+    //private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+    private static final String URL = "http://"+HOST+"/servicios/servicios.php";
     private SoapSerializationEnvelope envelope;
     private HttpTransportSE httpt;
     private Bundle bundleResult=new Bundle();
@@ -161,6 +162,7 @@ public class MuestraCategorias extends Activity {
              result = (SoapObject)envelope.bodyIn;
              
              SoapObject result2 =  (SoapObject) envelope.getResponse();
+             Log.i("Datos:",result2.toString());
              
              for(int cont=0; cont< result2.getPropertyCount(); cont ++){
             	 SoapObject resultados = (SoapObject) result2.getProperty(cont);
@@ -222,7 +224,8 @@ public class ImageAdapter extends BaseAdapter {
 		private Context myContext; 
 		private int numCat;
 		private ArrayList<Categorias> listaCat;
-        private String url = "http://10.0.2.2/tienda/catalog/images/";
+        //private String url = "http://"+Valores.HOST+"/tienda/catalog/images/";
+		private String url = "http://"+Valores.HOST+"/catalog/images/";
 		
 		private Categorias imagenes[];
 		
@@ -282,8 +285,9 @@ public class ImageAdapter extends BaseAdapter {
 			holder.getTexto().setText(((Categorias) getItem(position)).getNombreCat());
 
 			}
-			catch(Exception err)
-			{}
+			catch(Exception err){
+				Log.e("Error en imagen", err.toString());
+			}
 			return convertView; 
 
 			

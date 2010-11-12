@@ -23,12 +23,19 @@ public class Principal extends TabActivity {
         mTabHost.addTab(mTabHost.newTabSpec("Buscar").setIndicator("Buscar",getResources().getDrawable(R.drawable.buscar)).setContent(new Intent(this, Buscar.class)));
         mTabHost.addTab(mTabHost.newTabSpec("Mapa").setIndicator("Mapa",getResources().getDrawable(R.drawable.iconomapa)).setContent(new Intent(this, Mapa.class)));
         //mTabHost.addTab(mTabHost.newTabSpec("Producto").setIndicator("Producto",getResources().getDrawable(R.drawable.icon)).setContent(new Intent(this, Producto.class)));
+
+        /*if (mTabHost.getCurrentTab() == 0 || mTabHost.getCurrentTab() == 1){
+        	
+        }
+        */
+        
         bundle = getIntent().getExtras();
         if (bundle != null){ 
         	mTabHost.setCurrentTab(1);   
         }else{
         	mTabHost.setCurrentTab(0);
         }
+        
     	}catch(Exception err){
     		Log.e("Error principal", err.toString());
     	}

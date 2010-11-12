@@ -38,7 +38,7 @@ public class DescripcionProdSelec extends Activity{
 	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerProducto";
     private static final String METHOD_NAME = "obtenerProducto";
     private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-    private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+    private static final String URL = "http://"+HOST+"/servicios/servicios.php";
     private SoapSerializationEnvelope envelope;
     private HttpTransportSE httpt;
     private Producto producto;
@@ -90,7 +90,7 @@ public class DescripcionProdSelec extends Activity{
     private void inicializaCat(){
     	//ObtenerValoresJSon obtenerValores = new ObtenerValoresJSon();
     	//Bundle prodObtenidos = new Bundle();
-        final String url = "http://"+HOST+"/tienda/catalog/images/";
+        final String url = "http://"+HOST+"/catalog/images/";
     	TextView tvNombreProd = (TextView) findViewById(R.id.tvNombProdDescripProd);
     	TextView tvModeloProd = (TextView) findViewById(R.id.tvModeloProdDescripProd);
     	TextView tvDescripProd = (TextView) findViewById(R.id.tvDescripProdDescripProd);
@@ -171,7 +171,7 @@ public class DescripcionProdSelec extends Activity{
 		String SOAP_ACTIONV = "capeconnect:servicios:serviciosPortType#validaCantidad";
 	    String METHOD_NAMEV = "validaCantidad";
 	    String NAMESPACEV = "http://www.your-company.com/servicios.wsdl";
-	    String URLV = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URLV = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelopeValida;
 	    HttpTransportSE httptValida;
 	    SoapObject resultValida;

@@ -138,14 +138,14 @@ public class Mapa extends MapActivity{
         mapView.invalidate();
     
     }
-	
+	/*
     public boolean onKeyDown(int keyCode, KeyEvent event) {
     	if (keyCode == KeyEvent.KEYCODE_BACK) {
             return false;
         }
     	return super.onKeyDown(keyCode, event);
     }
-	
+	*/
 	private class MyLocationListener implements LocationListener 
     {
         public void onLocationChanged(Location loc) {
@@ -553,12 +553,12 @@ public class Mapa extends MapActivity{
 	};
 	*/
 	
-
+/*
 	protected void onDestroy() {
 		super.onDestroy(); 
 		lm.removeUpdates(locationListener); 
 	};
-	
+	*/
 	private void mensajeError(String titulo, String msj){
 		 new AlertDialog.Builder(Mapa.this)
 

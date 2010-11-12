@@ -11,9 +11,10 @@
      android:layout_height="fill_parent"
      android:enabled="true"
      android:clickable="true"
-     android:apiKey="0S9Ikgk08HaNffIpEeIYdh8I_XrQewGkVzOwyjQ" 
+     android:apiKey="0S9Ikgk08HaO6lyLdu5Z8rBugznFX2AHmAioSfA"      
    />
-
+     <!-- android:apiKey="0S9Ikgk08HaNffIpEeIYdh8I_XrQewGkVzOwyjQ" -->
+     
 	<LinearLayout
 	   android:orientation="horizontal"
 	   android:layout_width="fill_parent"

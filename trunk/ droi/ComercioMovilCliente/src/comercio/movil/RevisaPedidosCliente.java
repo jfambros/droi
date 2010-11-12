@@ -80,7 +80,7 @@ public class RevisaPedidosCliente extends ListActivity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerPedidos";
 	    String METHOD_NAME = "obtenerPedidos";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result;
@@ -165,7 +165,7 @@ public class RevisaPedidosCliente extends ListActivity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDatosCliente";
 	    String METHOD_NAME = "obtenerDatosCliente";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -195,7 +195,7 @@ public class RevisaPedidosCliente extends ListActivity{
 	public class IconListViewAdapter extends ArrayAdapter<ListadoPedidos> {
 
         private ArrayList<ListadoPedidos> items;
-        private String url = "http://"+HOST+"/tienda/catalog/images/";
+        private String url = "http://"+HOST+"/catalog/images/";
 
         public IconListViewAdapter(Context context, int textViewResourceId, ArrayList<ListadoPedidos> items) {
                 super(context, textViewResourceId, items);
