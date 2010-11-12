@@ -42,7 +42,7 @@ public class ProductosListCatLV extends ListActivity{
 	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerProductosPorCategoria";
     private static final String METHOD_NAME = "obtenerProductosPorCategorias";
     private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-    private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+    private static final String URL = "http://"+HOST+"/servicios/servicios.php";
     private SoapSerializationEnvelope envelope; 
     private HttpTransportSE httpt;
     private Bundle bundleResult=new Bundle();
@@ -226,7 +226,7 @@ public class ProductosListCatLV extends ListActivity{
 	 public class IconListViewAdapter extends ArrayAdapter<ProductosCat> {
 
 	        private ArrayList<ProductosCat> items;
-	        private String url = "http://"+HOST+"/tienda/catalog/images/";
+	        private String url = "http://"+HOST+"/catalog/images/";
 
 	        public IconListViewAdapter(Context context, int textViewResourceId, ArrayList<ProductosCat> items) {
 	                super(context, textViewResourceId, items);

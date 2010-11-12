@@ -41,7 +41,7 @@ public class Buscar  extends Activity{
 			intent.putExtra("palabra", etBuscar.getText().toString());
 	        intent.setClass(Buscar.this, ProductosListCatLVBuscar.class);
 	        startActivity(intent);
-	        finish();
+	        Buscar.this.finish();
         }
 		else{
 			mensajeError("Error", "Introduzca una palabra");

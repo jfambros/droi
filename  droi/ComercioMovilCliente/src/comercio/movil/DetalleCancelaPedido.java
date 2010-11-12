@@ -83,7 +83,7 @@ public class DetalleCancelaPedido extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerDetallePedido";
 	    String METHOD_NAME = "obtenerDetallePedido";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -241,7 +241,7 @@ public class DetalleCancelaPedido extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerProductosOrden";
 	    String METHOD_NAME = "obtenerProductosOrden";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;
@@ -351,7 +351,7 @@ public class DetalleCancelaPedido extends Activity{
 		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#borraPedido";
 	    String METHOD_NAME = "borraPedido";
 	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-	    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelope;
 	    HttpTransportSE httpt;
 	    SoapObject result=null;

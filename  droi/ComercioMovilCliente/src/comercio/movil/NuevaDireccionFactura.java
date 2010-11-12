@@ -109,7 +109,7 @@ public class NuevaDireccionFactura extends Activity{
 			String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerLibretaDirecciones";
 		    String METHOD_NAME = "obtenerLibretaDirecciones";
 		    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-		    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+		    String URL = "http://"+HOST+"/servicios/servicios.php";
 		    SoapSerializationEnvelope envelope;
 		    HttpTransportSE httpt;
 		    
@@ -249,7 +249,7 @@ public class NuevaDireccionFactura extends Activity{
 			String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerPaises";
 		    String METHOD_NAME = "obtenerPaises";
 		    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-		    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+		    String URL = "http://"+HOST+"/servicios/servicios.php";
 		    SoapSerializationEnvelope envelope;
 		    HttpTransportSE httpt;
 		    SoapObject result;
@@ -322,7 +322,7 @@ public class NuevaDireccionFactura extends Activity{
 			String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#insertaLibretaDireccion";
 		    String METHOD_NAME = "insertaLibretaDireccion";
 		    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-		    String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
+		    String URL = "http://"+HOST+"/servicios/servicios.php";
 		    SoapSerializationEnvelope envelope;
 		    HttpTransportSE httpt;
 		 //Fin definición

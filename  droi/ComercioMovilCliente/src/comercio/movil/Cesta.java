@@ -50,7 +50,7 @@ public class Cesta extends Activity {
     private TextView precioProd = null;
     
     private static final String HOST = Valores.HOST;
-    private String ruta = "http://"+HOST+"/tienda/catalog/images/";
+    private String ruta = "http://"+HOST+"/catalog/images/";
     private Bundle bundle = null;
     private TableRow row=null;
     private HashMap<String, TableRow> cantidadCesta= new HashMap<String, TableRow>();
@@ -331,7 +331,7 @@ public class Cesta extends Activity {
 		String SOAP_ACTIONV = "capeconnect:servicios:serviciosPortType#validaCantidad";
 	    String METHOD_NAMEV = "validaCantidad";
 	    String NAMESPACEV = "http://www.your-company.com/servicios.wsdl";
-	    String URLV = "http://"+HOST+"/tienda/servicios/servicios.php";
+	    String URLV = "http://"+HOST+"/servicios/servicios.php";
 	    SoapSerializationEnvelope envelopeValida;
 	    HttpTransportSE httptValida;
 	    SoapObject resultValida;
