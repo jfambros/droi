@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-android:layout_width="fill_parent"
-android:layout_height="fill_parent"
-xmlns:android="http://schemas.android.com/apk/res/android"
->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -109,8 +105,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							<EditText
 							   android:id="@+id/etEmailVerificaCte"
 							   android:textColor="#ff000000" 
-								android:maxLines="1"
-								android:text="jferaa007@gmail.com" android:layout_height="40px" android:layout_width="180px" android:textSize="15sp"/>
+							   android:text="jferaa007@gmail.com" 
+							   android:layout_height="40px" 
+							   android:layout_width="180px" 
+							   android:textSize="15sp"/>
 						</TableRow>
 						<TableRow
 						android:layout_width="fill_parent"
@@ -128,7 +126,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 							   android:id="@+id/etPasswdVerificaCte"
 							   android:layout_height="40px"
 								android:textColor="#ff000000" 
-								android:maxLines="1"
 								android:password="true"
 								android:text="123456" android:layout_width="180px" android:textSize="15sp"/>
 						</TableRow>
@@ -249,4 +246,3 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 	</TableLayout>
   
 </LinearLayout>
-</ScrollView>
