@@ -57,12 +57,6 @@
 					android:textSize="14sp"
 					android:text="    "
 					/>
-					<ImageView
-					android:id="@+id/ivContinuarCancelaPedidos"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/continuar48x48"
-					/>
 				</TableRow>
 			</TableLayout>	
 
