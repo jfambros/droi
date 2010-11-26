@@ -291,7 +291,7 @@ public class RevisaPedido3 extends Activity{
     	        TableRow filaNumCta = new TableRow(this);
             	filaNumCta.setLayoutParams(new LayoutParams(
             	LayoutParams.FILL_PARENT,
-            	LayoutParams.WRAP_CONTENT));
+            	LayoutParams.WRAP_CONTENT));  
             	
             	TextView tvNumCta = new TextView(this);
             	tvNumCta.setText("Número de cuenta: "+numeroCuenta.toString());

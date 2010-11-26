@@ -1,18 +1,22 @@
 package comercio.movil;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
-import org.json.JSONObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import utils.ParcheInputStream;
 import utils.ProductosCat;
 import utils.Valores;
 import android.app.AlertDialog;
@@ -20,8 +24,12 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -57,6 +65,7 @@ public class ProductosListCatLV extends ListActivity{
     private ImageView ivRegresa = null;
     private ImageView ivInicio = null;
 	
+    private final static int IO_BUFFER_SIZE = 4 * 1024;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		try{
@@ -251,6 +260,30 @@ public class ProductosListCatLV extends ListActivity{
 	                        
 	            			try{
 	            				ImageView i = new ImageView(ProductosListCatLV.this);
+	            				
+	            				/*
+	            				String rutaUrl = url+productosCat.getImagenProd();
+	            				BitmapFactory.Options options=new BitmapFactory.Options();
+	            				options.inSampleSize = 1;
+	
+	            				URL aURL = new URL(url+productosCat.getImagenProd()); 
+	            	            URLConnection conn = aURL.openConnection(); 
+	            	            conn.connect();
+	            	            InputStream is = conn.getInputStream();                  
+	            	            BufferedInputStream bis = new BufferedInputStream(is); 
+	            	            Bitmap bm = BitmapFactory.decodeStream(bis,null, options); 
+	            	            bis.close(); 
+	            	            is.close();
+	            	            
+	            				if (bm == null){
+	            					Log.e("Erro bitmap", "error");
+	            				}
+	            				Bitmap bMapEScala = Bitmap.createScaledBitmap(bm, 80, 80, true);
+	            				if (bMapEScala == null){
+	            					Log.e("Erro bitmap Escala", "error");
+	            				}	            				
+	            				*/
+	            				/*
 	            				URL aURL = new URL(url+productosCat.getImagenProd()); 
 	            	            URLConnection conn = aURL.openConnection(); 
 	            	            conn.connect();
@@ -258,19 +291,111 @@ public class ProductosListCatLV extends ListActivity{
 	            	            BufferedInputStream bis = new BufferedInputStream(is); 
 	            	            Bitmap bm = BitmapFactory.decodeStream(bis); 
 	            	            bis.close(); 
-	            	            is.close();  
-	            	            Bitmap bMapScala = Bitmap.createScaledBitmap(bm, 80, 80, true);
-	            	            i.setImageBitmap(bMapScala);
+	            	            is.close();
+	            	            */
+	            				
+	        		        	//cambio
+	            				
+	                        	String rutaUrl = url+productosCat.getImagenProd();
+	            				HttpGet httpRequest = null;
+	            				try {
+	            					httpRequest = new HttpGet(rutaUrl);
+	            				} catch (Exception e) {
+	            					e.printStackTrace();
+	            				}
+	            				
+	            				BitmapFactory.Options bfOpt = new BitmapFactory.Options();
+	            				BufferedOutputStream bos = null;
+
+	            		        bfOpt.inScaled = true;
+	            		        bfOpt.inSampleSize = 1;
+	            		        bfOpt.inPurgeable = true;
+	            		        
+	            				
+	            				HttpClient httpclient = new DefaultHttpClient();
+	            		        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+	            		        HttpEntity entity = response.getEntity();
+	            		        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
+	            		        InputStream instream = bufHttpEntity.getContent();
+	            		        //Bitmap bm = BitmapFactory.decodeStream(instream,null,bfOpt);
+	            		        Bitmap bm = BitmapFactory.decodeStream(new ParcheInputStream(instream),null,bfOpt);
+	            		        Bitmap bMapEScala;
+	            		        if (bm == null){
+	            		        	Log.e("error", "Error en BitMap");
+	            		        	Resources res = getResources();
+	            		        	Drawable drawable = res.getDrawable(R.drawable.categorias64x64);
+	            		        	i.setImageDrawable(drawable);
+	            		        	Bitmap bmp=((BitmapDrawable)drawable).getBitmap();
+	            		        	bMapEScala = Bitmap.createScaledBitmap(bmp, 64,64, true);
+	            		        }
+	            		        else{
+	            		        	bMapEScala = Bitmap.createScaledBitmap(bm, 80, 80, true);	
+	            		        }
+
+	            		       
+	            		        
+	            				//fin
+
+	            	            //nuevo
+	            				/*
+	            				Bitmap bm = null;
+
+	            			    InputStream in = null;
+
+	            			    BufferedOutputStream out = null;
+	            			    
+	            			    
+
+	            			    try {
+
+	            			            in = new BufferedInputStream(new URL(url).openStream(), IO_BUFFER_SIZE);
+
+
+
+	            			            final ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
+
+	            			            out = new BufferedOutputStream(dataStream, IO_BUFFER_SIZE);
+
+	            			            copy(in, out);
+
+	            			            out.flush();
+
+
+
+	            			            final byte[] data = dataStream.toByteArray();
+
+	            			            bm = BitmapFactory.decodeByteArray(data, 0, data.length);
+
+
+
+
+
+	            			   } catch (Exception err){
+	            				   	Log.e("Error", err.toString());
+
+	            			   }    
+	            			   Bitmap bMapEScala = Bitmap.createScaledBitmap(bm, 80, 80, true);
+	            			   */
+	            				//fin
+	            				
+	            				
+	            		        if (bm != null){
+	            		        	i.setImageBitmap(bMapEScala);	
+		            		    }
+	            	            
 	            	            //i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
 	            	            i.setLayoutParams(new GridView.LayoutParams(80, 80));
 	            	            
 		            			if (imagenProd != null){
-			            			   imagenProd.setImageBitmap(bMapScala);
+			            			   imagenProd.setImageBitmap(bMapEScala);
 			            		}
+		            			//instream.close();
 
 	            			}
 	            			catch(Exception err)
-	            			{}
+	            			{
+	            				Log.e("Error grid" , err.toString());
+	            			}
 	            			if (nombreProd != null){
 	            			   nombreProd.setText(productosCat.getNombreProd());
 	            			}
@@ -290,6 +415,8 @@ public class ProductosListCatLV extends ListActivity{
 	                return v;
 	        }
 	}
+	 
+	    
 	 
 	 private OnClickListener ivCestaPres = new OnClickListener() {
 		
