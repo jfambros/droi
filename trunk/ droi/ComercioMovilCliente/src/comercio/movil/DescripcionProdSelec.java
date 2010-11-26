@@ -5,6 +5,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -97,7 +103,7 @@ public class DescripcionProdSelec extends Activity{
     	TextView tvPrecioProd = (TextView) findViewById(R.id.tvPrecioProdDescripProd);
     	TextView tvFabricanteProd = (TextView) findViewById(R.id.tvFabricanteDescripProd);
     	ImageView ivImagenProd = (ImageView) findViewById(R.id.ivImgProdDescripProd);
-    
+     
     	
     	try{
              httpt.call(SOAP_ACTION, envelope);
@@ -129,10 +135,13 @@ public class DescripcionProdSelec extends Activity{
             	 tvNombreProd.setText(producto.getNombreProd());
             	 tvModeloProd.setText("Modelo: ["+producto.getModeloProd()+"]");
             	 tvDescripProd.setText(producto.getDescripProd());
-            	 tvPrecioProd.setText(producto.getPrecioProd());
+            	 tvPrecioProd.setText("$"+producto.getPrecioProd());
             	 tvFabricanteProd.setText(producto.getFabricanteProd());
             	 
             	 ImageView i = new ImageView(DescripcionProdSelec.this);
+            	 
+            	 
+            	 /*
      			 URL aURL = new URL(url+producto.getImagenProd()); 
                  URLConnection conn = aURL.openConnection(); 
                  conn.connect();
@@ -140,9 +149,25 @@ public class DescripcionProdSelec extends Activity{
                  BufferedInputStream bis = new BufferedInputStream(is); 
                  Bitmap bm = BitmapFactory.decodeStream(bis); 
                  bis.close(); 
-                 is.close();  
-                 i.setImageBitmap(bm);
-                 ivImagenProd.setImageBitmap(bm);
+                 is.close();
+                 */
+		        	//cambio
+            	String rutaUrl = url+producto.getImagenProd();
+				HttpGet httpRequest = null;
+				try {
+					httpRequest = new HttpGet(rutaUrl);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				HttpClient httpclient = new DefaultHttpClient();
+		        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+		        HttpEntity entity = response.getEntity();
+		        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
+		        InputStream instream = bufHttpEntity.getContent();
+		        Bitmap bm = BitmapFactory.decodeStream(instream);
+				//fin
+		        i.setImageBitmap(bm);
+		        ivImagenProd.setImageBitmap(bm);
             	 
  
     	}

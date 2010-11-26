@@ -8,6 +8,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -132,7 +138,8 @@ public class Cesta extends Activity {
 		        	LayoutParams.FILL_PARENT,
 		        	LayoutParams.WRAP_CONTENT));
 		        	
-		        	
+		        	String rutaUrl = ruta + ((DatosCesta) me.getValue()).getImagenProducto();
+		        	/*
 		        	String rutaUrl = ruta + ((DatosCesta) me.getValue()).getImagenProducto();
 		        	URL aURL = new URL(rutaUrl);
 		        	HttpURLConnection conn= (HttpURLConnection)aURL.openConnection();
@@ -143,6 +150,22 @@ public class Cesta extends Activity {
 		            byte[] bitmapData2 =new byte[length];
 		            InputStream is = conn.getInputStream();
 		            Bitmap bmImg = BitmapFactory.decodeStream(is);
+		            */
+		        	//cambio
+					HttpGet httpRequest = null;
+					try {
+						httpRequest = new HttpGet(rutaUrl);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					HttpClient httpclient = new DefaultHttpClient();
+			        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+			        HttpEntity entity = response.getEntity();
+			        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
+			        InputStream instream = bufHttpEntity.getContent();
+			        Bitmap bmImg = BitmapFactory.decodeStream(instream);
+					//fin
+		            
 		            Bitmap bMapScala = Bitmap.createScaledBitmap(bmImg, 80, 80, true);
 		            
 		            

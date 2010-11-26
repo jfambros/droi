@@ -6,6 +6,12 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -19,9 +25,13 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -250,6 +260,48 @@ public class ProductosListCatLVBuscar extends ListActivity{
 	                        
 	            			try{
 	            				ImageView i = new ImageView(ProductosListCatLVBuscar.this);
+	            				
+	            				//cambio
+	                        	String rutaUrl = url+productosCat.getImagenProd();
+	            				HttpGet httpRequest = null;
+	            				try {
+	            					httpRequest = new HttpGet(rutaUrl);
+	            				} catch (Exception e) {
+	            					e.printStackTrace();
+	            				}
+	            				
+	            				BitmapFactory.Options bfOpt = new BitmapFactory.Options();
+
+	            		        bfOpt.inScaled = true;
+	            		        bfOpt.inSampleSize = 1;
+	            		        bfOpt.inPurgeable = true;
+	            		        
+	            				HttpClient httpclient = new DefaultHttpClient();
+	            		        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+	            		        HttpEntity entity = response.getEntity();
+	            		        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
+	            		        InputStream instream = bufHttpEntity.getContent();
+	            		        Bitmap bm = BitmapFactory.decodeStream(instream,null,bfOpt);
+	            		        Bitmap bMapEScala;
+	            		        
+	            		        if (bm == null){
+	            		        	Log.e("error", "Error en BitMap");
+	            		        	Resources res = getResources();
+	            		        	Drawable drawable = res.getDrawable(R.drawable.categorias64x64);
+	            		        	i.setImageDrawable(drawable);
+	            		        	Bitmap bmp=((BitmapDrawable)drawable).getBitmap();
+	            		        	bMapEScala = Bitmap.createScaledBitmap(bmp, 64,64, true);
+	            		        }
+	            		        else{
+	            		        	bMapEScala = Bitmap.createScaledBitmap(bm, 80, 80, true);
+	            		        }
+	            		        if (bm != null){
+	            		        	i.setImageBitmap(bMapEScala);	
+		            		    }
+	            		        
+	            				//fin
+
+	            				/*
 	            				URL aURL = new URL(url+productosCat.getImagenProd()); 
 	            	            URLConnection conn = aURL.openConnection(); 
 	            	            conn.connect();
@@ -263,9 +315,9 @@ public class ProductosListCatLVBuscar extends ListActivity{
 	            	            i.setImageBitmap(bMapScala);
 	            	            //i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
 	            	            i.setLayoutParams(new GridView.LayoutParams(80, 80));
-	            	            
+	            	            */
 		            			if (imagenProd != null){
-			            			   imagenProd.setImageBitmap(bMapScala);
+			            			   imagenProd.setImageBitmap(bMapEScala);
 			            		}
 
 	            			}

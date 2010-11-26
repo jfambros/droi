@@ -1,13 +1,14 @@
 package comercio.movil;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.json.JSONObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
@@ -16,15 +17,18 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import utils.Categorias;
 import utils.DatosCategorias;
+import utils.ParcheInputStream;
 import utils.Valores;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -37,7 +41,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MuestraCategorias extends Activity {
@@ -267,20 +270,64 @@ public class ImageAdapter extends BaseAdapter {
 
 			} 
 			try{
+				
+				
 			ImageView i = new ImageView(this.myContext);
-			URL aURL = new URL(url+imagenes[position].getImagenCat()); 
+			
+			
+			
+
+			//cambio
+			HttpGet httpRequest = null;
+			try {
+				httpRequest = new HttpGet(url+imagenes[position].getImagenCat());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			HttpClient httpclient = new DefaultHttpClient();
+	        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+	        HttpEntity entity = response.getEntity();
+	        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
+	        InputStream instream = bufHttpEntity.getContent();
+	        
+	        BitmapFactory.Options bfOpt = new BitmapFactory.Options();
+
+	        bfOpt.inScaled = true;
+	        bfOpt.inSampleSize = 1;
+	        bfOpt.inPurgeable = true;
+	        
+	        //Bitmap bm = BitmapFactory.decodeStream(instream,null,bfOpt);
+	        Bitmap bm = BitmapFactory.decodeStream(new ParcheInputStream(instream),null,bfOpt);
+	        if (bm == null){
+	        	Log.e("error", "Error en BitMap");
+	        	Resources res = getResources();
+	        	Drawable drawable = res.getDrawable(R.drawable.categorias64x64);
+	        	i.setImageDrawable(drawable);
+	        	Bitmap bmp=((BitmapDrawable)drawable).getBitmap();
+	        	bm= Bitmap.createScaledBitmap(bmp, 64,64, true);
+	        }
+	        else{
+	          i.setImageBitmap(bm);	
+	        }
+	        instream.close();
+			//fin
+	        //original
+	        /*
+	         * URL aURL = new URL(url+imagenes[position].getImagenCat());
             URLConnection conn = aURL.openConnection(); 
             conn.connect();
             InputStream is = conn.getInputStream();                  
             BufferedInputStream bis = new BufferedInputStream(is); 
             Bitmap bm = BitmapFactory.decodeStream(bis); 
+            
             bis.close(); 
             is.close();  
-            i.setImageBitmap(bm);
+	         */
+            
+            //i.setImageBitmap(bm);
             i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
             i.setLayoutParams(new GridView.LayoutParams(80, 80)); 
-            
-			holder.getImagen().setImageBitmap(bm);
+            holder.getImagen().setImageBitmap(bm);
 			
 			holder.getTexto().setText(((Categorias) getItem(position)).getNombreCat());
 
