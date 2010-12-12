@@ -161,10 +161,11 @@ android:layout_gravity="center_horizontal"
 android:textSize="12sp"
 />
 <ImageView
-android:id="@+id/imgRemoto1"
+android:id="@+id/ivConf"
 android:layout_gravity="center_horizontal"
 android:layout_width="48px"
 android:layout_height="48px"
+android:src="@drawable/droid"
 >
 </ImageView>
 

@@ -161,9 +161,27 @@ public class Mapa extends MapActivity{
                 GeoPoint p = new GeoPoint(
                         (int) (loc.getLatitude() * 1E6), 
                         (int) (loc.getLongitude() * 1E6));
+                /*
                 mc.animateTo(p);
                 mc.setZoom(17);                
                 mapView.invalidate();
+                */
+                pDestino = p;
+
+               
+				MapOverlay mapDestino = new MapOverlay(pDestino, R.drawable.marcadorusuario);
+		        listaOverlays = mapView.getOverlays();
+		        if (listaOverlays.size()==2){
+		        	listaOverlays.remove(1);
+		        }
+		        //listaOverlays.clear();
+		        listaOverlays.add(mapDestino); 
+
+				mc.animateTo(pDestino);
+                mc.setZoom(17);                
+                mapView.invalidate();   
+            
+                
             }
         }
 
@@ -325,6 +343,7 @@ public class Mapa extends MapActivity{
     }
     
     private void activaGPS(){
+    	try{
     	//---use the LocationManager class to obtain GPS locations---
         lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);    
         
@@ -334,7 +353,61 @@ public class Mapa extends MapActivity{
             LocationManager.GPS_PROVIDER, 
             0, 
             0, 
-            locationListener);  
+            locationListener);
+        
+        Location loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Double lat = loc.getLatitude() * 1E6;
+        Double lon = loc.getLongitude() * 1E6;
+        
+        GeoPoint punto = new GeoPoint(lat.intValue(), lon.intValue());
+        pDestino = punto;
+        
+        MapOverlay mapDestino = new MapOverlay(pDestino, R.drawable.marcadorusuario);
+        listaOverlays = mapView.getOverlays();
+        if (listaOverlays.size()==2){
+        	listaOverlays.remove(1);
+        }
+        //listaOverlays.clear();
+        listaOverlays.add(mapDestino); 
+
+		mc.animateTo(pDestino);
+        mc.setZoom(17);                
+        mapView.invalidate();
+        
+    	}
+    	catch (Exception e) {
+    		Toast.makeText(this, "No se puede obtener la ubicación", Toast.LENGTH_SHORT).show();
+
+		}
+         
+        //Location loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        /*
+        Toast.makeText(getBaseContext(), 
+                "Latitude: " + loc.getLatitude() + 
+                " Longitude: " + loc.getLongitude(), 
+                Toast.LENGTH_LONG).show();
+                */
+        
+        
+      /*
+        double lat = loc.getLatitude() * 1E6;
+        double lon = loc.getLongitude() * 1E6;
+        
+        GeoPoint punto = new GeoPoint(lat.intValue(), lon.intValue());
+        pDestino = punto;
+        
+        MapOverlay mapDestino = new MapOverlay(pDestino, R.drawable.marcadorusuario);
+        listaOverlays = mapView.getOverlays();
+        if (listaOverlays.size()==2){
+        	listaOverlays.remove(1);
+        }
+        //listaOverlays.clear();
+        listaOverlays.add(mapDestino); 
+
+		mc.animateTo(pDestino);
+        mc.setZoom(17);                
+        mapView.invalidate();
+        */
     }
       
     private OnClickListener btnSatelitePres = new OnClickListener() {
@@ -368,7 +441,7 @@ public class Mapa extends MapActivity{
 				onOff = '1';
 				btnGPS.setText("GPS Off");
 				activaGPS();
-				
+			
 			}
 			else{
 				onOff = '0';				
