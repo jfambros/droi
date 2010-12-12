@@ -1,28 +1,31 @@
 package comercio.movil;
 
-import java.net.URL;
-
+import utils.Validaciones;
+import utils.Valores;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Portada extends Activity {
 
 	private ImageView categorias;
 	private ImageView ivDatosCuenta;
 	private TextView txtVerCategorias;
-	URL rutaUrl;
+	private ImageView ivConf;
 
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.portada);
-       // String url = "http://www.terra.es/personal3/javaja/android/img/logoAndroid_2_camiseta.png";
         categorias = (ImageView)findViewById(R.id.imgCategorias);
         categorias.setOnClickListener(imgCategoriasPres);
         
@@ -31,27 +34,10 @@ public class Portada extends Activity {
         
         ivDatosCuenta = (ImageView)findViewById(R.id.ivDatosCuenta);
         ivDatosCuenta.setOnClickListener(ivDatosCuentaPres);
-        /*
-        try{
-        HttpURLConnection conn= (HttpURLConnection)rutaUrl.openConnection();
-        conn.setDoInput(true);
-        conn.connect();
-        int length = conn.getContentLength();
-        int[] bitmapData =new int[length];
-        byte[] bitmapData2 =new byte[length];
-        InputStream is = conn.getInputStream();
-        Bitmap bmImg = BitmapFactory.decodeStream(is);
-        ImageView img = (ImageView) findViewById(R.id.imgRemoto1);
-        img.setImageBitmap(bmImg);
-        }
-        catch(IOException err){
-
-        }
-*/
-        //http://www.terra.es/personal3/javaja/android/img/logoAndroid_2_camiseta.png
-         
-    }
-    
+        
+        ivConf = (ImageView)findViewById(R.id.ivConf);
+        ivConf.setOnClickListener(ivConfPres); 
+    }    
     public boolean onKeyDown(int keyCode, KeyEvent event) {
     	if (keyCode == KeyEvent.KEYCODE_BACK) {
             return false;
@@ -81,6 +67,28 @@ public class Portada extends Activity {
 	        Intent intent = new Intent();
 	        intent.setClass(Portada.this, VerificaDatosCliente.class);
 	        startActivity(intent);				
+		}
+	};
+	
+	private OnClickListener ivConfPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			final AlertDialog.Builder alerta = new AlertDialog.Builder(Portada.this);
+			final EditText entrada = new EditText(Portada.this);
+			        alerta.setView(entrada);
+			        alerta.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int whichButton) {
+			                Valores.HOST = entrada.getText().toString();
+			            }
+			        });
+			        alerta.setNegativeButton("Cancelar",
+			                new DialogInterface.OnClickListener() {
+			                    public void onClick(DialogInterface dialog, int whichButton) {
+			                        dialog.cancel();
+			                    }
+			                });
+			        alerta.setTitle("Ip");
+			        alerta.show();
 		}
 	};
 	
