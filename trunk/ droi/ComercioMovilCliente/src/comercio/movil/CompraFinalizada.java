@@ -7,7 +7,9 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import utils.Valores;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 public class CompraFinalizada extends Activity{
  
 	private ImageView ivInicio;
+	private ImageView ivLlamar;
 	private String HOST = Valores.HOST;
 	private Bundle bundle;
 	
@@ -31,6 +34,9 @@ public class CompraFinalizada extends Activity{
 	   
 	   ivInicio = (ImageView) findViewById(R.id.ivInicioCompraFin);
 	   ivInicio.setOnClickListener(ivInicioPres);
+	   
+	   ivLlamar = (ImageView) findViewById(R.id.ivLlamar);
+	   ivLlamar.setOnClickListener(ivLlamarPres);
 	   
 	}
 	
@@ -77,7 +83,18 @@ public class CompraFinalizada extends Activity{
 		}
 	};
 	
-	
-
+	private OnClickListener ivLlamarPres = new OnClickListener() {
+		
+		public void onClick(View arg0) {
+			try {
+		        Intent callIntent = new Intent(Intent.ACTION_CALL);
+		        callIntent.setData(Uri.parse("tel:123456789"));
+		        startActivity(callIntent);
+		    } catch (ActivityNotFoundException err) {
+		         Log.e("helloandroid dialing example", "Call failed", err);
+		    }
+		}
+	};
+  
 
 }
