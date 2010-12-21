@@ -2,6 +2,7 @@ package comercio.movil;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
@@ -16,6 +17,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class CompraFinalizada extends Activity{
  
@@ -65,6 +67,34 @@ public class CompraFinalizada extends Activity{
 		}
 	}
 	
+	private String obtenerTelefono(){
+		//Definición para servicio Web
+		String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerTelefono";
+	    String METHOD_NAME = "obtenerTelefono";
+	    String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+	    String URL = "http://"+HOST+"/servicios/servicios.php";
+	    SoapSerializationEnvelope envelope;
+	    HttpTransportSE httpt;
+	    SoapObject result=null;
+	 //Fin definición
+	    try{
+		    SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+	        httpt = new HttpTransportSE(URL);
+	        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+	        envelope.dotNet = false;
+	        envelope.setOutputSoapObject(request);
+	        httpt.call(SOAP_ACTION, envelope);
+	        result =  (SoapObject) envelope.bodyIn;
+	        SoapPrimitive spTelefono = (SoapPrimitive) result.getProperty("result");
+	        //SoapObject resultSoap =  (SoapObject) envelope.getResponse();
+	        Log.i("Telefono", spTelefono.toString());
+	        return spTelefono.toString();
+	    }catch (Exception e) {
+	    	Log.e("error obtener teléfono", e.toString());
+	    	return "";
+		}
+	}
+	
 	
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
     	if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -87,11 +117,12 @@ public class CompraFinalizada extends Activity{
 		
 		public void onClick(View arg0) {
 			try {
-		        Intent callIntent = new Intent(Intent.ACTION_CALL);
-		        callIntent.setData(Uri.parse("tel:123456789"));
-		        startActivity(callIntent);
+		        Intent intentLlamada = new Intent(Intent.ACTION_CALL);
+		        intentLlamada.setData(Uri.parse("tel:"+obtenerTelefono()));
+		        startActivity(intentLlamada);
 		    } catch (ActivityNotFoundException err) {
-		         Log.e("helloandroid dialing example", "Call failed", err);
+		         Log.e("error llamar", err.toString());
+ 		    	 Toast.makeText(CompraFinalizada.this, "No se puede establecer la llamada", Toast.LENGTH_LONG).show();
 		    }
 		}
 	};
