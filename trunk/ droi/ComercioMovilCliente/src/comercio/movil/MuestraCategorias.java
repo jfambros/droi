@@ -44,59 +44,27 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class MuestraCategorias extends Activity {
-	private static final String HOST = Valores.HOST; //esto es para el equipo local
-	private static final String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerCategorias";
-    private static final String METHOD_NAME = "obtenerCategorias";
-    private static final String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
-    //private static final String URL = "http://"+HOST+"/tienda/servicios/servicios.php";
-    private static final String URL = "http://"+HOST+"/servicios/servicios.php";
-    private SoapSerializationEnvelope envelope;
-    private HttpTransportSE httpt;
-    private Bundle bundleResult=new Bundle();
-    private String resultData;
-    
     public ArrayList<Categorias> listaCategorias;
-    
-    private SoapObject result;
-    
-    //botones
     private ImageView ivCesta = null;
     private ImageView ivRegresar = null;
-    
-    
+ 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.muestracategorias);
-        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
-
-        httpt = new HttpTransportSE(URL);
-        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
-        envelope.dotNet = false;
-       // envelope.bodyOut = request; 
-        envelope.setOutputSoapObject(request);
-        
-        
-        
         inicializaCat();
         
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ((GridView) findViewById(R.id.gridview)).setOnItemClickListener(clickList);
-        
 		
 		try{
 		gridview.setAdapter(new ImageAdapter(this, listaCategorias.size(), listaCategorias));
 		}
 		catch (Exception e) {
 	    	new AlertDialog.Builder(MuestraCategorias.this)
-
 	    	.setTitle("error en OnCreate")
-
 	    	.setMessage(e.toString())
-
 	    	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
 	    	public void onClick(DialogInterface dialog, int whichButton) {
-
 	    	setResult(RESULT_OK);
 	    	  }
 	    	})
@@ -108,9 +76,6 @@ public class MuestraCategorias extends Activity {
 		
 		ivCesta.setOnClickListener(ivCestaPres);
 		ivRegresar.setOnClickListener(ivRegresarPres);
-		
-		
-		
      }
     
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -127,38 +92,43 @@ public class MuestraCategorias extends Activity {
 			try{
 				String val = ((Categorias) parent.getAdapter().getItem(position)).getNombreCat();
 				String idCat =((Categorias) parent.getAdapter().getItem(position)).getIdCat();
-				//Toast.makeText(MuestraCategorias.this, "Id: " + idCat +" categoria "+  val,Toast.LENGTH_SHORT).show();
-		      //Toast.makeText(Servicio3.this, "Dato: " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(); 
 				i.putExtra("idCategoria", idCat);
 				i.setClass(MuestraCategorias.this, ProductosListCatLV.class);
 				startActivity(i);
 				finish();
-		   
 			}
 			catch (Exception e) {
 		    	new AlertDialog.Builder(MuestraCategorias.this)
-
 		    	.setTitle("error en OnItemClic()")
-
 		    	.setMessage(e.toString())
-
 		    	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
 		    	public void onClick(DialogInterface dialog, int whichButton) {
-
-		    	setResult(RESULT_OK);
+		    		setResult(RESULT_OK);
 		    	  }
 		    	})
 		    	.show();
 		    }
-
-		   
 		}
 	};  
     
     
     public void inicializaCat(){
+    	String HOST = Valores.HOST;
+    	String SOAP_ACTION = "capeconnect:servicios:serviciosPortType#obtenerCategorias";
+        String METHOD_NAME = "obtenerCategorias";
+        String NAMESPACE = "http://www.your-company.com/servicios.wsdl";
+        String URL = "http://"+HOST+"/servicios/servicios.php";
+        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+        SoapSerializationEnvelope envelope;
+        HttpTransportSE httpt;
+        SoapObject result;
+        
+        httpt = new HttpTransportSE(URL);
+        envelope = new SoapSerializationEnvelope( SoapEnvelope.VER11 );
+        envelope.dotNet = false;
+        envelope.setOutputSoapObject(request);
+        
     	listaCategorias = new ArrayList<Categorias>();
     	try{
             httpt.call(SOAP_ACTION, envelope);
@@ -184,16 +154,11 @@ public class MuestraCategorias extends Activity {
     	}
     	catch(Exception err){
         	new AlertDialog.Builder(MuestraCategorias.this)
-
         	.setTitle("error en inicializaCat()")
-
         	.setMessage(err.toString())
-
         	.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-
         	public void onClick(DialogInterface dialog, int whichButton) {
-
-        	setResult(RESULT_OK);
+        		setResult(RESULT_OK);
         	  }
         	})
         	.show();   		
@@ -227,7 +192,6 @@ public class ImageAdapter extends BaseAdapter {
 		private Context myContext; 
 		private int numCat;
 		private ArrayList<Categorias> listaCat;
-        //private String url = "http://"+Valores.HOST+"/tienda/catalog/images/";
 		private String url = "http://"+Valores.HOST+"/catalog/images/";
 		
 		private Categorias imagenes[];
@@ -245,14 +209,11 @@ public class ImageAdapter extends BaseAdapter {
         	inflater = (LayoutInflater) myContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
         } 
 
-        /** Returns the amount of images we have defined. */ 
         public int getCount() { return this.imagenes.length; } 
 
-        /* Use the array-Positions as unique IDs */ 
         public Object getItem(int position) { return listaCat.get(position); } 
         public long getItemId(int position) { return position; } 
 
-		// create a new ImageView for each item referenced by the Adapter
 		public View getView(int position, View convertView, ViewGroup parent) {
 			
 			DatosCategorias holder;
@@ -266,70 +227,62 @@ public class ImageAdapter extends BaseAdapter {
 			} 
 			else 
 			{ 
-			holder = (DatosCategorias) convertView.getTag(); 
-
+				holder = (DatosCategorias) convertView.getTag(); 
 			} 
 			try{
+				ImageView i = new ImageView(this.myContext);
+				HttpGet httpRequest = null;
+				try {
+					httpRequest = new HttpGet(url+imagenes[position].getImagenCat());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				HttpClient httpclient = new DefaultHttpClient();
+		        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
+		        HttpEntity entity = response.getEntity();
+		        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
+		        InputStream instream = bufHttpEntity.getContent();
+		        
+		        BitmapFactory.Options bfOpt = new BitmapFactory.Options();
+		
+		        bfOpt.inScaled = true;
+		        bfOpt.inSampleSize = 1;
+		        bfOpt.inPurgeable = true;
+		        
+		        //Bitmap bm = BitmapFactory.decodeStream(instream,null,bfOpt);
+		        Bitmap bm = BitmapFactory.decodeStream(new ParcheInputStream(instream),null,bfOpt);
+		        if (bm == null){
+		        	Log.e("error", "Error en BitMap");
+		        	Resources res = getResources();
+		        	Drawable drawable = res.getDrawable(R.drawable.categorias64x64);
+		        	i.setImageDrawable(drawable);
+		        	Bitmap bmp=((BitmapDrawable)drawable).getBitmap();
+		        	bm= Bitmap.createScaledBitmap(bmp, 64,64, true);
+		        }
+		        else{
+		          i.setImageBitmap(bm);	
+		        }
+		        instream.close();
+				//fin
+		        //original
+		        /*
+		         * URL aURL = new URL(url+imagenes[position].getImagenCat());
+		        URLConnection conn = aURL.openConnection(); 
+		        conn.connect();
+		        InputStream is = conn.getInputStream();                  
+		        BufferedInputStream bis = new BufferedInputStream(is); 
+		        Bitmap bm = BitmapFactory.decodeStream(bis); 
+		        
+		        bis.close(); 
+		        is.close();  
+		         */
+		        
+		        //i.setImageBitmap(bm);
+		        i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
+		        i.setLayoutParams(new GridView.LayoutParams(80, 80)); 
+		        holder.getImagen().setImageBitmap(bm);
 				
-				
-			ImageView i = new ImageView(this.myContext);
-			
-			
-			
-
-			//cambio
-			HttpGet httpRequest = null;
-			try {
-				httpRequest = new HttpGet(url+imagenes[position].getImagenCat());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			HttpClient httpclient = new DefaultHttpClient();
-	        HttpResponse response = (HttpResponse) httpclient.execute(httpRequest);
-	        HttpEntity entity = response.getEntity();
-	        BufferedHttpEntity bufHttpEntity = new BufferedHttpEntity(entity); 
-	        InputStream instream = bufHttpEntity.getContent();
-	        
-	        BitmapFactory.Options bfOpt = new BitmapFactory.Options();
-
-	        bfOpt.inScaled = true;
-	        bfOpt.inSampleSize = 1;
-	        bfOpt.inPurgeable = true;
-	        
-	        //Bitmap bm = BitmapFactory.decodeStream(instream,null,bfOpt);
-	        Bitmap bm = BitmapFactory.decodeStream(new ParcheInputStream(instream),null,bfOpt);
-	        if (bm == null){
-	        	Log.e("error", "Error en BitMap");
-	        	Resources res = getResources();
-	        	Drawable drawable = res.getDrawable(R.drawable.categorias64x64);
-	        	i.setImageDrawable(drawable);
-	        	Bitmap bmp=((BitmapDrawable)drawable).getBitmap();
-	        	bm= Bitmap.createScaledBitmap(bmp, 64,64, true);
-	        }
-	        else{
-	          i.setImageBitmap(bm);	
-	        }
-	        instream.close();
-			//fin
-	        //original
-	        /*
-	         * URL aURL = new URL(url+imagenes[position].getImagenCat());
-            URLConnection conn = aURL.openConnection(); 
-            conn.connect();
-            InputStream is = conn.getInputStream();                  
-            BufferedInputStream bis = new BufferedInputStream(is); 
-            Bitmap bm = BitmapFactory.decodeStream(bis); 
-            
-            bis.close(); 
-            is.close();  
-	         */
-            
-            //i.setImageBitmap(bm);
-            i.setScaleType(ImageView.ScaleType.FIT_CENTER); 
-            i.setLayoutParams(new GridView.LayoutParams(80, 80)); 
-            holder.getImagen().setImageBitmap(bm);
-			
-			holder.getTexto().setText(((Categorias) getItem(position)).getNombreCat());
+				holder.getTexto().setText(((Categorias) getItem(position)).getNombreCat());
 
 			}
 			catch(Exception err){
@@ -368,9 +321,5 @@ public class ImageAdapter extends BaseAdapter {
         return i;
         */
     }
-		
 	}
-	
-    
-    
  }
