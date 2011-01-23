@@ -21,10 +21,6 @@
        android:label="Categorías disponibles">
     </activity>
 
-    <activity android:name="DescripcionProducto"
-       android:label="Descripción del producto">
-    </activity>
-
     <activity android:name="Buscar"
        android:label="Búsqueda">
     </activity>
