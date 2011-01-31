@@ -47,6 +47,7 @@ public class NuevaDireccionEntrega extends Activity{
 	private int pais;
 	private String nombrePais;
 	private char sexo = '0';
+
 	
 	private RadioGroup rgSexo = null;
 	private ImageView ivContinuar = null;
