@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class RevisaPedido1 extends Activity{
-	private EditText tvComentario = null;
+	private EditText etComentario = null;
 	private ImageView ivContinuar = null;
 	private RadioGroup rgSiNoEnvio = null;
 	private ImageView ivCambiaDirecc = null;
@@ -45,7 +45,7 @@ public class RevisaPedido1 extends Activity{
         setContentView(R.layout.revisapedido1);
         
         //objetos
-        tvComentario = (EditText) findViewById(R.id.etComentarioRevisaPed1);
+        etComentario = (EditText) findViewById(R.id.etComentarioRevisaPed1);
         
         ivContinuar = (ImageView) findViewById(R.id.ivContinuarRevisaPed1);
         ivContinuar.setOnClickListener(ivContinuarPres);
@@ -66,7 +66,7 @@ public class RevisaPedido1 extends Activity{
         }
         
         if (bundle.getString("comentario")!= null){
-        	tvComentario.setText(bundle.getString("comentario"));
+        	etComentario.setText(bundle.getString("comentario"));
         }
         if (bundle.getString("envioProd")!= null){
         	obtieneCostoEnvio();
@@ -220,11 +220,11 @@ public class RevisaPedido1 extends Activity{
 	private OnClickListener ivContinuarPres = new OnClickListener() {
 		
 		public void onClick(View arg0) {
-			Log.i("comentario",tvComentario.getText().toString());
+			Log.i("comentario",etComentario.getText().toString());
 			
 	        Intent intent = new Intent();
 	        intent.putExtra("idCliente", idClienteA);
-	        intent.putExtra("comentario", tvComentario.getText().toString());
+	        intent.putExtra("comentario", etComentario.getText().toString());
 	        intent.putExtra("emailCliente", email);
 	        intent.putExtra("envioProd", envioProd);
 	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
@@ -260,6 +260,7 @@ public class RevisaPedido1 extends Activity{
 			Intent intent = new Intent();
 	        intent.putExtra("idCliente", idClienteA);
 	        intent.putExtra("emailCliente", email);
+	        intent.putExtra("comentario", etComentario.getText().toString());
 	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
 	        if (bundle.getStringArrayList("direccionFactura")!= null){
 		        intent.putStringArrayListExtra("direccionFactura", bundle.getStringArrayList("direccionFactura"));

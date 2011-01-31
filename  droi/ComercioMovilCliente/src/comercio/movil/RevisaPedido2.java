@@ -228,7 +228,8 @@ public class RevisaPedido2 extends Activity{
 		public void onClick(View arg0) {
 			Intent intent = new Intent();
 			intent.putExtra("idCliente", idClienteA);
-			intent.putExtra("emailCliente", email);					
+			intent.putExtra("emailCliente", email);		
+			intent.putExtra("comentario", etComentario.getText().toString());
 	        intent.putStringArrayListExtra("direccionCliente", direccionCliente);
 	        intent.setClass(RevisaPedido2.this, NuevaDireccionFactura.class);
 	        startActivity(intent);
