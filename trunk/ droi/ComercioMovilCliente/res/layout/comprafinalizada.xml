@@ -38,7 +38,7 @@
 			android:layout_height="wrap_content"
 			android:textColor="#ff000000"
 			android:textSize="14sp"
-			android:text="Lo invitamos a seguir comprando en nuestra tienda o llamar para reportar el pedido con mayor rápidez"
+			android:text="Lo invitamos a seguir comprando en nuestra tienda o si lo desea, llamar o enviar un SMS para reportar el pedido con mayor rápidez"
 			android:layout_gravity="center_horizontal"
 			/>
 		
@@ -76,6 +76,20 @@
 			android:layout_gravity="center_horizontal"
 			/>
 			<ImageView
+				android:id="@+id/ivSms"
+				android:layout_width="48px"
+				android:layout_height="48px"
+				android:layout_gravity="center_horizontal"
+				android:src="@drawable/sms" 
+			/>
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="     "
+			android:textColor="#ff000000"
+			android:layout_gravity="center_horizontal"
+			/>
+			<ImageView
 				android:id="@+id/ivInicioCompraFin"
 				android:layout_width="48px"
 				android:layout_height="48px"
@@ -99,6 +113,20 @@
 				android:text="  Llamar"
 			/>
 			
+			<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="     "
+			android:textColor="#ff000000"
+			android:layout_gravity="center_horizontal"
+			/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="#ff000000"
+				android:layout_gravity="center_horizontal"
+				android:text="  SMS"
+			/>
 			<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

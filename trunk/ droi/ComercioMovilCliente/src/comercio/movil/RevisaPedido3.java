@@ -40,6 +40,7 @@ public class RevisaPedido3 extends Activity{
 	
 	private String HOST = Valores.HOST;
 	private String email = null;
+	private String nombreC = null;
 	private int idClienteA = 0;
 	private String tipoPago = null;
 	private String comentario = null;
@@ -565,6 +566,8 @@ public class RevisaPedido3 extends Activity{
 			orden.setPaisFactura(direccionFactura.get(7));
 			orden.setIdDireccFormatFactura("1");
 		
+			nombreC = nombreCliente.toString()+" "+apellidoCliente.toString();
+			
 			if (tipoPago.equals("Tienda")){
 				orden.setFormaPago("Pagar en tienda");	
 			}
@@ -652,6 +655,8 @@ public class RevisaPedido3 extends Activity{
 	            
 	            Intent intent = new Intent();
 	            intent.putExtra("idPedido", idPedidoC);
+	            intent.putExtra("nombreC", nombreC);
+	            intent.putExtra("emailC", email);
 	            intent.setClass(RevisaPedido3.this, CompraFinalizada.class);
 		        startActivity(intent);
 	             finish();
